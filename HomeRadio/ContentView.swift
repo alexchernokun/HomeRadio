@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  HomeRadio
 //
-//  Created by Alexander Chernokun on 05.04.2023.
+//  Created by Oleksandr Chornokun on 05.04.2023.
 //
 
 import SwiftUI

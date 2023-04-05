@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6307E93229DD8CCC00678D08 /* RadioPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 6307E93129DD8CCC00678D08 /* RadioPlayer */; };
+		6307E93529DD8E0D00678D08 /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 6307E93429DD8E0D00678D08 /* Utils */; };
+		6307E93829DD8E8F00678D08 /* DomainLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 6307E93729DD8E8F00678D08 /* DomainLayer */; };
+		6307E93C29DD9A9D00678D08 /* NetworkService in Frameworks */ = {isa = PBXBuildFile; productRef = 6307E93B29DD9A9D00678D08 /* NetworkService */; };
 		637411AE29DD7AA500297AC7 /* HomeRadioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */; };
 		637411B029DD7AA500297AC7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637411AF29DD7AA500297AC7 /* ContentView.swift */; };
 		637411B229DD7AA700297AC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 637411B129DD7AA700297AC7 /* Assets.xcassets */; };
@@ -14,11 +18,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6307E93329DD8D7C00678D08 /* Utils */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Utils; path = Packages/Utils; sourceTree = SOURCE_ROOT; };
+		6307E93629DD8E3D00678D08 /* DomainLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DomainLayer; path = Packages/DomainLayer; sourceTree = SOURCE_ROOT; };
+		6307E93A29DD8F1D00678D08 /* NetworkService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NetworkService; path = Packages/NetworkService; sourceTree = SOURCE_ROOT; };
 		637411AA29DD7AA500297AC7 /* HomeRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRadioApp.swift; sourceTree = "<group>"; };
 		637411AF29DD7AA500297AC7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		637411B129DD7AA700297AC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		637411B429DD7AA700297AC7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		637411C129DD86F000297AC7 /* RadioPlayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RadioPlayer; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,17 +34,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6307E93529DD8E0D00678D08 /* Utils in Frameworks */,
+				6307E93C29DD9A9D00678D08 /* NetworkService in Frameworks */,
+				6307E93229DD8CCC00678D08 /* RadioPlayer in Frameworks */,
+				6307E93829DD8E8F00678D08 /* DomainLayer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6307E93029DD8CCC00678D08 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		637411A129DD7AA500297AC7 = {
 			isa = PBXGroup;
 			children = (
 				637411AC29DD7AA500297AC7 /* HomeRadio */,
+				637411C229DD8AA100297AC7 /* Packages */,
 				637411AB29DD7AA500297AC7 /* Products */,
+				6307E93029DD8CCC00678D08 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +88,17 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		637411C229DD8AA100297AC7 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				6307E93A29DD8F1D00678D08 /* NetworkService */,
+				6307E93629DD8E3D00678D08 /* DomainLayer */,
+				6307E93329DD8D7C00678D08 /* Utils */,
+				637411C129DD86F000297AC7 /* RadioPlayer */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -83,6 +115,12 @@
 			dependencies = (
 			);
 			name = HomeRadio;
+			packageProductDependencies = (
+				6307E93129DD8CCC00678D08 /* RadioPlayer */,
+				6307E93429DD8E0D00678D08 /* Utils */,
+				6307E93729DD8E8F00678D08 /* DomainLayer */,
+				6307E93B29DD9A9D00678D08 /* NetworkService */,
+			);
 			productName = HomeRadio;
 			productReference = 637411AA29DD7AA500297AC7 /* HomeRadio.app */;
 			productType = "com.apple.product-type.application";
@@ -274,6 +312,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,6 +341,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -337,6 +377,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6307E93129DD8CCC00678D08 /* RadioPlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RadioPlayer;
+		};
+		6307E93429DD8E0D00678D08 /* Utils */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Utils;
+		};
+		6307E93729DD8E8F00678D08 /* DomainLayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DomainLayer;
+		};
+		6307E93B29DD9A9D00678D08 /* NetworkService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetworkService;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 637411A229DD7AA500297AC7 /* Project object */;
 }

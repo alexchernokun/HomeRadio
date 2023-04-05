@@ -1,0 +1,3 @@
+# DomainLayer
+
+Models for UI.

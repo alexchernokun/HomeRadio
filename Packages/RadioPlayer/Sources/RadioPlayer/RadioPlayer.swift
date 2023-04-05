@@ -1,0 +1,175 @@
+//
+//  RadioPlayerService.swift
+//  Radio
+//
+//  Created by Oleksandr Chornokun on 1/28/22.
+//
+
+import UIKit
+import AVFoundation
+import Combine
+import Utils
+import MediaPlayer
+
+/// General purpose Radio Player module which also can fetch station metadata
+public final class RadioPlayer: NSObject {
+    
+    // MARK: Properties
+    public var trackTitle = CurrentValueSubject<String, Never>("")
+    @Published var isPaused: Bool = true
+    
+    // MARK: Private Properties
+    private let player = AVPlayer()
+    private var playbackLikelyToKeepUpContext = 0
+    private var playerItemContext = 0
+    
+    // MARK: Public methods
+    /// Play Radio URL
+    /// - Parameter url: url for a playback
+    public func playRadio(from url: URL) {
+        player.pause()
+        setupPlayer(with: url)
+        player.play()
+        isPaused = false
+    }
+    
+    // Playback Observer
+    override public func observeValue(forKeyPath keyPath: String?,
+                                      of object: Any?,
+                                      change: [NSKeyValueChangeKey : Any]?,
+                                      context: UnsafeMutableRawPointer?) {
+        
+        if context == &playbackLikelyToKeepUpContext {
+            print("isPlaybackBufferFull: \(player.currentItem!.isPlaybackBufferFull)")
+            print("isPlaybackBufferEmpty: \(player.currentItem!.isPlaybackBufferEmpty)")
+            print("isPlaybackLikelyToKeepUp: \(player.currentItem!.isPlaybackLikelyToKeepUp)")
+        }
+        
+        if keyPath == #keyPath(AVPlayerItem.status) {
+            let status: AVPlayerItem.Status
+            if let statusNumber = change?[.newKey] as? NSNumber {
+                status = AVPlayerItem.Status(rawValue: statusNumber.intValue)!
+            } else {
+                status = .unknown
+            }
+
+            // Switch over status value
+            switch status {
+            case .readyToPlay:
+                print("ReadyToPlay")
+            case .failed:
+                print("FaledToPlay")
+            case .unknown:
+                print("UnknowToPlay")
+            @unknown default:
+                print("UnknowToPlayuUUUUU")
+            }
+        }
+    }
+
+    // MARK: Initialization
+    public override init() {
+        super.init()
+        enableBackgroundPlayback()
+        setupRemoteCommandCenter()
+        addPlaybackObserver()
+    }
+}
+
+// MARK: Private methods
+private extension RadioPlayer {
+    
+    func enableBackgroundPlayback() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback)
+        } catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+    }
+    
+    func addPlaybackObserver() {
+        player.addObserver(self,
+                           forKeyPath: "currentItem.playbackLikelyToKeepUp",
+                           options: .new,
+                           context: &playbackLikelyToKeepUpContext)
+    }
+    
+    func setupPlayer(with url: URL) {
+        let playerAsset = AVURLAsset(url: url)
+        let playerItem = AVPlayerItem(asset: playerAsset)
+        let metadataOutput = AVPlayerItemMetadataOutput(identifiers: nil)
+        metadataOutput.setDelegate(self, queue: DispatchQueue.main)
+        playerItem.add(metadataOutput)
+        
+        playerItem.addObserver(self,
+                               forKeyPath: #keyPath(AVPlayerItem.status),
+                               options: [.old, .new],
+                               context: &playerItemContext)
+        
+        player.replaceCurrentItem(with: playerItem)
+    }
+    
+    func toggleRadioPlayback() {
+//        isPaused ? player.play() : player.pause()
+//        isPaused.toggle()
+    }
+    
+}
+
+// MARK: Remote Command Center Setup
+private extension RadioPlayer {
+    
+    private func setupRemoteCommandCenter() {
+        let commandCenter = MPRemoteCommandCenter.shared()
+        commandCenter.playCommand.isEnabled = true
+        commandCenter.pauseCommand.isEnabled = true
+        commandCenter.nextTrackCommand.isEnabled = true
+        commandCenter.previousTrackCommand.isEnabled = true
+        
+        commandCenter.playCommand.addTarget(self, action: #selector(play))
+        commandCenter.pauseCommand.addTarget(self, action: #selector(pause))
+        commandCenter.nextTrackCommand.addTarget(self, action: #selector(nextStation))
+        commandCenter.previousTrackCommand.addTarget(self, action: #selector(previousStation))
+    }
+    
+    // MPRemoteCommandHandlerStatus
+    @objc private func play() -> MPRemoteCommandHandlerStatus {
+        toggleRadioPlayback()
+        return .success
+    }
+    
+    @objc private func pause() -> MPRemoteCommandHandlerStatus {
+        toggleRadioPlayback()
+        return .success
+    }
+    
+    @objc private func nextStation() -> MPRemoteCommandHandlerStatus {
+        print("next station")
+        return .success
+    }
+    
+    @objc private func previousStation() -> MPRemoteCommandHandlerStatus {
+        print("previous station")
+        return .success
+    }
+    
+}
+
+// MARK: Metadata delegate conformance
+extension RadioPlayer: AVPlayerItemMetadataOutputPushDelegate {
+    
+    public func metadataOutput(_ output: AVPlayerItemMetadataOutput,
+                               didOutputTimedMetadataGroups groups: [AVTimedMetadataGroup],
+                               from track: AVPlayerItemTrack?) {
+        
+        trackTitle.value = MetadataParser.getTitle(from: groups)
+
+        Logger.logMetadata(groups: groups,
+                           title: trackTitle.value,
+                           track: track,
+                           logLevel: .short)
+    }
+    
+}
