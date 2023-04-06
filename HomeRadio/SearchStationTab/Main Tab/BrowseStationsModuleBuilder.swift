@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import NetworkService
 import Utils
 
 struct BrowseStationsModuleBuilder: ModuleBuilder {
@@ -16,7 +17,9 @@ struct BrowseStationsModuleBuilder: ModuleBuilder {
     
     func build() -> BrowseStationsView {
         let presenter = BrowseStationsPresenter()
-        let interactor = BrowseStationsInteractor(presenter: presenter)
+        let mainTuneInRepository = container.resolve(type: MainTuneInRepository.self)
+        let interactor = BrowseStationsInteractor(presenter: presenter,
+                                                  tuneInRepository: mainTuneInRepository)
         let view = BrowseStationsView(interactor: interactor,
                                       viewModel: presenter.viewModel)
         return view

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct MainTuneInCategory {
+public struct MainTuneInCategory: Hashable {
     public var type: CategoryType
     public var text: String
     public var url: URL?
