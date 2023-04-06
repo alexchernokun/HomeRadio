@@ -2,7 +2,7 @@
 //  File.swift
 //
 //
-//  Created by Oleksandr Chornokun on 05/15/2022.
+//  Created by Oleksandr Chornokun on 04.04.2023.
 //
 
 import Foundation
@@ -37,7 +37,7 @@ public final class DIContainer {
     
 }
 
-public final class DependencyKey: Hashable, Equatable {
+private final class DependencyKey: Hashable, Equatable {
     private let type: Any.Type
     private let name: String?
     

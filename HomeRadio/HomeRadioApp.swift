@@ -6,12 +6,29 @@
 //
 
 import SwiftUI
+import Utils
 
 @main
 struct HomeRadioApp: App {
+    
+    let container = DIContainer.shared
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                container.resolve(type: MyStationsModuleBuilder.self).build()
+                    .tabItem {
+                        Label("My Stations", systemImage: "music.note.list")
+                    }
+                container.resolve(type: BrowseStationsModuleBuilder.self).build()
+                    .tabItem {
+                        Label("Browse", systemImage: "antenna.radiowaves.left.and.right")
+                    }
+            }
         }
+    }
+    
+    init() {
+        DIContainerInitialization()
     }
 }

@@ -2,7 +2,7 @@
 //  NetworkService.swift
 //  RadioSwiftUI
 //
-//  Created by Oleksandr Chornokun on 10/3/21.
+//  Created by Oleksandr Chornokun on 04.04.2023.
 //
 
 import Foundation

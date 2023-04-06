@@ -2,12 +2,13 @@
 //  File.swift
 //
 //
-//  Created by Oleksandr Chornokun on 1/30/22.
+//  Created by Oleksandr Chornokun on 04.04.2023.
 //
 
 import Foundation
 import AVFoundation
 
+/// Type for getting metadata from stream link
 public struct MetadataParser {
     public static func getTitle(from metadata: [AVTimedMetadataGroup]) -> String {
         guard let items = metadata.first?.items else { return "" }
@@ -23,7 +24,6 @@ private extension MetadataParser {
             guard let key = item.key else { return nil}
             
             switch key as? String {
-            // General metadata response
             case "StreamTitle":
                 title = item.value as? String
             default:

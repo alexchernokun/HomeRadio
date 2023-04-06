@@ -11,8 +11,19 @@
 		6307E93529DD8E0D00678D08 /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 6307E93429DD8E0D00678D08 /* Utils */; };
 		6307E93829DD8E8F00678D08 /* DomainLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 6307E93729DD8E8F00678D08 /* DomainLayer */; };
 		6307E93C29DD9A9D00678D08 /* NetworkService in Frameworks */ = {isa = PBXBuildFile; productRef = 6307E93B29DD9A9D00678D08 /* NetworkService */; };
+		6307E94129DEE0CB00678D08 /* MyStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94029DEE0CB00678D08 /* MyStationsView.swift */; };
+		6307E94329DEE14F00678D08 /* BrowseStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94229DEE14F00678D08 /* BrowseStationsView.swift */; };
+		6307E94529DEE1A100678D08 /* DIContainerInitialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94429DEE1A100678D08 /* DIContainerInitialization.swift */; };
+		6307E94729DEE2FE00678D08 /* MyStationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94629DEE2FE00678D08 /* MyStationsInteractor.swift */; };
+		6307E94929DEE30500678D08 /* MyStationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94829DEE30500678D08 /* MyStationsPresenter.swift */; };
+		6307E94B29DEE4EF00678D08 /* MyStationsModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94A29DEE4EF00678D08 /* MyStationsModuleBuilder.swift */; };
+		6307E94F29DEE93700678D08 /* MyStationsPreviewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94E29DEE93700678D08 /* MyStationsPreviewMock.swift */; };
+		635FAB6129DEEB1E00EC02E5 /* BrowseStationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6029DEEB1E00EC02E5 /* BrowseStationsInteractor.swift */; };
+		635FAB6329DEEB2800EC02E5 /* BrowseStationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6229DEEB2800EC02E5 /* BrowseStationsPresenter.swift */; };
+		635FAB6529DEEB3100EC02E5 /* BrowseStationsModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6429DEEB3100EC02E5 /* BrowseStationsModuleBuilder.swift */; };
+		635FAB6729DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6629DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift */; };
 		637411AE29DD7AA500297AC7 /* HomeRadioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */; };
-		637411B029DD7AA500297AC7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637411AF29DD7AA500297AC7 /* ContentView.swift */; };
+		637411B029DD7AA500297AC7 /* TestContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637411AF29DD7AA500297AC7 /* TestContentView.swift */; };
 		637411B229DD7AA700297AC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 637411B129DD7AA700297AC7 /* Assets.xcassets */; };
 		637411B529DD7AA700297AC7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 637411B429DD7AA700297AC7 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -21,9 +32,21 @@
 		6307E93329DD8D7C00678D08 /* Utils */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Utils; path = Packages/Utils; sourceTree = SOURCE_ROOT; };
 		6307E93629DD8E3D00678D08 /* DomainLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DomainLayer; path = Packages/DomainLayer; sourceTree = SOURCE_ROOT; };
 		6307E93A29DD8F1D00678D08 /* NetworkService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NetworkService; path = Packages/NetworkService; sourceTree = SOURCE_ROOT; };
+		6307E93D29DDA3EE00678D08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6307E94029DEE0CB00678D08 /* MyStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsView.swift; sourceTree = "<group>"; };
+		6307E94229DEE14F00678D08 /* BrowseStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseStationsView.swift; sourceTree = "<group>"; };
+		6307E94429DEE1A100678D08 /* DIContainerInitialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainerInitialization.swift; sourceTree = "<group>"; };
+		6307E94629DEE2FE00678D08 /* MyStationsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsInteractor.swift; sourceTree = "<group>"; };
+		6307E94829DEE30500678D08 /* MyStationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsPresenter.swift; sourceTree = "<group>"; };
+		6307E94A29DEE4EF00678D08 /* MyStationsModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsModuleBuilder.swift; sourceTree = "<group>"; };
+		6307E94E29DEE93700678D08 /* MyStationsPreviewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsPreviewMock.swift; sourceTree = "<group>"; };
+		635FAB6029DEEB1E00EC02E5 /* BrowseStationsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseStationsInteractor.swift; sourceTree = "<group>"; };
+		635FAB6229DEEB2800EC02E5 /* BrowseStationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseStationsPresenter.swift; sourceTree = "<group>"; };
+		635FAB6429DEEB3100EC02E5 /* BrowseStationsModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseStationsModuleBuilder.swift; sourceTree = "<group>"; };
+		635FAB6629DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseStationsPreviewMock.swift; sourceTree = "<group>"; };
 		637411AA29DD7AA500297AC7 /* HomeRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRadioApp.swift; sourceTree = "<group>"; };
-		637411AF29DD7AA500297AC7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		637411AF29DD7AA500297AC7 /* TestContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestContentView.swift; sourceTree = "<group>"; };
 		637411B129DD7AA700297AC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		637411B429DD7AA700297AC7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		637411C129DD86F000297AC7 /* RadioPlayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RadioPlayer; sourceTree = "<group>"; };
@@ -51,6 +74,62 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6307E93E29DEE00F00678D08 /* SearchStationTab */ = {
+			isa = PBXGroup;
+			children = (
+				635FAB6929DEEE0F00EC02E5 /* Main Tab */,
+			);
+			path = SearchStationTab;
+			sourceTree = "<group>";
+		};
+		6307E93F29DEE02200678D08 /* MyStationsTab */ = {
+			isa = PBXGroup;
+			children = (
+				6307E94D29DEE91E00678D08 /* Main Tab */,
+			);
+			path = MyStationsTab;
+			sourceTree = "<group>";
+		};
+		6307E94C29DEE91200678D08 /* PreviewMock */ = {
+			isa = PBXGroup;
+			children = (
+				6307E94E29DEE93700678D08 /* MyStationsPreviewMock.swift */,
+			);
+			path = PreviewMock;
+			sourceTree = "<group>";
+		};
+		6307E94D29DEE91E00678D08 /* Main Tab */ = {
+			isa = PBXGroup;
+			children = (
+				6307E94A29DEE4EF00678D08 /* MyStationsModuleBuilder.swift */,
+				6307E94629DEE2FE00678D08 /* MyStationsInteractor.swift */,
+				6307E94829DEE30500678D08 /* MyStationsPresenter.swift */,
+				6307E94029DEE0CB00678D08 /* MyStationsView.swift */,
+				6307E94C29DEE91200678D08 /* PreviewMock */,
+			);
+			path = "Main Tab";
+			sourceTree = "<group>";
+		};
+		635FAB6829DEEB3C00EC02E5 /* PreviewMock */ = {
+			isa = PBXGroup;
+			children = (
+				635FAB6629DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift */,
+			);
+			path = PreviewMock;
+			sourceTree = "<group>";
+		};
+		635FAB6929DEEE0F00EC02E5 /* Main Tab */ = {
+			isa = PBXGroup;
+			children = (
+				635FAB6429DEEB3100EC02E5 /* BrowseStationsModuleBuilder.swift */,
+				635FAB6029DEEB1E00EC02E5 /* BrowseStationsInteractor.swift */,
+				635FAB6229DEEB2800EC02E5 /* BrowseStationsPresenter.swift */,
+				6307E94229DEE14F00678D08 /* BrowseStationsView.swift */,
+				635FAB6829DEEB3C00EC02E5 /* PreviewMock */,
+			);
+			path = "Main Tab";
+			sourceTree = "<group>";
+		};
 		637411A129DD7AA500297AC7 = {
 			isa = PBXGroup;
 			children = (
@@ -73,7 +152,11 @@
 			isa = PBXGroup;
 			children = (
 				637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */,
-				637411AF29DD7AA500297AC7 /* ContentView.swift */,
+				6307E94429DEE1A100678D08 /* DIContainerInitialization.swift */,
+				637411AF29DD7AA500297AC7 /* TestContentView.swift */,
+				6307E93F29DEE02200678D08 /* MyStationsTab */,
+				6307E93E29DEE00F00678D08 /* SearchStationTab */,
+				6307E93D29DDA3EE00678D08 /* Info.plist */,
 				637411B129DD7AA700297AC7 /* Assets.xcassets */,
 				637411B329DD7AA700297AC7 /* Preview Content */,
 			);
@@ -175,8 +258,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				637411B029DD7AA500297AC7 /* ContentView.swift in Sources */,
+				635FAB6729DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift in Sources */,
+				6307E94B29DEE4EF00678D08 /* MyStationsModuleBuilder.swift in Sources */,
+				637411B029DD7AA500297AC7 /* TestContentView.swift in Sources */,
+				6307E94729DEE2FE00678D08 /* MyStationsInteractor.swift in Sources */,
+				6307E94329DEE14F00678D08 /* BrowseStationsView.swift in Sources */,
+				635FAB6529DEEB3100EC02E5 /* BrowseStationsModuleBuilder.swift in Sources */,
+				6307E94929DEE30500678D08 /* MyStationsPresenter.swift in Sources */,
+				6307E94F29DEE93700678D08 /* MyStationsPreviewMock.swift in Sources */,
 				637411AE29DD7AA500297AC7 /* HomeRadioApp.swift in Sources */,
+				635FAB6129DEEB1E00EC02E5 /* BrowseStationsInteractor.swift in Sources */,
+				6307E94129DEE0CB00678D08 /* MyStationsView.swift in Sources */,
+				6307E94529DEE1A100678D08 /* DIContainerInitialization.swift in Sources */,
+				635FAB6329DEEB2800EC02E5 /* BrowseStationsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +401,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"HomeRadio/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HomeRadio/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -336,6 +431,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"HomeRadio/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HomeRadio/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

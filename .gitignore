@@ -39,3 +39,7 @@ playground.xcworkspace
 .build/
 
 \.DS_Store
+HomeRadio.xcodeproj/project.xcworkspace/xcuserdata/alexchernokun.xcuserdatad/UserInterfaceState.xcuserstate
+Utils/.swiftpm/xcode/package.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+HomeRadio.xcodeproj/xcuserdata/alexchernokun.xcuserdatad/xcschemes/xcschememanagement.plist
+.DS_Store

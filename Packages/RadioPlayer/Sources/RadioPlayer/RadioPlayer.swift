@@ -2,7 +2,7 @@
 //  RadioPlayerService.swift
 //  Radio
 //
-//  Created by Oleksandr Chornokun on 1/28/22.
+//  Created by Oleksandr Chornokun on 04.04.2023.
 //
 
 import UIKit
@@ -20,7 +20,6 @@ public final class RadioPlayer: NSObject {
     
     // MARK: Private Properties
     private let player = AVPlayer()
-    private var playbackLikelyToKeepUpContext = 0
     private var playerItemContext = 0
     
     // MARK: Public methods
@@ -38,12 +37,6 @@ public final class RadioPlayer: NSObject {
                                       of object: Any?,
                                       change: [NSKeyValueChangeKey : Any]?,
                                       context: UnsafeMutableRawPointer?) {
-        
-        if context == &playbackLikelyToKeepUpContext {
-            print("isPlaybackBufferFull: \(player.currentItem!.isPlaybackBufferFull)")
-            print("isPlaybackBufferEmpty: \(player.currentItem!.isPlaybackBufferEmpty)")
-            print("isPlaybackLikelyToKeepUp: \(player.currentItem!.isPlaybackLikelyToKeepUp)")
-        }
         
         if keyPath == #keyPath(AVPlayerItem.status) {
             let status: AVPlayerItem.Status
@@ -72,7 +65,6 @@ public final class RadioPlayer: NSObject {
         super.init()
         enableBackgroundPlayback()
         setupRemoteCommandCenter()
-        addPlaybackObserver()
     }
 }
 
@@ -87,13 +79,6 @@ private extension RadioPlayer {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
         UIApplication.shared.beginReceivingRemoteControlEvents()
-    }
-    
-    func addPlaybackObserver() {
-        player.addObserver(self,
-                           forKeyPath: "currentItem.playbackLikelyToKeepUp",
-                           options: .new,
-                           context: &playbackLikelyToKeepUpContext)
     }
     
     func setupPlayer(with url: URL) {
@@ -121,7 +106,7 @@ private extension RadioPlayer {
 // MARK: Remote Command Center Setup
 private extension RadioPlayer {
     
-    private func setupRemoteCommandCenter() {
+    func setupRemoteCommandCenter() {
         let commandCenter = MPRemoteCommandCenter.shared()
         commandCenter.playCommand.isEnabled = true
         commandCenter.pauseCommand.isEnabled = true
@@ -135,22 +120,22 @@ private extension RadioPlayer {
     }
     
     // MPRemoteCommandHandlerStatus
-    @objc private func play() -> MPRemoteCommandHandlerStatus {
+    @objc func play() -> MPRemoteCommandHandlerStatus {
         toggleRadioPlayback()
         return .success
     }
     
-    @objc private func pause() -> MPRemoteCommandHandlerStatus {
+    @objc func pause() -> MPRemoteCommandHandlerStatus {
         toggleRadioPlayback()
         return .success
     }
     
-    @objc private func nextStation() -> MPRemoteCommandHandlerStatus {
+    @objc func nextStation() -> MPRemoteCommandHandlerStatus {
         print("next station")
         return .success
     }
     
-    @objc private func previousStation() -> MPRemoteCommandHandlerStatus {
+    @objc func previousStation() -> MPRemoteCommandHandlerStatus {
         print("previous station")
         return .success
     }
