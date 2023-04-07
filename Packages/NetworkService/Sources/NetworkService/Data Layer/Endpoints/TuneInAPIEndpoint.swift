@@ -8,7 +8,7 @@
 import Foundation
 
 private struct TuneInAPIConstants {
-    static let scheme = "https"
+    static let scheme = "http"
     static let host = "opml.radiotime.com"
 }
 

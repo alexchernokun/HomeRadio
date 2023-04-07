@@ -19,7 +19,11 @@ public final class LocalRadioRepository {
         return networkService
             .send(request)
             .map { (response: GeneralLocalRadioResponse) -> [RadioStation] in
-                return response.body.first!.children.map { RadioStation($0) }
+                var radioStations = [RadioStation]()
+                for item in response.body {
+                    radioStations.append(contentsOf: item.children.map { RadioStation($0) })
+                }
+                return radioStations
             }
             .eraseToAnyPublisher()
     }

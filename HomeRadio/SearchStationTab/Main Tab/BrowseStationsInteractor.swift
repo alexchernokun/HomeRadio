@@ -9,10 +9,12 @@ import Foundation
 import NetworkService
 import Combine
 import Utils
+import SwiftUI
 
 final class BrowseStationsInteractor {
     
     // MARK: Properties
+    private let container = DIContainer.shared
     private let presenter: BrowseStationsPresenter
     private let tuneInRepository: MainTuneInRepository
     private var subscriptions = Set<AnyCancellable>()
@@ -22,8 +24,8 @@ final class BrowseStationsInteractor {
         getMainCategories()
     }
     
-    func navigateToLocalStations() {
-        
+    func navigateToLocalStations() -> some View {
+        return container.resolve(type: LocalRadioModuleBuilder.self).build()
     }
     
     func navigateToMusic() {

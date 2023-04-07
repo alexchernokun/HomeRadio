@@ -21,6 +21,8 @@ final class DIContainerInitialization {
                            service: MyStationsModuleBuilder())
         container.register(type: BrowseStationsModuleBuilder.self,
                            service: BrowseStationsModuleBuilder())
+        container.register(type: LocalRadioModuleBuilder.self,
+                           service: LocalRadioModuleBuilder())
     }
     
     private func registerServices() {

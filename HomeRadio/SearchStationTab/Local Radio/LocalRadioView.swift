@@ -9,15 +9,32 @@ import SwiftUI
 import DomainLayer
 
 struct LocalRadioView: View {
-    let category: MainTuneInCategory
+    let interactor: LocalRadioInteractor
+    @ObservedObject var viewModel: LocalRadioViewModel
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 10) {
+                ForEach(viewModel.stations, id: \.self) { station in
+                    Button {
+                        interactor.playRadio(from: station.url)
+                    } label: {
+                        RadioStationView(station: station)
+                    }
+                }
+            }
+        }
+        .navigationTitle("Local Radio")
+        .navigationBarTitleDisplayMode(.inline)
+        .redacted(reason: viewModel.isLoading ? .placeholder : [])
+        .onAppear {
+            interactor.fetchLocalRadioStations()
+        }        
     }
 }
 
 struct LocalRadioView_Previews: PreviewProvider {
     static var previews: some View {
-        LocalRadioView(category: MainTuneInCategory(type: "", text: "", url: ""))
+        LocalRadioPreviewMock.view()
     }
 }

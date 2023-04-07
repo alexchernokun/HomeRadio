@@ -7,72 +7,84 @@
 
 import SwiftUI
 import DomainLayer
+import Utils
 
 struct BrowseStationsView: View {
     let interactor: BrowseStationsInteractor
     @ObservedObject var viewModel: BrowseStationsViewModel
     
     var body: some View {
-        ZStack {
-            Color("bgPrimary")
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack(alignment: .leading, spacing: 15) {
-                categoryView(viewModel.localCategory,
-                             action: interactor.navigateToLocalStations)
+        NavigationStack {
+            ZStack(alignment: .top) {
+                Color(Colors.bgPrimary)
+                    .edgesIgnoringSafeArea(.all)
                 
-                HStack(alignment: .center, spacing: 10) {
-                    categoryView(viewModel.musicCategory,
-                                 action: interactor.navigateToMusic)
-                    categoryView(viewModel.talkCategory,
-                                 action: interactor.navigateToTalk)
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 15) {
+                        NavigationLink {
+                            interactor.navigateToLocalStations()
+                        } label: {
+                            categoryView(viewModel.localCategory)
+                        }
+                        
+                        HStack(alignment: .center, spacing: 10) {
+                            categoryView(viewModel.musicCategory)
+                            categoryView(viewModel.talkCategory)
+                        }
+                        
+                        HStack(alignment: .center, spacing: 10) {
+                            categoryView(viewModel.sportsCategory)
+                            categoryView(viewModel.locationCategory)
+                        }
+                        
+                        HStack(alignment: .center, spacing: 10) {
+                            categoryView(viewModel.languageCategory)
+                            categoryView(viewModel.podcastsCategory)
+                        }
+                    }
+                    .padding()
+                    .redacted(reason: viewModel.isLoading ? .placeholder : [])
+                    .onAppear {
+                        interactor.fetchCategories()
                 }
-                
-                HStack(alignment: .center, spacing: 10) {
-                    categoryView(viewModel.sportsCategory,
-                                 action: interactor.navigateToSports)
-                    categoryView(viewModel.locationCategory,
-                                 action: interactor.navigateToByLocation)
-                }
-                
-                HStack(alignment: .center, spacing: 10) {
-                    categoryView(viewModel.languageCategory,
-                                 action: interactor.navigateToByLanguage)
-                    categoryView(viewModel.podcastsCategory,
-                                 action: interactor.navigateToPodcasts)
                 }
             }
-            .padding()
-            .redacted(reason: viewModel.isLoading ? .placeholder : [])
-            .onAppear {
-                interactor.fetchCategories()
-            }
+            .navigationTitle("Find Your Tune")
         }
+        
     }
 }
 
 private extension BrowseStationsView {
     
-    func categoryView(_ category: MainTuneInCategory?, action: @escaping () -> Void) -> some View {
-        Button {
-            action()
-        } label: {
-            VStack(alignment: .leading, spacing: 0) {
-                HStack {
-                    Spacer()
-                    Text(category?.text ?? "")
-                        .foregroundColor(Color("textPrimary"))
-                        .padding(.vertical, 40)
-                    Spacer()
-                }
+    func categoryView(_ category: BrowseStationsViewModel.CategoryViewModel?) -> some View {
+        return VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Text(category?.text ?? "")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(Color(Colors.textPrimary))
+                    .padding(.vertical, 20)
+                    .padding(.leading, 20)
+                Spacer()
             }
-            .background(
-                Rectangle()
-                    .fill(Color("bgSpecial"))
-                    .cornerRadius(25)
-            )
+            
+            Spacer()
+            
+            HStack {
+                Spacer()
+                
+                Image(systemName: category?.imageName ?? "")
+                    .foregroundColor(Color(Colors.textPrimary))
+                    .padding(.vertical, 20)
+                    .padding(.trailing, 20)
+            }
         }
         .disabled(viewModel.isLoading)
+        .background(
+            Rectangle()
+                .fill(Color(category?.color ?? "").gradient)
+                .cornerRadius(25)
+        )
     }
     
 }
@@ -82,15 +94,3 @@ struct SearchStationsView_Previews: PreviewProvider {
         BrowseStationsPreviewMock.view()
     }
 }
-
-
-
-//        .padding()
-
-//        List(viewModel.categories, id: \.self) { category in
-//            Text(category.text)
-//        }
-//        .redacted(reason: viewModel.isLoading ? .placeholder : [])
-//        .onAppear {
-//            interactor.fetchCategories()
-//        }

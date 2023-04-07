@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct RadioStation {
+public struct RadioStation: Hashable {
     public var type: CategoryType
     public var text: String
     public var url: URL?
@@ -15,7 +15,7 @@ public struct RadioStation {
     public var reliability: String?
     public var subtext: String?
     public var formats: String?
-    public var image: String?
+    public var image: URL?
     public var currentTrack: String?
     public var playing: String?
     public var playingImage: String?
@@ -34,11 +34,11 @@ public struct RadioStation {
         self.type = CategoryType(rawValue: type) ?? .unknown
         self.text = text
         self.url = URL(string: url) ?? nil
-        self.bitrate = bitrate
-        self.reliability = reliability
+        self.bitrate = (bitrate ?? "n/a") + " Kbps"
+        self.reliability = (reliability ?? "n/a") + "%"
         self.subtext = subtext
         self.formats = formats
-        self.image = image
+        self.image = URL(string: image ?? "") ?? nil
         self.currentTrack = currentTrack
         self.playing = playing
         self.playingImage = playingImage

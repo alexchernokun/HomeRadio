@@ -13,13 +13,13 @@ import DomainLayer
 struct BrowseStationsPreviewMock {
     static var presenter: BrowseStationsPresenter {
         let presenter = BrowseStationsPresenter()
-        presenter.viewModel.localCategory = MainTuneInCategory(type: "", text: "Local Radio", url: "")
-        presenter.viewModel.musicCategory = MainTuneInCategory(type: "", text: "Music", url: "")
-        presenter.viewModel.talkCategory = MainTuneInCategory(type: "", text: "Talk", url: "")
-        presenter.viewModel.sportsCategory = MainTuneInCategory(type: "", text: "Sports", url: "")
-        presenter.viewModel.locationCategory = MainTuneInCategory(type: "", text: "By Location", url: "")
-        presenter.viewModel.languageCategory = MainTuneInCategory(type: "", text: "By Language", url: "")
-        presenter.viewModel.podcastsCategory = MainTuneInCategory(type: "", text: "Podcasts", url: "")
+        presenter.viewModel.localCategory = BrowseStationsViewModel.CategoryViewModel(MainTuneInCategory(type: "", text: "Local Radio", url: ""))
+        presenter.viewModel.musicCategory = BrowseStationsViewModel.CategoryViewModel(MainTuneInCategory(type: "", text: "Music", url: ""))
+        presenter.viewModel.talkCategory = BrowseStationsViewModel.CategoryViewModel(MainTuneInCategory(type: "", text: "Talk", url: ""))
+        presenter.viewModel.sportsCategory = BrowseStationsViewModel.CategoryViewModel(MainTuneInCategory(type: "", text: "Sports", url: ""))
+        presenter.viewModel.locationCategory = BrowseStationsViewModel.CategoryViewModel(MainTuneInCategory(type: "", text: "By Location", url: ""))
+        presenter.viewModel.languageCategory = BrowseStationsViewModel.CategoryViewModel(MainTuneInCategory(type: "", text: "By Language", url: ""))
+        presenter.viewModel.podcastsCategory = BrowseStationsViewModel.CategoryViewModel(MainTuneInCategory(type: "", text: "Podcasts", url: ""))
         presenter.viewModel.isLoading = false
         return presenter
     }
