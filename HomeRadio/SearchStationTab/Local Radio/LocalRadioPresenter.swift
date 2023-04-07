@@ -9,7 +9,8 @@ import Foundation
 import DomainLayer
 
 final class LocalRadioViewModel: ObservableObject {
-    var isLoading = true
+    @Published var isLoading = true
+    @Published var shouldShowError = false
     
     @Published var stations: [RadioStation] = []
 }
@@ -20,6 +21,15 @@ final class LocalRadioPresenter {
     func showLocalStations(_ stations: [RadioStation]) {
         viewModel.stations = stations
         viewModel.isLoading = false
-        print(stations)
+    }
+    
+    func showErrorState() {
+        viewModel.isLoading = false
+        viewModel.shouldShowError = true
+    }
+    
+    func clearErrorState() {
+        viewModel.isLoading = true
+        viewModel.shouldShowError = false
     }
 }

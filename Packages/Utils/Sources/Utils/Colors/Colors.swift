@@ -13,4 +13,11 @@ public struct Colors {
     static public let bgSpecial = "bgSpecial"
     static public let textPrimary = "textPrimary"
     static public let textSecondary = "textSecondary"
+    
+    static public let categoryBlue = "categoryBlue"
+    static public let categoryGreen = "categoryGreen"
+    static public let categoryOrange = "categoryOrange"
+    static public let categoryRed = "categoryRed"
+    static public let categoryYellow = "categoryYellow"
+    static public let categoryBrown = "categoryBrown"
 }

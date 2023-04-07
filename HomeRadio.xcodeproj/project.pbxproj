@@ -29,6 +29,8 @@
 		635FAB7529DF554100EC02E5 /* LocalRadioPreviewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB7429DF554100EC02E5 /* LocalRadioPreviewMock.swift */; };
 		635FAB7829DF663600EC02E5 /* RadioStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB7729DF663600EC02E5 /* RadioStationView.swift */; };
 		635FAB7A29E027F400EC02E5 /* SquircleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB7929E027F400EC02E5 /* SquircleShape.swift */; };
+		635FAB7C29E04C3900EC02E5 /* MyStationsEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB7B29E04C3800EC02E5 /* MyStationsEmptyView.swift */; };
+		635FAB7E29E050E000EC02E5 /* NetworkErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB7D29E050E000EC02E5 /* NetworkErrorView.swift */; };
 		637411AE29DD7AA500297AC7 /* HomeRadioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */; };
 		637411B229DD7AA700297AC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 637411B129DD7AA700297AC7 /* Assets.xcassets */; };
 		637411B529DD7AA700297AC7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 637411B429DD7AA700297AC7 /* Preview Assets.xcassets */; };
@@ -57,6 +59,8 @@
 		635FAB7429DF554100EC02E5 /* LocalRadioPreviewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRadioPreviewMock.swift; sourceTree = "<group>"; };
 		635FAB7729DF663600EC02E5 /* RadioStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioStationView.swift; sourceTree = "<group>"; };
 		635FAB7929E027F400EC02E5 /* SquircleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquircleShape.swift; sourceTree = "<group>"; };
+		635FAB7B29E04C3800EC02E5 /* MyStationsEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsEmptyView.swift; sourceTree = "<group>"; };
+		635FAB7D29E050E000EC02E5 /* NetworkErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorView.swift; sourceTree = "<group>"; };
 		637411AA29DD7AA500297AC7 /* HomeRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRadioApp.swift; sourceTree = "<group>"; };
 		637411B129DD7AA700297AC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -168,6 +172,8 @@
 			children = (
 				635FAB7729DF663600EC02E5 /* RadioStationView.swift */,
 				635FAB7929E027F400EC02E5 /* SquircleShape.swift */,
+				635FAB7B29E04C3800EC02E5 /* MyStationsEmptyView.swift */,
+				635FAB7D29E050E000EC02E5 /* NetworkErrorView.swift */,
 			);
 			path = "Reusable Views";
 			sourceTree = "<group>";
@@ -305,6 +311,7 @@
 				6307E94B29DEE4EF00678D08 /* MyStationsModuleBuilder.swift in Sources */,
 				6307E94729DEE2FE00678D08 /* MyStationsInteractor.swift in Sources */,
 				635FAB7829DF663600EC02E5 /* RadioStationView.swift in Sources */,
+				635FAB7C29E04C3900EC02E5 /* MyStationsEmptyView.swift in Sources */,
 				635FAB7529DF554100EC02E5 /* LocalRadioPreviewMock.swift in Sources */,
 				635FAB6E29DF550D00EC02E5 /* LocalRadioModuleBuilder.swift in Sources */,
 				6307E94329DEE14F00678D08 /* BrowseStationsView.swift in Sources */,
@@ -312,6 +319,7 @@
 				6307E94929DEE30500678D08 /* MyStationsPresenter.swift in Sources */,
 				635FAB7229DF552600EC02E5 /* LocalRadioPresenter.swift in Sources */,
 				6307E94F29DEE93700678D08 /* MyStationsPreviewMock.swift in Sources */,
+				635FAB7E29E050E000EC02E5 /* NetworkErrorView.swift in Sources */,
 				637411AE29DD7AA500297AC7 /* HomeRadioApp.swift in Sources */,
 				635FAB7029DF551900EC02E5 /* LocalRadioInteractor.swift in Sources */,
 				635FAB6129DEEB1E00EC02E5 /* BrowseStationsInteractor.swift in Sources */,

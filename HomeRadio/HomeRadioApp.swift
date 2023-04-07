@@ -25,6 +25,12 @@ struct HomeRadioApp: App {
                         Label("Browse", systemImage: "antenna.radiowaves.left.and.right")
                     }
             }
+            .onAppear {
+                // fix for the transparency bug of Tab bars
+                let tabBarAppearance = UITabBarAppearance()
+                tabBarAppearance.configureWithOpaqueBackground()
+                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            }
         }
     }
     

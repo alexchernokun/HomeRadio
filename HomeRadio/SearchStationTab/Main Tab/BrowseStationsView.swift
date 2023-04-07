@@ -19,39 +19,45 @@ struct BrowseStationsView: View {
                 Color(Colors.bgPrimary)
                     .edgesIgnoringSafeArea(.all)
                 
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 15) {
-                        NavigationLink {
-                            interactor.navigateToLocalStations()
-                        } label: {
-                            categoryView(viewModel.localCategory)
-                        }
-                        
-                        HStack(alignment: .center, spacing: 10) {
-                            categoryView(viewModel.musicCategory)
-                            categoryView(viewModel.talkCategory)
-                        }
-                        
-                        HStack(alignment: .center, spacing: 10) {
-                            categoryView(viewModel.sportsCategory)
-                            categoryView(viewModel.locationCategory)
-                        }
-                        
-                        HStack(alignment: .center, spacing: 10) {
-                            categoryView(viewModel.languageCategory)
-                            categoryView(viewModel.podcastsCategory)
-                        }
-                    }
-                    .padding()
-                    .redacted(reason: viewModel.isLoading ? .placeholder : [])
-                    .onAppear {
+                if viewModel.shouldShowError {
+                    NetworkErrorView {
                         interactor.fetchCategories()
+                    }
+                } else {
+                    ScrollView(showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: 15) {
+                            NavigationLink {
+                                interactor.navigateToLocalStations()
+                            } label: {
+                                categoryView(viewModel.localCategory)
+                            }
+                            
+                            HStack(alignment: .center, spacing: 10) {
+                                categoryView(viewModel.musicCategory)
+                                categoryView(viewModel.talkCategory)
+                            }
+                            
+                            HStack(alignment: .center, spacing: 10) {
+                                categoryView(viewModel.sportsCategory)
+                                categoryView(viewModel.locationCategory)
+                            }
+                            
+                            HStack(alignment: .center, spacing: 10) {
+                                categoryView(viewModel.languageCategory)
+                                categoryView(viewModel.podcastsCategory)
+                            }
+                        }
+                        .padding()
+                        .redacted(reason: viewModel.isLoading ? .placeholder : [])
+                        .onAppear {
+                            interactor.fetchCategories()
+                    }
+                    }
                 }
-                }
+                
             }
             .navigationTitle("Find Your Tune")
         }
-        
     }
 }
 

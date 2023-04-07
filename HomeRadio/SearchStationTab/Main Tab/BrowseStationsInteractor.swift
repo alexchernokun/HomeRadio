@@ -21,6 +21,7 @@ final class BrowseStationsInteractor {
     
     // MARK: Methods
     func fetchCategories() {
+        presenter.clearErrorState()
         getMainCategories()
     }
     
@@ -64,11 +65,12 @@ private extension BrowseStationsInteractor {
     func getMainCategories() {
         tuneInRepository.getMainTuneInCategories()
             .receive(on: DispatchQueue.main)
-            .sink { completion in
+            .sink { [weak self] completion in
+                guard let self else { return }
                 switch completion {
                 case .failure(let error):
-                    // TODO: handle error 
                     Logger.logError(message: error)
+                    self.presenter.showErrorState()
                 case .finished:
                     break
                 }

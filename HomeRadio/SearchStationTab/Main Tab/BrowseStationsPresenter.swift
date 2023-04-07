@@ -7,9 +7,11 @@
 
 import Foundation
 import DomainLayer
+import Utils
 
 final class BrowseStationsViewModel: ObservableObject {
-    var isLoading = true
+    @Published var isLoading = true
+    @Published var shouldShowError = false
 
     @Published var localCategory: CategoryViewModel?
     @Published var musicCategory: CategoryViewModel?
@@ -34,25 +36,25 @@ final class BrowseStationsViewModel: ObservableObject {
             switch text {
             case "Local Radio":
                 self.imageName = "location.circle"
-                self.color = "bgSecondary"
+                self.color = Colors.categoryRed
             case "Music":
                 self.imageName = "music.note"
-                self.color = "bgSecondary"
+                self.color = Colors.categoryBlue
             case "Talk":
                 self.imageName = "waveform.and.mic"
-                self.color = "bgSecondary"
+                self.color = Colors.bgSecondary
             case "Sports":
                 self.imageName = "sportscourt"
-                self.color = "bgSecondary"
+                self.color = Colors.categoryOrange
             case "By Location":
                 self.imageName = "mappin.and.ellipse"
-                self.color = "bgSecondary"
+                self.color = Colors.categoryGreen
             case "By Language":
                 self.imageName = "globe"
-                self.color = "bgSecondary"
+                self.color = Colors.categoryYellow
             case "Podcasts":
                 self.imageName = "mic.fill"
-                self.color = "bgSecondary"
+                self.color = Colors.categoryBrown
             default:
                 self.imageName = "questionmark"
                 self.color = "bgSecondary"
@@ -86,5 +88,15 @@ final class BrowseStationsPresenter {
         }
 
         viewModel.isLoading = false
+    }
+    
+    func showErrorState() {
+        viewModel.isLoading = false
+        viewModel.shouldShowError = true
+    }
+    
+    func clearErrorState() {
+        viewModel.isLoading = true
+        viewModel.shouldShowError = false
     }
 }

@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Combine
 import RadioPlayer
 import NetworkService
-import Combine
+import DomainLayer
 import Utils
 
 final class LocalRadioInteractor {
@@ -29,6 +30,10 @@ final class LocalRadioInteractor {
         radioPlayer.playRadio(from: url)
     }
     
+    func saveToMyStations(_ station: RadioStation) {
+        save(station)
+    }
+    
     // MARK: Initialization
     init(presenter: LocalRadioPresenter,
          localRadioRepository: LocalRadioRepository,
@@ -39,6 +44,7 @@ final class LocalRadioInteractor {
     }
 }
 
+
 // MARK: Private methods
 private extension LocalRadioInteractor {
     func getLocalRadios() {
@@ -47,8 +53,8 @@ private extension LocalRadioInteractor {
             .sink { completion in
                 switch completion {
                 case .failure(let error):
-                    // TODO: handle error
                     Logger.logError(message: error)
+                    self.presenter.showErrorState()
                 case .finished:
                     break
                 }
@@ -57,5 +63,14 @@ private extension LocalRadioInteractor {
                 self.presenter.showLocalStations(localStations)
             }
             .store(in: &subscriptions)
+    }
+    
+    func save(_ station: RadioStation) {
+        guard var myStations: [RadioStation] = Defaults.getMyStations(for: Defaults.myStationsKey) else {
+            Defaults.saveMyStations(object: [station], for: Defaults.myStationsKey)
+            return
+        }
+        myStations.append(station)
+        Defaults.saveMyStations(object: myStations, for: Defaults.myStationsKey)
     }
 }

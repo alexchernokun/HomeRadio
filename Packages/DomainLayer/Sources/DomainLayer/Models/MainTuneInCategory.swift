@@ -21,7 +21,7 @@ public struct MainTuneInCategory: Hashable {
     }
 }
 
-public enum CategoryType: String {
+public enum CategoryType: String, Codable {
     case link
     case audio
     case unknown

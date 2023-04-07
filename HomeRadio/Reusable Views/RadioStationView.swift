@@ -12,9 +12,16 @@ import Utils
 struct RadioStationView: View {
     
     var station: RadioStation
+    var state: State = .notAdded
+    var action: ((RadioStation) -> Void)?
+    
+    enum State {
+        case added
+        case notAdded
+    }
     
     var body: some View {
-        HStack(alignment: .center, spacing: 15) {
+        HStack(alignment: .center, spacing: 12) {
             AsyncImage(url: station.image) { phase in
                 if let image = phase.image {
                     image
@@ -49,6 +56,12 @@ struct RadioStationView: View {
             .lineLimit(0)
             
             Spacer()
+            
+            if state == .notAdded {
+                addButton()
+                    .padding(.trailing, 15)
+            }
+            
         }
         .background(
             Rectangle()
@@ -78,6 +91,23 @@ private extension RadioStationView {
                 .fill(Color(Colors.bgPrimary))
                 .cornerRadius(25)
         )
+    }
+    
+    func addButton() -> some View {
+        Button {
+            action?(station)
+        } label: {
+            Text("Add")
+                .foregroundColor(Color(Colors.textPrimary))
+                .font(.system(size: 15, weight: .medium))
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(
+                    Rectangle()
+                        .fill(Color(Colors.bgSpecial))
+                        .cornerRadius(20)
+                )
+        }
     }
 }
 
