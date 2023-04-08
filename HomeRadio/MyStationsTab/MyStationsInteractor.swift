@@ -26,7 +26,7 @@ final class MyStationsInteractor {
         getStationsFromUserDefaults()
     }
     
-    func playRadio(_ station: RadioStation) {
+    func playRadio(_ station: RadioItem) {
         guard let url = station.url else { return }
         presenter.updateCurrentStation(station)
         presenter.makeStopButton()
@@ -61,7 +61,7 @@ final class MyStationsInteractor {
 // MARK: - Private Methods
 private extension MyStationsInteractor {
     func getStationsFromUserDefaults() {
-        guard let myStations: [RadioStation] = Defaults.getMyStations(for: Defaults.myStationsKey) else {
+        guard let myStations: [RadioItem] = Defaults.getMyStations(for: Defaults.myStationsKey) else {
             presenter.showEmptyState()
             return
         }

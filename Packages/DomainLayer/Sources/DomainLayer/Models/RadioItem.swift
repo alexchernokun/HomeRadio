@@ -7,8 +7,8 @@
 
 import Foundation
 
-public struct RadioStation: Codable, Hashable {
-    public var type: CategoryType
+public struct RadioItem: Codable, Hashable {
+    public var type: RadioItemType
     public var text: String
     public var url: URL?
     public var bitrate: String?
@@ -19,12 +19,13 @@ public struct RadioStation: Codable, Hashable {
     public var currentTrack: String?
     public var playing: String?
     public var playingImage: String?
+    public var children: [RadioItem]?
     public var metadata: String?
     public var artworkFromMetadata: URL?
     
-    public init(type: String,
+    public init(type: String?,
                 text: String,
-                url: String,
+                url: String?,
                 bitrate: String?,
                 reliability: String?,
                 subtext: String?,
@@ -32,10 +33,11 @@ public struct RadioStation: Codable, Hashable {
                 image: String?,
                 currentTrack: String?,
                 playing: String?,
-                playingImage: String?) {
-        self.type = CategoryType(rawValue: type) ?? .unknown
+                playingImage: String?,
+                children: [RadioItem]?) {
+        self.type = RadioItemType(rawValue: type ?? "") ?? .unknown
         self.text = text
-        self.url = URL(string: url) ?? nil
+        self.url = URL(string: url ?? "") ?? nil
         self.bitrate = (bitrate ?? "n/a") + " Kbps"
         self.reliability = (reliability ?? "n/a") + "%"
         self.subtext = subtext
@@ -44,6 +46,25 @@ public struct RadioStation: Codable, Hashable {
         self.currentTrack = currentTrack
         self.playing = playing
         self.playingImage = playingImage
+        self.children = children
+        self.metadata = nil
+        self.artworkFromMetadata = nil
+    }
+    
+    // For SwiftUI preview mock
+    public init(text: String) {
+        self.type =  .unknown
+        self.text = text
+        self.url = nil
+        self.bitrate = ""
+        self.reliability = ""
+        self.subtext = ""
+        self.formats = ""
+        self.image = nil
+        self.currentTrack = ""
+        self.playing = ""
+        self.playingImage = ""
+        self.children = []
         self.metadata = nil
         self.artworkFromMetadata = nil
     }

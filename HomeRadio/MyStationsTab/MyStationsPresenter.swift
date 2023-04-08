@@ -9,9 +9,9 @@ import Foundation
 import DomainLayer
 
 final class MyStationsViewModel: ObservableObject {
-    @Published var myStations: [RadioStation] = []
+    @Published var myStations: [RadioItem] = []
     @Published var shouldShowEmptyState = false
-    @Published var currentStation: RadioStation?
+    @Published var currentStation: RadioItem?
     @Published var isRadioPlaying: Bool = false
 }
 
@@ -23,7 +23,7 @@ final class MyStationsPresenter {
     var isRadioPlaying: Bool {
         return viewModel.isRadioPlaying
     }
-    var currentStation: RadioStation? {
+    var currentStation: RadioItem? {
         return viewModel.currentStation
     }
     
@@ -32,12 +32,12 @@ final class MyStationsPresenter {
         viewModel.shouldShowEmptyState = true
     }
     
-    func showMyStations(_ stations: [RadioStation]) {
+    func showMyStations(_ stations: [RadioItem]) {
         viewModel.shouldShowEmptyState = false
         viewModel.myStations = stations
     }
     
-    func updateCurrentStation(_ station: RadioStation) {
+    func updateCurrentStation(_ station: RadioItem) {
         viewModel.currentStation = station
     }
     

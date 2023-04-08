@@ -7,21 +7,21 @@
 
 import Foundation
 
-public struct MainTuneInCategory: Hashable {
-    public var type: CategoryType
+public struct GeneralTuneInCategory: Hashable {
+    public var type: RadioItemType
     public var text: String
     public var url: URL?
     
     public init(type: String,
                 text: String,
                 url: String) {
-        self.type = CategoryType(rawValue: type) ?? .unknown
+        self.type = RadioItemType(rawValue: type) ?? .unknown
         self.text = text
         self.url = URL(string: url) ?? nil
     }
 }
 
-public enum CategoryType: String, Codable {
+public enum RadioItemType: String, Codable {
     case link
     case audio
     case unknown

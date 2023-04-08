@@ -26,35 +26,30 @@ struct BrowseStationsView: View {
                 } else {
                     ScrollView(showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 15) {
-                            NavigationLink {
-                                interactor.navigateToLocalStations()
-                            } label: {
-                                categoryView(viewModel.localCategory)
+                            navigation(for: viewModel.localCategory)
+                            
+                            HStack(alignment: .center, spacing: 10) {
+                                navigation(for: viewModel.musicCategory)
+                                navigation(for: viewModel.talkCategory)
                             }
                             
                             HStack(alignment: .center, spacing: 10) {
-                                categoryView(viewModel.musicCategory)
-                                categoryView(viewModel.talkCategory)
+                                navigation(for: viewModel.sportsCategory)
+                                navigation(for: viewModel.locationCategory)
                             }
                             
                             HStack(alignment: .center, spacing: 10) {
-                                categoryView(viewModel.sportsCategory)
-                                categoryView(viewModel.locationCategory)
-                            }
-                            
-                            HStack(alignment: .center, spacing: 10) {
-                                categoryView(viewModel.languageCategory)
-                                categoryView(viewModel.podcastsCategory)
+                                navigation(for: viewModel.languageCategory)
+                                navigation(for: viewModel.podcastsCategory)
                             }
                         }
                         .padding()
                         .redacted(reason: viewModel.isLoading ? .placeholder : [])
                         .onAppear {
                             interactor.fetchCategories()
-                    }
+                        }
                     }
                 }
-                
             }
             .navigationTitle("Find Your Tune")
         }
@@ -91,6 +86,17 @@ private extension BrowseStationsView {
                 .fill(Color(category?.color ?? "").gradient)
                 .cornerRadius(25)
         )
+    }
+    
+    @ViewBuilder
+    private func navigation(for category: BrowseStationsViewModel.CategoryViewModel?) -> some View {
+        if let category {
+            NavigationLink {
+                interactor.navigateTo(category)
+            } label: {
+                categoryView(category)
+            }
+        }
     }
     
 }

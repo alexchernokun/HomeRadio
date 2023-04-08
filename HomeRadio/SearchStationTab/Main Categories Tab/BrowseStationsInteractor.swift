@@ -16,7 +16,7 @@ final class BrowseStationsInteractor {
     // MARK: Properties
     private let container = DIContainer.shared
     private let presenter: BrowseStationsPresenter
-    private let tuneInRepository: MainTuneInRepository
+    private let tuneInRepository: TuneInRepository
     private var subscriptions = Set<AnyCancellable>()
     
     // MARK: Methods
@@ -25,36 +25,26 @@ final class BrowseStationsInteractor {
         getMainCategories()
     }
     
-    func navigateToLocalStations() -> some View {
-        return container.resolve(type: LocalRadioModuleBuilder.self).build()
-    }
-    
-    func navigateToMusic() {
+    func navigateTo(_ category: BrowseStationsViewModel.CategoryViewModel) -> some View {
+        let path = "/Browse.ashx"
+        var query: [String: String?] = [:]
         
-    }
-    
-    func navigateToTalk() {
+        switch category.text {
+        case "Local Radio": query = ["c": "local"]
+        case "Music": query = ["c": "music"]
+        case "Talk": query = ["c": "talk"]
+        case "Sports": query = ["c": "sports"]
+        case "By Location": query = ["id": "r0"]
+        case "By Language": query = ["c": "lang"]
+        case "Podcasts": query = ["c": "podcast"]
+        default: break
+        }
         
-    }
-    
-    func navigateToSports() {
-        
-    }
-    
-    func navigateToByLocation() {
-        
-    }
-    
-    func navigateToByLanguage() {
-        
-    }
-    
-    func navigateToPodcasts() {
-        
+        return SubCategoryModuleBuilder(path: path, query: query).build()
     }
     
     // MARK: Initialization
-    init(presenter: BrowseStationsPresenter, tuneInRepository: MainTuneInRepository) {
+    init(presenter: BrowseStationsPresenter, tuneInRepository: TuneInRepository) {
         self.presenter = presenter
         self.tuneInRepository = tuneInRepository
     }
@@ -63,7 +53,7 @@ final class BrowseStationsInteractor {
 // MARK: - Private methods
 private extension BrowseStationsInteractor {
     func getMainCategories() {
-        tuneInRepository.getMainTuneInCategories()
+        tuneInRepository.getGeneralTuneInCategories()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self else { return }

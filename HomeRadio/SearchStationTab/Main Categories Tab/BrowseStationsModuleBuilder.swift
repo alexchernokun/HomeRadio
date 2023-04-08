@@ -17,9 +17,9 @@ struct BrowseStationsModuleBuilder: ModuleBuilder {
     
     func build() -> BrowseStationsView {
         let presenter = BrowseStationsPresenter()
-        let mainTuneInRepository = container.resolve(type: MainTuneInRepository.self)
+        let tuneInRepository = container.resolve(type: TuneInRepository.self)
         let interactor = BrowseStationsInteractor(presenter: presenter,
-                                                  tuneInRepository: mainTuneInRepository)
+                                                  tuneInRepository: tuneInRepository)
         let view = BrowseStationsView(interactor: interactor,
                                       viewModel: presenter.viewModel)
         return view

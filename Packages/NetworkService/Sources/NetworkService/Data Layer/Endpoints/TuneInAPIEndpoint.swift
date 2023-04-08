@@ -16,9 +16,7 @@ struct TuneInAPIEndpoint: APIEndpoint {
     
     enum Kind {
         case main
-        case local
-        case subCategory(_ id: String)
-        case subCategoryLocation(_ id: String)
+        case subCategory(_ path: String, _ query: [String: String?])
     }
     
     var kind: Kind
@@ -34,25 +32,20 @@ struct TuneInAPIEndpoint: APIEndpoint {
     var path: String {
         switch kind {
         case .main: return ""
-        case .local: return "/Browse.ashx"
-        case .subCategory: return "/Browse.ashx"
-        case .subCategoryLocation: return "/Browse.ashx"
+        case let .subCategory(path, _):
+            return path
         }
     }
     
     var query: [String: String?]? {
-        var generalQuery = ["render": "json"]
+        var generalQuery: [String: String?] = ["": ""]
         switch kind {
-            // TODO: Check if we need local kind
-        case .local:
-            generalQuery["c"] = "local"
-        case .subCategory(let id):
-            generalQuery["c"] = id
-        case .subCategoryLocation(let id):
-            generalQuery["id"] = id
+        case let .subCategory(_, query):
+            generalQuery = query
         default:
             break
         }
+        generalQuery["render"] = "json"
         return generalQuery
     }
     

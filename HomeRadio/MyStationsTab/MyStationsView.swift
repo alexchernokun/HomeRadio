@@ -57,7 +57,7 @@ private extension MyStationsView {
                         Button {
                             interactor.playRadio(station)
                         } label: {
-                            RadioStationView(station: station, state: .added)
+                            RadioStationTypeView(station: station, state: .added)
                         }
                     }
                 }

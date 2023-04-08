@@ -9,11 +9,11 @@ import SwiftUI
 import DomainLayer
 import Utils
 
-struct RadioStationView: View {
+struct RadioStationTypeView: View {
     
-    var station: RadioStation
+    var station: RadioItem
     var state: State = .notAdded
-    var action: ((RadioStation) -> Void)?
+    var action: ((RadioItem) -> Void)?
     
     enum State {
         case added
@@ -74,7 +74,7 @@ struct RadioStationView: View {
     
 }
 
-private extension RadioStationView {
+private extension RadioStationTypeView {
     func labelInfo(text: String?, imageName: String) -> some View {
         HStack(alignment: .center, spacing: 2) {
             Image(systemName: imageName)
@@ -112,8 +112,8 @@ private extension RadioStationView {
 }
 
 struct RadioStation_Previews: PreviewProvider {
-    static var station: RadioStation {
-        return RadioStation(type: "audio",
+    static var station: RadioItem {
+        return RadioItem(type: "audio",
                             text: "Хіт FM 101.7 (Top 40 & Pop Music)",
                             url: "http://opml.radiotime.com/Tune.ashx?id=s142760",
                             bitrate: "128",
@@ -123,11 +123,12 @@ struct RadioStation_Previews: PreviewProvider {
                             image: "http://cdn-profiles.tunein.com/s6122/images/logoq.png?t=1",
                             currentTrack: "",
                             playing: "",
-                            playingImage: "")
+                            playingImage: "",
+                            children: [])
     }
     
     static var previews: some View {
-        RadioStationView(station: station)
+        RadioStationTypeView(station: station)
             .frame(width: 380, height: 100)
     }
 }

@@ -22,13 +22,13 @@ final class BrowseStationsViewModel: ObservableObject {
     @Published var podcastsCategory: CategoryViewModel?
     
     struct CategoryViewModel {
-        var type: CategoryType
+        var type: RadioItemType
         var text: String
         var url: URL?
         var imageName: String
         var color: String
         
-        init(_ category: MainTuneInCategory) {
+        init(_ category: RadioItem) {
             self.type = category.type
             self.text = category.text
             self.url = category.url
@@ -66,7 +66,7 @@ final class BrowseStationsViewModel: ObservableObject {
 final class BrowseStationsPresenter {
     fileprivate(set) var viewModel = BrowseStationsViewModel()
     
-    func showCategories(_ categories: [MainTuneInCategory]) {
+    func showCategories(_ categories: [RadioItem]) {
         for category in categories {
             switch category.text {
             case "Local Radio":

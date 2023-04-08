@@ -16,7 +16,7 @@ public struct NowPlayingService {
     
     /// The method for setting track properties into NowPlaingInfoCenter
     /// - Parameter track: The track you want to show in NowPlayingInfoCenter
-    public static func addNowPlayingInfo(from track: RadioStation?) {
+    public static func addNowPlayingInfo(from track: RadioItem?) {
         var nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo ?? [String: Any]()
         nowPlayingInfo[MPNowPlayingInfoPropertyIsLiveStream] = true
         if let metadata = track?.metadata {
@@ -26,17 +26,25 @@ public struct NowPlayingService {
         }
         
         if let artwork = track?.artworkFromMetadata {
-            guard let data = try? Data(contentsOf: artwork) else {
-                nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
-                return
+            DispatchQueue.global(qos: .background).async {
+                guard let data = try? Data(contentsOf: artwork) else {
+                    nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
+                    return
+                }
+                DispatchQueue.main.async {
+                    addArtwork(from: UIImage(data: data))
+                }
             }
-            addArtwork(from: UIImage(data: data))
         } else if let image = track?.image {
-            guard let data = try? Data(contentsOf: image) else {
-                nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
-                return
+            DispatchQueue.global(qos: .background).async {
+                guard let data = try? Data(contentsOf: image) else {
+                    nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
+                    return
+                }
+                DispatchQueue.main.async {
+                    addArtwork(from: UIImage(data: data))
+                }
             }
-            addArtwork(from: UIImage(data: data))
         }
         
         nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo

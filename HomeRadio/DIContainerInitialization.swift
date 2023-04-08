@@ -21,8 +21,6 @@ final class DIContainerInitialization {
                            service: MyStationsModuleBuilder())
         container.register(type: BrowseStationsModuleBuilder.self,
                            service: BrowseStationsModuleBuilder())
-        container.register(type: LocalRadioModuleBuilder.self,
-                           service: LocalRadioModuleBuilder())
     }
     
     private func registerServices() {
@@ -31,10 +29,8 @@ final class DIContainerInitialization {
     }
     
     private func registerRepositories() {
-        container.register(type: MainTuneInRepository.self,
-                           service: MainTuneInRepository())
-        container.register(type: LocalRadioRepository.self,
-                           service: LocalRadioRepository())
+        container.register(type: TuneInRepository.self,
+                           service: TuneInRepository())
         container.register(type: ItunesSearchRepository.self,
                            service: ItunesSearchRepository())
     }
