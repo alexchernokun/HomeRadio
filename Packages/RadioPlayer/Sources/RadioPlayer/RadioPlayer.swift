@@ -11,7 +11,7 @@ import Combine
 import Utils
 import MediaPlayer
 
-/// General purpose Radio Player module which also can fetch station metadata
+/// General purpose Radio Player module which plays stream from url and also can fetch station metadata
 public final class RadioPlayer: NSObject {
     
     // MARK: Properties
@@ -32,6 +32,12 @@ public final class RadioPlayer: NSObject {
         isPaused = false
     }
     
+    /// Pause Radio URL
+    public func pauseRadio() {
+        player.pause()
+        isPaused = true
+    }
+    
     // Playback Observer
     override public func observeValue(forKeyPath keyPath: String?,
                                       of object: Any?,
@@ -49,13 +55,13 @@ public final class RadioPlayer: NSObject {
             // Switch over status value
             switch status {
             case .readyToPlay:
-                print("ReadyToPlay")
+                Logger.logDebug(message: "ReadyToPlay")
             case .failed:
-                print("FaledToPlay")
+                Logger.logDebug(message: "FaledToPlay")
             case .unknown:
-                print("UnknowToPlay")
+                Logger.logDebug(message: "UnknownToPlay")
             @unknown default:
-                print("UnknowToPlayuUUUUU")
+                Logger.logDebug(message: "NewUnknownToPlay")
             }
         }
     }
@@ -70,13 +76,12 @@ public final class RadioPlayer: NSObject {
 
 // MARK: Private methods
 private extension RadioPlayer {
-    
     func enableBackgroundPlayback() {
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setCategory(.playback)
         } catch {
-            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+            Logger.logError(message: "Setting category to AVAudioSessionCategoryPlayback failed")
         }
         UIApplication.shared.beginReceivingRemoteControlEvents()
     }
@@ -97,29 +102,21 @@ private extension RadioPlayer {
     }
     
     func toggleRadioPlayback() {
-//        isPaused ? player.play() : player.pause()
-//        isPaused.toggle()
+        isPaused ? player.play() : player.pause()
+        isPaused.toggle()
     }
-    
 }
 
 // MARK: Remote Command Center Setup
 private extension RadioPlayer {
-    
     func setupRemoteCommandCenter() {
         let commandCenter = MPRemoteCommandCenter.shared()
         commandCenter.playCommand.isEnabled = true
         commandCenter.pauseCommand.isEnabled = true
-        commandCenter.nextTrackCommand.isEnabled = true
-        commandCenter.previousTrackCommand.isEnabled = true
-        
         commandCenter.playCommand.addTarget(self, action: #selector(play))
         commandCenter.pauseCommand.addTarget(self, action: #selector(pause))
-        commandCenter.nextTrackCommand.addTarget(self, action: #selector(nextStation))
-        commandCenter.previousTrackCommand.addTarget(self, action: #selector(previousStation))
     }
     
-    // MPRemoteCommandHandlerStatus
     @objc func play() -> MPRemoteCommandHandlerStatus {
         toggleRadioPlayback()
         return .success
@@ -129,22 +126,10 @@ private extension RadioPlayer {
         toggleRadioPlayback()
         return .success
     }
-    
-    @objc func nextStation() -> MPRemoteCommandHandlerStatus {
-        print("next station")
-        return .success
-    }
-    
-    @objc func previousStation() -> MPRemoteCommandHandlerStatus {
-        print("previous station")
-        return .success
-    }
-    
 }
 
 // MARK: Metadata delegate conformance
 extension RadioPlayer: AVPlayerItemMetadataOutputPushDelegate {
-    
     public func metadataOutput(_ output: AVPlayerItemMetadataOutput,
                                didOutputTimedMetadataGroups groups: [AVTimedMetadataGroup],
                                from track: AVPlayerItemTrack?) {
@@ -156,5 +141,4 @@ extension RadioPlayer: AVPlayerItemMetadataOutputPushDelegate {
                            track: track,
                            logLevel: .short)
     }
-    
 }

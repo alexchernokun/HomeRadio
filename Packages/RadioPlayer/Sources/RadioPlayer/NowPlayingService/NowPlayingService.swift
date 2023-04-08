@@ -16,15 +16,34 @@ public struct NowPlayingService {
     
     /// The method for setting track properties into NowPlaingInfoCenter
     /// - Parameter track: The track you want to show in NowPlayingInfoCenter
-    public static func addNowPlayingInfo(from track: RadioStation) {
+    public static func addNowPlayingInfo(from track: RadioStation?) {
         var nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo ?? [String: Any]()
         nowPlayingInfo[MPNowPlayingInfoPropertyIsLiveStream] = true
-//        nowPlayingInfo[MPMediaItemPropertyArtist] = track.artist?.localizedCapitalized
-//        nowPlayingInfo[MPMediaItemPropertyTitle] = track.title?.localizedCapitalized
+        if let metadata = track?.metadata {
+            nowPlayingInfo[MPMediaItemPropertyTitle] = metadata
+        } else {
+            nowPlayingInfo[MPMediaItemPropertyTitle] = track?.text
+        }
+        
+        if let artwork = track?.artworkFromMetadata {
+            guard let data = try? Data(contentsOf: artwork) else {
+                nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
+                return
+            }
+            addArtwork(from: UIImage(data: data))
+        } else if let image = track?.image {
+            guard let data = try? Data(contentsOf: image) else {
+                nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
+                return
+            }
+            addArtwork(from: UIImage(data: data))
+        }
+        
         nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
     }
 
-    static func addArtwork(from image: UIImage) {
+    static func addArtwork(from image: UIImage?) {
+        guard let image else { return }
         var nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo ?? [String: Any]()
         nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size, requestHandler: { (size) -> UIImage in
             return image

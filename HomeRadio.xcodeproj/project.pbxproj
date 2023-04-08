@@ -95,6 +95,7 @@
 			children = (
 				635FAB6929DEEE0F00EC02E5 /* Main Tab */,
 				635FAB6A29DF4ADD00EC02E5 /* Local Radio */,
+				634E1B5129E076780012C9C5 /* Sub Category */,
 			);
 			path = SearchStationTab;
 			sourceTree = "<group>";
@@ -125,6 +126,13 @@
 				6307E94C29DEE91200678D08 /* PreviewMock */,
 			);
 			path = "Main Tab";
+			sourceTree = "<group>";
+		};
+		634E1B5129E076780012C9C5 /* Sub Category */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Sub Category";
 			sourceTree = "<group>";
 		};
 		635FAB6829DEEB3C00EC02E5 /* PreviewMock */ = {

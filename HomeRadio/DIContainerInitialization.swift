@@ -35,6 +35,8 @@ final class DIContainerInitialization {
                            service: MainTuneInRepository())
         container.register(type: LocalRadioRepository.self,
                            service: LocalRadioRepository())
+        container.register(type: ItunesSearchRepository.self,
+                           service: ItunesSearchRepository())
     }
     
     // MARK: Initialization

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import NetworkService
 import RadioPlayer
 
 struct MyStationsPreviewMock {
@@ -17,8 +18,10 @@ struct MyStationsPreviewMock {
     }
     
     static func view() -> MyStationsView {
+        let repository = ItunesSearchRepository()
         let interactor = MyStationsInteractor(presenter: presenter,
-                                              radioPlayer: radioPlayer)
+                                              radioPlayer: radioPlayer,
+                                              iTunesRepository: repository)
         let view = MyStationsView(interactor: interactor,
                                   viewModel: presenter.viewModel)
         return view

@@ -20,6 +20,7 @@ public struct RadioStation: Codable, Hashable {
     public var playing: String?
     public var playingImage: String?
     public var metadata: String?
+    public var artworkFromMetadata: URL?
     
     public init(type: String,
                 text: String,
@@ -43,6 +44,7 @@ public struct RadioStation: Codable, Hashable {
         self.currentTrack = currentTrack
         self.playing = playing
         self.playingImage = playingImage
-        self.metadata = ""
+        self.metadata = nil
+        self.artworkFromMetadata = nil
     }
 }

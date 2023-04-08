@@ -20,7 +20,7 @@ public extension Defaults {
             let data = try JSONEncoder().encode(object)
             UserDefaults.standard.setValue(data, forKey: key)
         } catch {
-            print("--- can't save object in UserDefaults")
+            Logger.logError(message: "Falied to save object in UserDefaults")
         }
     }
 
@@ -30,7 +30,7 @@ public extension Defaults {
             let object = try JSONDecoder().decode([T].self, from: data)
             return object
         } catch {
-            print("--- can't get Data from UserDefaults")
+            Logger.logError(message: "Falied to get Data from UserDefaults")
             return nil
         }
     }
