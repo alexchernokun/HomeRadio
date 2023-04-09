@@ -32,19 +32,20 @@ struct TuneInAPIEndpoint: APIEndpoint {
     var path: String {
         switch kind {
         case .main: return ""
-        case let .subCategory(path, _):
-            return path
+        case let .subCategory(path, _): return path
         }
     }
     
     var query: [String: String?]? {
         var generalQuery: [String: String?] = ["": ""]
+        
         switch kind {
         case let .subCategory(_, query):
             generalQuery = query
         default:
             break
         }
+        
         generalQuery["render"] = "json"
         return generalQuery
     }

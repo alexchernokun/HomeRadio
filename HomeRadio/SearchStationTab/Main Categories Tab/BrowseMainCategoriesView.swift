@@ -9,9 +9,9 @@ import SwiftUI
 import DomainLayer
 import Utils
 
-struct BrowseStationsView: View {
-    let interactor: BrowseStationsInteractor
-    @ObservedObject var viewModel: BrowseStationsViewModel
+struct BrowseMainCategoriesView: View {
+    let interactor: BrowseMainCategoriesInteractor
+    @ObservedObject var viewModel: BrowseMainCategoriesViewModel
     
     var body: some View {
         NavigationStack {
@@ -56,10 +56,10 @@ struct BrowseStationsView: View {
     }
 }
 
-private extension BrowseStationsView {
+private extension BrowseMainCategoriesView {
     
     @ViewBuilder
-    private func navigation(for category: BrowseStationsViewModel.CategoryViewModel?) -> some View {
+    private func navigation(for category: BrowseMainCategoriesViewModel.CategoryViewModel?) -> some View {
         if let category {
             NavigationLink {
                 interactor.navigateToLink(category.url)
@@ -69,7 +69,7 @@ private extension BrowseStationsView {
         }
     }
     
-    func categoryView(_ category: BrowseStationsViewModel.CategoryViewModel) -> some View {
+    func categoryView(_ category: BrowseMainCategoriesViewModel.CategoryViewModel) -> some View {
         return VStack(alignment: .leading, spacing: 0) {
             HStack {
                 Text(category.text)

@@ -57,7 +57,13 @@ private extension MyStationsView {
                         Button {
                             interactor.playRadio(station)
                         } label: {
-                            RadioStationTypeView(station: station, state: .added)
+                            RadioStationTypeView(station: station, isAdded: true)
+                                .background(
+                                    Rectangle()
+                                        .fill(Color(Colors.bgSecondary))
+                                        .cornerRadius(25)
+                                )
+                                .padding(.horizontal)
                         }
                     }
                 }
@@ -91,6 +97,16 @@ private extension MyStationsView {
             }
             
             Spacer()
+            
+            Button {
+                interactor.toggleRadioPlayback()
+            } label: {
+                Image(systemName: viewModel.isRadioPlaying ? "stop.fill" : "play.fill")
+                    .resizable()
+                    .frame(width: 25, height: 25)
+                    .foregroundColor(Color(Colors.textSecondary))
+                    .padding(.trailing, 25)
+            }
         }
         .background(
             Rectangle()

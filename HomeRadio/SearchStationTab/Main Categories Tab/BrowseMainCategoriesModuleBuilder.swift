@@ -10,17 +10,17 @@ import SwiftUI
 import NetworkService
 import Utils
 
-struct BrowseStationsModuleBuilder: ModuleBuilder {
-    typealias ViewType = BrowseStationsView
+struct BrowseMainCategoriesModuleBuilder: ModuleBuilder {
+    typealias ViewType = BrowseMainCategoriesView
     
     var container = DIContainer.shared
     
-    func build() -> BrowseStationsView {
-        let presenter = BrowseStationsPresenter()
+    func build() -> BrowseMainCategoriesView {
+        let presenter = BrowseMainCategoriesPresenter()
         let tuneInRepository = container.resolve(type: TuneInRepository.self)
-        let interactor = BrowseStationsInteractor(presenter: presenter,
+        let interactor = BrowseMainCategoriesInteractor(presenter: presenter,
                                                   tuneInRepository: tuneInRepository)
-        let view = BrowseStationsView(interactor: interactor,
+        let view = BrowseMainCategoriesView(interactor: interactor,
                                       viewModel: presenter.viewModel)
         return view
     }

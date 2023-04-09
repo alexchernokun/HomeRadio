@@ -11,11 +11,11 @@ import Combine
 import Utils
 import SwiftUI
 
-final class BrowseStationsInteractor {
+final class BrowseMainCategoriesInteractor {
     
     // MARK: Properties
     private let container = DIContainer.shared
-    private let presenter: BrowseStationsPresenter
+    private let presenter: BrowseMainCategoriesPresenter
     private let tuneInRepository: TuneInRepository
     private var subscriptions = Set<AnyCancellable>()
     
@@ -37,14 +37,14 @@ final class BrowseStationsInteractor {
     }
     
     // MARK: Initialization
-    init(presenter: BrowseStationsPresenter, tuneInRepository: TuneInRepository) {
+    init(presenter: BrowseMainCategoriesPresenter, tuneInRepository: TuneInRepository) {
         self.presenter = presenter
         self.tuneInRepository = tuneInRepository
     }
 }
 
 // MARK: - Private methods
-private extension BrowseStationsInteractor {
+private extension BrowseMainCategoriesInteractor {
     func getMainCategories() {
         tuneInRepository.getGeneralTuneInCategories()
             .receive(on: DispatchQueue.main)

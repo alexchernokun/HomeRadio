@@ -20,7 +20,7 @@ struct HomeRadioApp: App {
                     .tabItem {
                         Label("My Stations", systemImage: "music.note.list")
                     }
-                container.resolve(type: BrowseStationsModuleBuilder.self).build()
+                container.resolve(type: BrowseMainCategoriesModuleBuilder.self).build()
                     .tabItem {
                         Label("Browse", systemImage: "antenna.radiowaves.left.and.right")
                     }

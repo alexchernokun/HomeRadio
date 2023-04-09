@@ -12,13 +12,9 @@ import Utils
 struct RadioStationTypeView: View {
     
     var station: RadioItem
-    var state: State = .notAdded
     var action: ((RadioItem) -> Void)?
     
-    enum State {
-        case added
-        case notAdded
-    }
+    @State var isAdded = false
     
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
@@ -28,7 +24,7 @@ struct RadioStationTypeView: View {
                         .resizable()
                         .frame(width: 75, height: 75)
                         .clipShape(SquircleShape(size: 75))
-                        .padding(10)
+                        .padding(5)
                 } else {
                     Color(Colors.bgSecondary)
                         .frame(width: 75, height: 75)
@@ -41,12 +37,13 @@ struct RadioStationTypeView: View {
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(Color(Colors.textPrimary))
                 Text(station.subtext ?? "")
-                    .font(.system(size: 12, weight: .light))
+                    .font(.system(size: 11, weight: .light))
                     .foregroundColor(Color(Colors.textSecondary))
                 
                 Spacer()
+                    .frame(height: 10)
                 
-                HStack(alignment: .center, spacing: 7) {
+                HStack(alignment: .center, spacing: 3) {
                     labelInfo(text: station.reliability, imageName: "cellularbars")
                     labelInfo(text: station.bitrate, imageName: "arrow.up.arrow.down")
                     labelInfo(text: station.formats, imageName: "music.note")
@@ -57,19 +54,11 @@ struct RadioStationTypeView: View {
             
             Spacer()
             
-            if state == .notAdded {
+            if !isAdded {
                 addButton()
-                    .padding(.trailing, 15)
             }
-            
         }
-        .background(
-            Rectangle()
-                .fill(Color(Colors.bgSecondary))
-                .cornerRadius(25)
-        )
-        .padding(.horizontal)
-        
+        .contentShape(Rectangle())
     }
     
 }
@@ -81,7 +70,7 @@ private extension RadioStationTypeView {
                 .resizable()
                 .frame(width: 8, height: 8)
             Text(text ?? "")
-                .font(.system(size: 9, weight: .medium))
+                .font(.system(size: 7, weight: .medium))
         }
         .padding(.horizontal, 4)
         .padding(.vertical, 2)
@@ -95,18 +84,12 @@ private extension RadioStationTypeView {
     
     func addButton() -> some View {
         Button {
+            isAdded = true
             action?(station)
         } label: {
             Text("Add")
                 .foregroundColor(Color(Colors.textPrimary))
-                .font(.system(size: 15, weight: .medium))
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                .background(
-                    Rectangle()
-                        .fill(Color(Colors.bgSpecial))
-                        .cornerRadius(20)
-                )
+                .font(.system(size: 13, weight: .medium))
         }
     }
 }

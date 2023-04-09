@@ -19,21 +19,8 @@ struct LinkTypeView: View {
             Text(stationItem.text)
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundColor(Color(Colors.textPrimary))
-                .padding(.leading, 15)
-            
-            Spacer()
-            
-            Image(systemName: "chevron.forward")
-                .padding(.trailing, 15)
         }
-        .padding(.vertical)
         .lineLimit(0)
-        .background(
-            Rectangle()
-                .fill(Color(Colors.bgSecondary))
-                .cornerRadius(25)
-        )
-        .padding(.horizontal)
     }
 }
 

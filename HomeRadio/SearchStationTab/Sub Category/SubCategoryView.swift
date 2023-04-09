@@ -14,54 +14,62 @@ struct SubCategoryView:  View {
     @ObservedObject var viewModel: SubCategoryViewModel
     
     var body: some View {
-        ZStack(alignment: .top) {
-            Color(Colors.bgPrimary)
-                .edgesIgnoringSafeArea(.all)
-            
-            if viewModel.shouldShowError {
-                NetworkErrorView {
-                    interactor.fetchRadioStationItems()
-                }
-            } else {
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 10) {
-                        ForEach(viewModel.stationItems, id: \.self) { stationItem in
-                            switch stationItem.type {
-                            case .audio:
-                                Button {
-                                    interactor.playRadio(from: stationItem.url)
-                                } label: {
-                                    RadioStationTypeView(station: stationItem) { station in
-                                        interactor.saveToMyStations(station)
-                                    }
-                                }
-                            case .link:
-                                NavigationLink {
-                                    interactor.navigateToLink(stationItem)
-                                } label: {
-                                    LinkTypeView(stationItem: stationItem)
-                                }
-                            default:
-                                VStack(alignment: .center, spacing: 0) {
-                                    Spacer()
-                                    Text("No stations or shows available")
-                                        .foregroundColor(Color(Colors.textPrimary))
-                                        .font(.system(size: 18, weight: .semibold))
-                                    Spacer()
-                                }
-                            }
-                            
+        if viewModel.shouldShowError {
+            NetworkErrorView {
+                interactor.fetchRadioStationItems()
+            }
+        } else {
+            List(viewModel.stationItems, id: \.self) { stationItem in
+                if let children = stationItem.children {
+                    Section(header: Text(stationItem.text)) {
+                        ForEach(children, id: \.self) { child in
+                            viewForItem(item: child)
                         }
                     }
+                } else {
+                    viewForItem(item: stationItem)
                 }
-                .padding(.top, 15)
+                
+            }
+            .buttonStyle(.bordered)
+            .listStyle(.sidebar)
+            .navigationTitle(viewModel.title)
+            .navigationBarTitleDisplayMode(.inline)
+            .redacted(reason: viewModel.isLoading ? .placeholder : [])
+            .onAppear {
+                interactor.fetchRadioStationItems()
             }
         }
-        .navigationTitle(viewModel.title)
-        .navigationBarTitleDisplayMode(.inline)
-        .redacted(reason: viewModel.isLoading ? .placeholder : [])
-        .onAppear {
-            interactor.fetchRadioStationItems()
+    }
+}
+
+private extension SubCategoryView {
+    @ViewBuilder
+    func viewForItem(item: RadioItem) -> some View {
+        switch item.type {
+        case .audio:
+            Button {
+                interactor.playRadio(item)
+            } label: {
+                RadioStationTypeView(station: item) { station in
+                    interactor.saveToMyStations(station)
+                }
+            }
+            .buttonStyle(.plain)
+        case .link:
+            NavigationLink {
+                interactor.navigateToLink(item)
+            } label: {
+                LinkTypeView(stationItem: item)
+            }
+        default:
+            VStack(alignment: .center, spacing: 0) {
+                Spacer()
+                Text("No stations or shows available")
+                    .foregroundColor(Color(Colors.textPrimary))
+                    .font(.system(size: 18, weight: .semibold))
+                Spacer()
+            }
         }
     }
 }

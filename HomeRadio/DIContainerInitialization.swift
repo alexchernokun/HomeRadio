@@ -19,8 +19,8 @@ final class DIContainerInitialization {
     private func registerModuleBuilders() {
         container.register(type: MyStationsModuleBuilder.self,
                            service: MyStationsModuleBuilder())
-        container.register(type: BrowseStationsModuleBuilder.self,
-                           service: BrowseStationsModuleBuilder())
+        container.register(type: BrowseMainCategoriesModuleBuilder.self,
+                           service: BrowseMainCategoriesModuleBuilder())
     }
     
     private func registerServices() {

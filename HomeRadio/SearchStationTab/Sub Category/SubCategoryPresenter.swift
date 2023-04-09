@@ -17,11 +17,13 @@ final class SubCategoryViewModel: ObservableObject {
 }
 
 final class SubCategoryPresenter {
+    // MARK: Properties
     fileprivate(set) var viewModel = SubCategoryViewModel()
     
+    // MARK: Methods
     func showItems(_ title: String?, _ stations: [RadioItem]) {
         viewModel.isLoading = false
-        viewModel.title = title ?? "Title"
+        viewModel.title = title ?? "Browse Station"
         viewModel.stationItems = stations
     }
     

@@ -9,7 +9,7 @@ import Foundation
 import DomainLayer
 import Utils
 
-final class BrowseStationsViewModel: ObservableObject {
+final class BrowseMainCategoriesViewModel: ObservableObject {
     @Published var isLoading = true
     @Published var shouldShowError = false
 
@@ -65,27 +65,27 @@ final class BrowseStationsViewModel: ObservableObject {
     }
 }
 
-final class BrowseStationsPresenter {
-    fileprivate(set) var viewModel = BrowseStationsViewModel()
+final class BrowseMainCategoriesPresenter {
+    fileprivate(set) var viewModel = BrowseMainCategoriesViewModel()
     
     func showCategories(_ categories: [RadioItem]) {
         
         for category in categories {
             switch category.key {
             case "local":
-                viewModel.localCategory = BrowseStationsViewModel.CategoryViewModel(category)
+                viewModel.localCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
             case "music":
-                viewModel.musicCategory = BrowseStationsViewModel.CategoryViewModel(category)
+                viewModel.musicCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
             case "talk":
-                viewModel.talkCategory = BrowseStationsViewModel.CategoryViewModel(category)
+                viewModel.talkCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
             case "sports":
-                viewModel.sportsCategory = BrowseStationsViewModel.CategoryViewModel(category)
+                viewModel.sportsCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
             case "location":
-                viewModel.locationCategory = BrowseStationsViewModel.CategoryViewModel(category)
+                viewModel.locationCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
             case "language":
-                viewModel.languageCategory = BrowseStationsViewModel.CategoryViewModel(category)
+                viewModel.languageCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
             case "podcast":
-                viewModel.podcastsCategory = BrowseStationsViewModel.CategoryViewModel(category)
+                viewModel.podcastsCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
             default: break
             }
         }
