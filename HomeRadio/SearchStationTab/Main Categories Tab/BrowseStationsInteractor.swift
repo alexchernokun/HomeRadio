@@ -25,20 +25,13 @@ final class BrowseStationsInteractor {
         getMainCategories()
     }
     
-    func navigateTo(_ category: BrowseStationsViewModel.CategoryViewModel) -> some View {
-        let path = "/Browse.ashx"
-        var query: [String: String?] = [:]
-        
-        switch category.text {
-        case "Local Radio": query = ["c": "local"]
-        case "Music": query = ["c": "music"]
-        case "Talk": query = ["c": "talk"]
-        case "Sports": query = ["c": "sports"]
-        case "By Location": query = ["id": "r0"]
-        case "By Language": query = ["c": "lang"]
-        case "Podcasts": query = ["c": "podcast"]
-        default: break
+    func navigateToLink(_ url: URL?) -> some View {
+        guard let url else {
+            return SubCategoryModuleBuilder(path: "", query: [:]).build()
         }
+        
+        let query = URLExtractHelper.extractQueryFrom(url)
+        let path = URLExtractHelper.extractPathFrom(url)
         
         return SubCategoryModuleBuilder(path: path, query: query).build()
     }

@@ -35,13 +35,13 @@ final class SubCategoryInteractor {
             return SubCategoryModuleBuilder(path: path, query: query).build()
         }
         
-        let query = extractQueryFrom(url)
-        let path = extractPathFrom(url)
+        let query = URLExtractHelper.extractQueryFrom(url)
+        let path = URLExtractHelper.extractPathFrom(url)
         return SubCategoryModuleBuilder(path: path, query: query).build()
     }
     
-    func playRadio(from url: URL?) {
-        guard let url else { return }
+    func playRadio(_ station: RadioItem) {
+        guard let url = station.url else { return }
         radioPlayer.playRadio(from: url)
     }
     
@@ -96,32 +96,7 @@ private extension SubCategoryInteractor {
     }
     
     func mapResponseType(from response: GeneralTuneInResponse) -> [RadioItem] {
-        var items = [RadioItem]()
-        for item in response.body {
-            if let children = item.children {
-                items.append(contentsOf: children.map { RadioItem($0) })
-            } else {
-                items.append(RadioItem(item))
-            }
-        }
-        return items
+        return response.body.map { RadioItem($0) }
     }
     
-    func extractQueryFrom(_ url: URL) -> [String: String?] {
-        var query: [String: String] = [:]
-        guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return [:] }
-        guard let queryItems = urlComponents.queryItems else { return [:] }
-        
-        for queryItem in queryItems {
-            query[queryItem.name] = queryItem.value
-        }
-        
-        return query
-    }
-    
-    func extractPathFrom(_ url: URL) -> String {
-        guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return "" }
-        let path = urlComponents.path
-        return path
-    }
 }

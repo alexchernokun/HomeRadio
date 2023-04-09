@@ -47,6 +47,7 @@ public extension RadioItem {
         }
         
         self.init(type: response.type,
+                  key: response.key,
                   text: response.text,
                   url: response.url,
                   bitrate: response.bitrate,

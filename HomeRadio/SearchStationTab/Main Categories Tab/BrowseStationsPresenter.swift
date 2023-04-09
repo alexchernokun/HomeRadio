@@ -23,36 +23,38 @@ final class BrowseStationsViewModel: ObservableObject {
     
     struct CategoryViewModel {
         var type: RadioItemType
+        var key: String?
         var text: String
         var url: URL?
         var imageName: String
         var color: String
-        
+
         init(_ category: RadioItem) {
             self.type = category.type
             self.text = category.text
             self.url = category.url
-            
-            switch text {
-            case "Local Radio":
+            self.key = category.key
+
+            switch key {
+            case "local":
                 self.imageName = "location.circle"
                 self.color = Colors.categoryRed
-            case "Music":
+            case "music":
                 self.imageName = "music.note"
                 self.color = Colors.categoryBlue
-            case "Talk":
+            case "talk":
                 self.imageName = "waveform.and.mic"
                 self.color = Colors.bgSecondary
-            case "Sports":
+            case "sports":
                 self.imageName = "sportscourt"
                 self.color = Colors.categoryOrange
-            case "By Location":
+            case "location":
                 self.imageName = "mappin.and.ellipse"
                 self.color = Colors.categoryGreen
-            case "By Language":
+            case "language":
                 self.imageName = "globe"
                 self.color = Colors.categoryYellow
-            case "Podcasts":
+            case "podcast":
                 self.imageName = "mic.fill"
                 self.color = Colors.categoryBrown
             default:
@@ -67,21 +69,22 @@ final class BrowseStationsPresenter {
     fileprivate(set) var viewModel = BrowseStationsViewModel()
     
     func showCategories(_ categories: [RadioItem]) {
+        
         for category in categories {
-            switch category.text {
-            case "Local Radio":
+            switch category.key {
+            case "local":
                 viewModel.localCategory = BrowseStationsViewModel.CategoryViewModel(category)
-            case "Music":
+            case "music":
                 viewModel.musicCategory = BrowseStationsViewModel.CategoryViewModel(category)
-            case "Talk":
+            case "talk":
                 viewModel.talkCategory = BrowseStationsViewModel.CategoryViewModel(category)
-            case "Sports":
+            case "sports":
                 viewModel.sportsCategory = BrowseStationsViewModel.CategoryViewModel(category)
-            case "By Location":
+            case "location":
                 viewModel.locationCategory = BrowseStationsViewModel.CategoryViewModel(category)
-            case "By Language":
+            case "language":
                 viewModel.languageCategory = BrowseStationsViewModel.CategoryViewModel(category)
-            case "Podcasts":
+            case "podcast":
                 viewModel.podcastsCategory = BrowseStationsViewModel.CategoryViewModel(category)
             default: break
             }

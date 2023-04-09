@@ -9,6 +9,7 @@ import Foundation
 
 public struct RadioItem: Codable, Hashable {
     public var type: RadioItemType
+    public var key: String?
     public var text: String
     public var url: URL?
     public var bitrate: String?
@@ -24,6 +25,7 @@ public struct RadioItem: Codable, Hashable {
     public var artworkFromMetadata: URL?
     
     public init(type: String?,
+                key: String?,
                 text: String,
                 url: String?,
                 bitrate: String?,
@@ -36,6 +38,7 @@ public struct RadioItem: Codable, Hashable {
                 playingImage: String?,
                 children: [RadioItem]?) {
         self.type = RadioItemType(rawValue: type ?? "") ?? .unknown
+        self.key = key
         self.text = text
         self.url = URL(string: url ?? "") ?? nil
         self.bitrate = (bitrate ?? "n/a") + " Kbps"

@@ -114,17 +114,18 @@ private extension RadioStationTypeView {
 struct RadioStation_Previews: PreviewProvider {
     static var station: RadioItem {
         return RadioItem(type: "audio",
-                            text: "Хіт FM 101.7 (Top 40 & Pop Music)",
-                            url: "http://opml.radiotime.com/Tune.ashx?id=s142760",
-                            bitrate: "128",
-                            reliability: "99",
-                            subtext: "Тільки хіти!",
-                            formats: "mp3",
-                            image: "http://cdn-profiles.tunein.com/s6122/images/logoq.png?t=1",
-                            currentTrack: "",
-                            playing: "",
-                            playingImage: "",
-                            children: [])
+                         key: "",
+                         text: "Хіт FM 101.7 (Top 40 & Pop Music)",
+                         url: "http://opml.radiotime.com/Tune.ashx?id=s142760",
+                         bitrate: "128",
+                         reliability: "99",
+                         subtext: "Тільки хіти!",
+                         formats: "mp3",
+                         image: "http://cdn-profiles.tunein.com/s6122/images/logoq.png?t=1",
+                         currentTrack: "",
+                         playing: "",
+                         playingImage: "",
+                         children: [])
     }
     
     static var previews: some View {

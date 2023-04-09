@@ -58,10 +58,21 @@ struct BrowseStationsView: View {
 
 private extension BrowseStationsView {
     
-    func categoryView(_ category: BrowseStationsViewModel.CategoryViewModel?) -> some View {
+    @ViewBuilder
+    private func navigation(for category: BrowseStationsViewModel.CategoryViewModel?) -> some View {
+        if let category {
+            NavigationLink {
+                interactor.navigateToLink(category.url)
+            } label: {
+                categoryView(category)
+            }
+        }
+    }
+    
+    func categoryView(_ category: BrowseStationsViewModel.CategoryViewModel) -> some View {
         return VStack(alignment: .leading, spacing: 0) {
             HStack {
-                Text(category?.text ?? "")
+                Text(category.text)
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(Color(Colors.textPrimary))
                     .padding(.vertical, 20)
@@ -74,7 +85,7 @@ private extension BrowseStationsView {
             HStack {
                 Spacer()
                 
-                Image(systemName: category?.imageName ?? "")
+                Image(systemName: category.imageName)
                     .foregroundColor(Color(Colors.textPrimary))
                     .padding(.vertical, 20)
                     .padding(.trailing, 20)
@@ -83,20 +94,9 @@ private extension BrowseStationsView {
         .disabled(viewModel.isLoading)
         .background(
             Rectangle()
-                .fill(Color(category?.color ?? "").gradient)
+                .fill(Color(category.color).gradient)
                 .cornerRadius(25)
         )
-    }
-    
-    @ViewBuilder
-    private func navigation(for category: BrowseStationsViewModel.CategoryViewModel?) -> some View {
-        if let category {
-            NavigationLink {
-                interactor.navigateTo(category)
-            } label: {
-                categoryView(category)
-            }
-        }
     }
     
 }

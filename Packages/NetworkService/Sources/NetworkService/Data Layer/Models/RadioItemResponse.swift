@@ -18,6 +18,7 @@ public struct HeadResponse: Codable {
 
 public struct RadioItemResponse: Codable {
     public let type: String?
+    public let key: String?
     public let text: String
     public let url: String?
     public let bitrate: String?
@@ -31,7 +32,7 @@ public struct RadioItemResponse: Codable {
     public let children: [RadioItemResponse]?
 
     enum CodingKeys: String, CodingKey {
-        case type, text
+        case type, text, key
         case url = "URL"
         case bitrate, reliability
         case subtext
