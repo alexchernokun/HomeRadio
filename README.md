@@ -39,20 +39,30 @@ Each Module consists of 4 files:
 
 ## Screens Overview
 This app works both on iPhone and iPad, also supports light and dark themes: 
-![](Resources/MyStations.png) ![](Resources/MyStationsLight.png)
+![](Resources/MyStations.png)
+
+![](Resources/MyStationsLight.png)
+
 When you first run the app you will see Empty state of the screens shown above:
+
 ![](Resources/MyStationsEmpty.png)
 
 If you drag the "NowPlayingSmallView" up you will find the view with an artwork and track title. Artwork is fetched using iTunes API.
+
 ![](Resources/NowPlaying.png)
 
 Navigation is implemented using one SwiftUI view called SubCategoryView.
-![](Resources/Categories.png) ![](Resources/Navigation3.png)
+
+![](Resources/Categories.png)
+
+![](Resources/Navigation3.png)
 
 Since it uses NavigationStack it enables us a programmatic navigation, popping a lot of screens in case of long tap on Back button, etc
 Also we my hide unneeded sections.
 
-![](Resources/Navigation.png) ![](Resources/Navigation2.png) 
+![](Resources/Navigation.png)
+
+![](Resources/Navigation2.png) 
 
 You can add a station to your Favourite station by tapping Add button. It saves into UserDefaults, just for simplicity means.
 And of course you may play a radio station from here by tapping on its cell.
