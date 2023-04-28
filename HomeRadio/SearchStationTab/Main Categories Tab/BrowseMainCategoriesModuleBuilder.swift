@@ -17,11 +17,11 @@ struct BrowseMainCategoriesModuleBuilder: ModuleBuilder {
     
     func build() -> BrowseMainCategoriesView {
         let presenter = BrowseMainCategoriesPresenter()
-        let tuneInRepository = container.resolve(type: TuneInRepository.self)
+        let tuneInRepository = container.resolve(type: TuneInRepositoryProtocol.self)
         let interactor = BrowseMainCategoriesInteractor(presenter: presenter,
-                                                  tuneInRepository: tuneInRepository)
+                                                        tuneInRepository: tuneInRepository)
         let view = BrowseMainCategoriesView(interactor: interactor,
-                                      viewModel: presenter.viewModel)
+                                            viewModel: presenter.viewModel)
         return view
     }
 }

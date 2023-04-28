@@ -19,7 +19,7 @@ final class SubCategoryInteractor {
     let query: [String: String?]
     let path: String
     private let presenter: SubCategoryPresenter
-    private let tuneInRepository: TuneInRepository
+    private let tuneInRepository: TuneInRepositoryProtocol
     private let radioPlayer: RadioPlayer
     private var subscriptions = Set<AnyCancellable>()
     private var container = DIContainer.shared
@@ -51,7 +51,7 @@ final class SubCategoryInteractor {
     
     // MARK: Initialization
     init(presenter: SubCategoryPresenter,
-         tuneInRepository: TuneInRepository,
+         tuneInRepository: TuneInRepositoryProtocol,
          radioPlayer: RadioPlayer,
          path: String,
          query: [String: String?]) {

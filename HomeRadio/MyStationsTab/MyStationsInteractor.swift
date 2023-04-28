@@ -17,7 +17,7 @@ final class MyStationsInteractor {
     // MARK: Properties
     private let presenter: MyStationsPresenter
     private let radioPlayer: RadioPlayer
-    private let iTunesRepository: ItunesSearchRepository
+    private let iTunesRepository: ItunesSearchRepositoryProtocol
     private var subscriptions = Set<AnyCancellable>()
     private var cancelableSubscriptions = Set<AnyCancellable>()
     
@@ -50,7 +50,7 @@ final class MyStationsInteractor {
     // MARK: Initialization
     init(presenter: MyStationsPresenter,
          radioPlayer: RadioPlayer,
-         iTunesRepository: ItunesSearchRepository) {
+         iTunesRepository: ItunesSearchRepositoryProtocol) {
         self.presenter = presenter
         self.radioPlayer = radioPlayer
         self.iTunesRepository = iTunesRepository

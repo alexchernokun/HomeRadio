@@ -29,9 +29,9 @@ final class DIContainerInitialization {
     }
     
     private func registerRepositories() {
-        container.register(type: TuneInRepository.self,
+        container.register(type: TuneInRepositoryProtocol.self,
                            service: TuneInRepository())
-        container.register(type: ItunesSearchRepository.self,
+        container.register(type: ItunesSearchRepositoryProtocol.self,
                            service: ItunesSearchRepository())
     }
     

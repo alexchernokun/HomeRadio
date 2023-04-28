@@ -16,7 +16,7 @@ final class BrowseMainCategoriesInteractor {
     // MARK: Properties
     private let container = DIContainer.shared
     private let presenter: BrowseMainCategoriesPresenter
-    private let tuneInRepository: TuneInRepository
+    private let tuneInRepository: TuneInRepositoryProtocol
     private var subscriptions = Set<AnyCancellable>()
     
     // MARK: Methods
@@ -37,7 +37,7 @@ final class BrowseMainCategoriesInteractor {
     }
     
     // MARK: Initialization
-    init(presenter: BrowseMainCategoriesPresenter, tuneInRepository: TuneInRepository) {
+    init(presenter: BrowseMainCategoriesPresenter, tuneInRepository: TuneInRepositoryProtocol) {
         self.presenter = presenter
         self.tuneInRepository = tuneInRepository
     }

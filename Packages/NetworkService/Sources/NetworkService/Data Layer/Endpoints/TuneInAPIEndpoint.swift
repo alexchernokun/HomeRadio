@@ -12,14 +12,10 @@ private struct TuneInAPIConstants {
     static let host = "opml.radiotime.com"
 }
 
-struct TuneInAPIEndpoint: APIEndpoint {
+enum TuneInAPIEndpoint: APIEndpoint {
     
-    enum Kind {
-        case main
-        case subCategory(_ path: String, _ query: [String: String?])
-    }
-    
-    var kind: Kind
+    case main
+    case subCategory(_ path: String, _ query: [String: String?])
     
     var scheme: String {
         return TuneInAPIConstants.scheme
@@ -30,7 +26,7 @@ struct TuneInAPIEndpoint: APIEndpoint {
     }
     
     var path: String {
-        switch kind {
+        switch self {
         case .main: return ""
         case let .subCategory(path, _): return path
         }
@@ -39,7 +35,7 @@ struct TuneInAPIEndpoint: APIEndpoint {
     var query: [String: String?]? {
         var generalQuery: [String: String?] = ["": ""]
         
-        switch kind {
+        switch self {
         case let .subCategory(_, query):
             generalQuery = query
         default:

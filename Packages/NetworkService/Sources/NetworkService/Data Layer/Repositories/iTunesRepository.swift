@@ -9,13 +9,17 @@ import Foundation
 import Combine
 import DomainLayer
 
-public final class ItunesSearchRepository {
+public protocol ItunesSearchRepositoryProtocol {
+    func search(title: String) -> AnyPublisher<URL?, Error>
+}
+
+public final class ItunesSearchRepository: ItunesSearchRepositoryProtocol {
     
     public let networkService = NetworkService()
     
     // MARK: Requests
     public func search(title: String) -> AnyPublisher<URL?, Error> {
-        let request = Request(apiEndpoint: ItunesAPIEndpoint(kind: .search(title)))
+        let request = Request(apiEndpoint: ItunesAPIEndpoint.search(title))
         
         return networkService
             .send(request)

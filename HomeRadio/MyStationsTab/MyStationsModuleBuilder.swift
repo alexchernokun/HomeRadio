@@ -20,7 +20,7 @@ struct MyStationsModuleBuilder: ModuleBuilder {
         let presenter = MyStationsPresenter()
         let interactor = MyStationsInteractor(presenter: presenter,
                                               radioPlayer: container.resolve(type: RadioPlayer.self),
-                                              iTunesRepository: container.resolve(type: ItunesSearchRepository.self))
+                                              iTunesRepository: container.resolve(type: ItunesSearchRepositoryProtocol.self))
         
         let view = MyStationsView(interactor: interactor,
                                   viewModel: presenter.viewModel)

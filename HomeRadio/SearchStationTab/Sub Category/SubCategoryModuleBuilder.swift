@@ -22,7 +22,7 @@ struct SubCategoryModuleBuilder: ModuleBuilder {
     func build() -> SubCategoryView {
         let presenter = SubCategoryPresenter()
         let radioPlayer = container.resolve(type: RadioPlayer.self)
-        let tuneInRepository = container.resolve(type: TuneInRepository.self)
+        let tuneInRepository = container.resolve(type: TuneInRepositoryProtocol.self)
         let interactor = SubCategoryInteractor(presenter: presenter,
                                                tuneInRepository: tuneInRepository,
                                                radioPlayer: radioPlayer,

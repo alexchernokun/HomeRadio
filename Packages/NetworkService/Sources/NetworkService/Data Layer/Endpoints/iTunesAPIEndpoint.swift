@@ -12,13 +12,9 @@ private struct ItunesAPIConstants {
     static let host = "itunes.apple.com"
 }
 
-struct ItunesAPIEndpoint: APIEndpoint {
+enum ItunesAPIEndpoint: APIEndpoint {
     
-    enum Kind {
-        case search(_ title: String)
-    }
-    
-    var kind: Kind
+    case search(_ title: String)
     
     var scheme: String {
         return ItunesAPIConstants.scheme
@@ -29,14 +25,14 @@ struct ItunesAPIEndpoint: APIEndpoint {
     }
     
     var path: String {
-        switch kind {
+        switch self {
         case .search:
             return "/search"
         }
     }
     
     var query: [String : String?]? {
-        switch kind {
+        switch self {
         case .search(let title):
             return ["term": title,
                     "entity": "song"]
@@ -44,7 +40,7 @@ struct ItunesAPIEndpoint: APIEndpoint {
     }
     
     var method: HTTPMethod {
-        switch kind {
+        switch self {
         case .search:
             return .get
         }

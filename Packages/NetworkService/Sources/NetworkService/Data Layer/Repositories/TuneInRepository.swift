@@ -8,13 +8,18 @@
 import Combine
 import DomainLayer
 
-public final class TuneInRepository {
+public protocol TuneInRepositoryProtocol {
+    func getGeneralTuneInCategories() -> AnyPublisher<[RadioItem], Error>
+    func getSubCategory(path: String, query: [String: String?]) -> AnyPublisher<GeneralTuneInResponse, Error>
+}
+
+public final class TuneInRepository: TuneInRepositoryProtocol {
     
     private let networkService = NetworkService()
     
     // MARK: Requests
     public func getGeneralTuneInCategories() -> AnyPublisher<[RadioItem], Error> {
-        let request = Request(apiEndpoint: TuneInAPIEndpoint(kind: .main))
+        let request = Request(apiEndpoint: TuneInAPIEndpoint.main)
         
         return networkService
             .send(request)
@@ -25,7 +30,7 @@ public final class TuneInRepository {
     }
     
     public func getSubCategory(path: String, query: [String: String?]) -> AnyPublisher<GeneralTuneInResponse, Error> {
-        let request = Request(apiEndpoint: TuneInAPIEndpoint(kind: .subCategory(path, query)))
+        let request = Request(apiEndpoint: TuneInAPIEndpoint.subCategory(path, query))
         
         return networkService
             .send(request)
