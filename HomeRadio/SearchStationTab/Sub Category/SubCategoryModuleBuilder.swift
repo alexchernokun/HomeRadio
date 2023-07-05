@@ -31,7 +31,6 @@ struct SubCategoryModuleBuilder: ModuleBuilder {
         let view = SubCategoryView(interactor: interactor,
                                    viewModel: presenter.viewModel)
         return view
-
     }
     
 }
