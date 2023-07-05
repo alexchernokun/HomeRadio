@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Defaults {
+public final class Defaults {
     public static let myStationsKey = "defaultsStationsKey"
     public static let defaults = UserDefaults.standard
 }
