@@ -26,6 +26,6 @@ struct LinkTypeView: View {
 
 struct LinkTypeView_Previews: PreviewProvider {
     static var previews: some View {
-        LinkTypeView(stationItem: RadioItem(text: ""), action: nil)
+        LinkTypeView(stationItem: RadioItem(type: .audio, text: "Classic Hits"), action: nil)
     }
 }

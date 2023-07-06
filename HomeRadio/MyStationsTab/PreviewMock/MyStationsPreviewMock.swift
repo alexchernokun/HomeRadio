@@ -11,19 +11,33 @@ import NetworkService
 import RadioPlayer
 
 struct MyStationsPreviewMock {
-    static let radioPlayer = RadioPlayer()
+    private static let radioPlayer = RadioPlayer()
+    private static let repository = ItunesSearchRepository()
     
-    static var presenter: MyStationsPresenter {
+    private static var presenter: MyStationsPresenter {
         return MyStationsPresenter()
     }
     
-    static func view() -> MyStationsView {
-        let repository = ItunesSearchRepository()
-        let interactor = MyStationsInteractor(presenter: presenter,
-                                              radioPlayer: radioPlayer,
-                                              iTunesRepository: repository)
-        let view = MyStationsView(interactor: interactor,
-                                  viewModel: presenter.viewModel)
-        return view
+    private static var interactor: MyStationsInteractor {
+        return MyStationsInteractor(presenter: presenter,
+                                    radioPlayer: radioPlayer,
+                                    iTunesRepository: repository)
+    }
+    
+    static func myStationsView() -> MyStationsView {
+        return MyStationsView(interactor: interactor,
+                              viewModel: presenter.viewModel)
+    }
+    
+    static func playerView() -> PlayerView {
+        return PlayerView(interactor: interactor,
+                          viewModel: presenter.viewModel,
+                          showPopover: Binding<Bool>.constant(true))
+    }
+    
+    static func miniPlayerView() -> MiniPlayerView {
+        return MiniPlayerView(interactor: interactor,
+                              viewModel: presenter.viewModel,
+                              showPopover: Binding<Bool>.constant(false))
     }
 }

@@ -17,7 +17,7 @@ struct BrowseMainCategoriesView: View {
         NavigationStack {
             ZStack(alignment: .top) {
                 Color(Colors.bgPrimary)
-                    .edgesIgnoringSafeArea(.all)
+                    .ignoresSafeArea()
                 
                 if viewModel.shouldShowError {
                     NetworkErrorView {
@@ -25,29 +25,12 @@ struct BrowseMainCategoriesView: View {
                     }
                 } else {
                     ScrollView(showsIndicators: false) {
-                        VStack(alignment: .leading, spacing: 15) {
-                            navigation(for: viewModel.localCategory)
-                            
-                            HStack(alignment: .center, spacing: 10) {
-                                navigation(for: viewModel.musicCategory)
-                                navigation(for: viewModel.talkCategory)
+                        menuContainerView()
+                            .padding()
+                            .redacted(reason: viewModel.isLoading ? .placeholder : [])
+                            .onAppear {
+                                interactor.fetchCategories()
                             }
-                            
-                            HStack(alignment: .center, spacing: 10) {
-                                navigation(for: viewModel.sportsCategory)
-                                navigation(for: viewModel.locationCategory)
-                            }
-                            
-                            HStack(alignment: .center, spacing: 10) {
-                                navigation(for: viewModel.languageCategory)
-                                navigation(for: viewModel.podcastsCategory)
-                            }
-                        }
-                        .padding()
-                        .redacted(reason: viewModel.isLoading ? .placeholder : [])
-                        .onAppear {
-                            interactor.fetchCategories()
-                        }
                     }
                 }
             }
@@ -58,8 +41,29 @@ struct BrowseMainCategoriesView: View {
 
 private extension BrowseMainCategoriesView {
     
+    func menuContainerView() -> some View {
+        VStack(alignment: .leading, spacing: 15) {
+            navigationViewItem(for: viewModel.localCategory)
+            
+            HStack(alignment: .center, spacing: 10) {
+                navigationViewItem(for: viewModel.musicCategory)
+                navigationViewItem(for: viewModel.talkCategory)
+            }
+            
+            HStack(alignment: .center, spacing: 10) {
+                navigationViewItem(for: viewModel.sportsCategory)
+                navigationViewItem(for: viewModel.locationCategory)
+            }
+            
+            HStack(alignment: .center, spacing: 10) {
+                navigationViewItem(for: viewModel.languageCategory)
+                navigationViewItem(for: viewModel.podcastsCategory)
+            }
+        }
+    }
+    
     @ViewBuilder
-    private func navigation(for category: BrowseMainCategoriesViewModel.CategoryViewModel?) -> some View {
+    func navigationViewItem(for category: BrowseMainCategoriesViewModel.CategoryViewModel?) -> some View {
         if let category {
             NavigationLink {
                 interactor.navigateToLink(category.url)
@@ -70,7 +74,7 @@ private extension BrowseMainCategoriesView {
     }
     
     func categoryView(_ category: BrowseMainCategoriesViewModel.CategoryViewModel) -> some View {
-        return VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             HStack {
                 Text(category.text)
                     .font(.system(size: 20, weight: .semibold))

@@ -13,7 +13,7 @@ final class SubCategoryViewModel: ObservableObject {
     @Published var shouldShowError = false
     
     @Published var title: String = ""
-    @Published var stationItems: [RadioItem] = []
+    @Published var radioItems: [RadioItem] = []
 }
 
 final class SubCategoryPresenter {
@@ -24,7 +24,7 @@ final class SubCategoryPresenter {
     func showItems(_ title: String?, _ stations: [RadioItem]) {
         viewModel.isLoading = false
         viewModel.title = title ?? "Browse Station"
-        viewModel.stationItems = stations
+        viewModel.radioItems = stations
     }
     
     func showErrorState() {

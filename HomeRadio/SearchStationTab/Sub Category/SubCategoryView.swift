@@ -19,57 +19,74 @@ struct SubCategoryView:  View {
                 interactor.fetchRadioStationItems()
             }
         } else {
-            List(viewModel.stationItems, id: \.self) { stationItem in
-                if let children = stationItem.children {
-                    Section(header: Text(stationItem.text)) {
-                        ForEach(children, id: \.self) { child in
-                            viewForItem(item: child)
-                        }
-                    }
-                } else {
-                    viewForItem(item: stationItem)
+            radioItemsList()
+                .buttonStyle(.bordered)
+                .listStyle(.sidebar)
+                .navigationTitle(viewModel.title)
+                .navigationBarTitleDisplayMode(.inline)
+                .redacted(reason: viewModel.isLoading ? .placeholder : [])
+                .onAppear {
+                    interactor.fetchRadioStationItems()
                 }
-                
-            }
-            .buttonStyle(.bordered)
-            .listStyle(.sidebar)
-            .navigationTitle(viewModel.title)
-            .navigationBarTitleDisplayMode(.inline)
-            .redacted(reason: viewModel.isLoading ? .placeholder : [])
-            .onAppear {
-                interactor.fetchRadioStationItems()
-            }
         }
     }
 }
 
 private extension SubCategoryView {
+    
+    func radioItemsList() -> some View {
+        List(viewModel.radioItems, id: \.self) { radioItem in
+            if let children = radioItem.children {
+                Section(header: Text(radioItem.text)) {
+                    ForEach(children, id: \.self) { child in
+                        viewForItem(item: child)
+                    }
+                }
+            } else {
+                viewForItem(item: radioItem)
+            }
+            
+        }
+    }
+    
     @ViewBuilder
     func viewForItem(item: RadioItem) -> some View {
         switch item.type {
         case .audio:
-            Button {
-                interactor.playRadio(item)
-            } label: {
-                RadioStationTypeView(station: item) { station in
-                    interactor.saveToMyStations(station)
-                }
-            }
-            .buttonStyle(.plain)
+            radioItemView(item)
         case .link:
-            NavigationLink {
-                interactor.navigateToLink(item)
-            } label: {
-                LinkTypeView(stationItem: item)
-            }
+            navigationItemView(item)
         default:
-            VStack(alignment: .center, spacing: 0) {
-                Spacer()
-                Text("No stations or shows available")
-                    .foregroundColor(Color(Colors.textPrimary))
-                    .font(.system(size: 18, weight: .semibold))
-                Spacer()
+            emptyState()
+        }
+    }
+    
+    func radioItemView(_ item: RadioItem) -> some View {
+        Button {
+            interactor.playRadio(item)
+        } label: {
+            RadioStationTypeView(station: item) { station in
+                interactor.saveToMyStations(station)
             }
+        }
+        .buttonStyle(.plain)
+    }
+    
+    func navigationItemView(_ item: RadioItem) -> some View {
+        NavigationLink {
+            interactor.navigateToLink(item)
+        } label: {
+            LinkTypeView(stationItem: item)
+        }
+    }
+    
+    func emptyState() -> some View {
+        VStack(alignment: .center, spacing: 0) {
+            Spacer()
+            Text("No stations or shows available")
+                .foregroundColor(Color(Colors.textPrimary))
+                .font(.system(size: 18, weight: .semibold))
+            Spacer()
         }
     }
 }

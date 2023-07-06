@@ -18,39 +18,9 @@ struct RadioStationTypeView: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            AsyncImage(url: station.image) { phase in
-                if let image = phase.image {
-                    image
-                        .resizable()
-                        .frame(width: 75, height: 75)
-                        .clipShape(SquircleShape(size: 75))
-                        .padding(5)
-                } else {
-                    Color(Colors.bgSecondary)
-                        .frame(width: 75, height: 75)
-                        .clipShape(SquircleShape(size: 75))
-                }
-            }
+            artwork()
             
-            VStack(alignment: .leading, spacing: 5) {
-                Text(station.text)
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(Color(Colors.textPrimary))
-                Text(station.subtext ?? "")
-                    .font(.system(size: 11, weight: .light))
-                    .foregroundColor(Color(Colors.textSecondary))
-                
-                Spacer()
-                    .frame(height: 10)
-                
-                HStack(alignment: .center, spacing: 3) {
-                    labelInfo(text: station.reliability, imageName: "cellularbars")
-                    labelInfo(text: station.bitrate, imageName: "arrow.up.arrow.down")
-                    labelInfo(text: station.formats, imageName: "music.note")
-                }
-            }
-            .padding(.vertical)
-            .lineLimit(0)
+            metadata()
             
             Spacer()
             
@@ -63,7 +33,46 @@ struct RadioStationTypeView: View {
     
 }
 
+// MARK: Subviews
 private extension RadioStationTypeView {
+    func artwork() -> some View {
+        AsyncImage(url: station.image) { phase in
+            if let image = phase.image {
+                image
+                    .resizable()
+                    .frame(width: 75, height: 75)
+                    .clipShape(SquircleShape(size: 75))
+                    .padding(5)
+            } else {
+                Color(Colors.bgSecondary)
+                    .frame(width: 75, height: 75)
+                    .clipShape(SquircleShape(size: 75))
+            }
+        }
+    }
+    
+    func metadata() -> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(station.text)
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundColor(Color(Colors.textPrimary))
+            Text(station.subtext ?? "")
+                .font(.system(size: 11, weight: .light))
+                .foregroundColor(Color(Colors.textSecondary))
+            
+            Spacer()
+                .frame(height: 10)
+            
+            HStack(alignment: .center, spacing: 3) {
+                labelInfo(text: station.reliability, imageName: "cellularbars")
+                labelInfo(text: station.bitrate, imageName: "arrow.up.arrow.down")
+                labelInfo(text: station.formats, imageName: "music.note")
+            }
+        }
+        .padding(.vertical)
+        .lineLimit(0)
+    }
+    
     func labelInfo(text: String?, imageName: String) -> some View {
         HStack(alignment: .center, spacing: 2) {
             Image(systemName: imageName)

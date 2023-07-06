@@ -55,19 +55,19 @@ public struct RadioItem: Codable, Hashable {
     }
     
     // For SwiftUI preview mock
-    public init(text: String) {
-        self.type =  .unknown
+    public init(type: RadioItemType = .audio, text: String, children: [RadioItem] = []) {
+        self.type =  type
         self.text = text
         self.url = nil
-        self.bitrate = ""
-        self.reliability = ""
-        self.subtext = ""
-        self.formats = ""
+        self.bitrate = "320 Kbps"
+        self.reliability = "99"
+        self.subtext = "Subtitle text"
+        self.formats = "mp3"
         self.image = nil
-        self.currentTrack = ""
+        self.currentTrack = "Best Hit"
         self.playing = ""
         self.playingImage = ""
-        self.children = []
+        self.children = children
         self.metadata = nil
         self.artworkFromMetadata = nil
     }
