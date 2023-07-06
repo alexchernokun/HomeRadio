@@ -135,6 +135,16 @@
 			path = ChildViews;
 			sourceTree = "<group>";
 		};
+		6340407B2A57657200EC3630 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				6307E93F29DEE02200678D08 /* MyStationsTab */,
+				6307E93E29DEE00F00678D08 /* SearchStationTab */,
+				635FAB7629DF662600EC02E5 /* Reusable Views */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		634E1B5129E076780012C9C5 /* Sub Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,9 +220,7 @@
 			children = (
 				637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */,
 				6307E94429DEE1A100678D08 /* DIContainerInitialization.swift */,
-				6307E93F29DEE02200678D08 /* MyStationsTab */,
-				6307E93E29DEE00F00678D08 /* SearchStationTab */,
-				635FAB7629DF662600EC02E5 /* Reusable Views */,
+				6340407B2A57657200EC3630 /* Screens */,
 				6307E93D29DDA3EE00678D08 /* Info.plist */,
 				637411B129DD7AA700297AC7 /* Assets.xcassets */,
 				637411B329DD7AA700297AC7 /* Preview Content */,
