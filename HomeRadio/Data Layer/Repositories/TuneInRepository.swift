@@ -7,6 +7,7 @@
 
 import Combine
 import DomainLayer
+import NetworkService
 
 public protocol TuneInRepositoryProtocol {
     func getGeneralTuneInCategories() -> AnyPublisher<[RadioItem], Error>

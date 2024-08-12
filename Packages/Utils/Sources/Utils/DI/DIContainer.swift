@@ -11,6 +11,8 @@ import Foundation
 public final class DIContainer {
     public static let shared = DIContainer()
     
+    private let recursiveLock = NSRecursiveLock()
+    
     private init() {}
     
     private var dependencies: [DependencyKey: Any] = [:]
@@ -31,6 +33,12 @@ public final class DIContainer {
     ///   - name: name of service (optional)
     /// - Returns: resolved service from container
     public func resolve<T>(type: T.Type, name: String? = nil) -> T {
+        recursiveLock.lock()
+
+        defer {
+            recursiveLock.unlock()
+        }
+        
         let dependencyKey = DependencyKey(type: type, name: name)
         return dependencies[dependencyKey] as! T
     }

@@ -61,7 +61,7 @@ final class MyStationsInteractor {
 // MARK: - Private Methods
 private extension MyStationsInteractor {
     func getStationsFromUserDefaults() {
-        guard let myStations: [RadioItem] = Defaults.getMyStations(for: Defaults.myStationsKey) else {
+        guard let myStations: [RadioItem] = Defaults.get(for: Defaults.myStationsKey) else {
             presenter.showEmptyState()
             return
         }

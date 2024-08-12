@@ -87,12 +87,12 @@ private extension SubCategoryInteractor {
     }
     
     func save(_ station: RadioItem) {
-        guard var myStations: [RadioItem] = Defaults.getMyStations(for: Defaults.myStationsKey) else {
-            Defaults.saveMyStations(object: [station], for: Defaults.myStationsKey)
+        guard var myStations: [RadioItem] = Defaults.get(for: Defaults.myStationsKey) else {
+            Defaults.save(object: [station], for: Defaults.myStationsKey)
             return
         }
         myStations.append(station)
-        Defaults.saveMyStations(object: myStations, for: Defaults.myStationsKey)
+        Defaults.save(object: myStations, for: Defaults.myStationsKey)
     }
     
     func mapResponseType(from response: GeneralTuneInResponse) -> [RadioItem] {

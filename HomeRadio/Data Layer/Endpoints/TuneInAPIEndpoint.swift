@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NetworkService
 
 private struct TuneInAPIConstants {
     static let scheme = "http"

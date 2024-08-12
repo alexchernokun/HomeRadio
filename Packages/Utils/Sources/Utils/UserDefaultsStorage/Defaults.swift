@@ -13,7 +13,7 @@ public final class Defaults {
 }
 
 public extension Defaults {
-    static func saveMyStations<T: Codable>(object: [T]?, for key: String) {
+    static func save<T: Codable>(object: [T]?, for key: String) {
         guard let object = object else { return }
         
         do {
@@ -24,7 +24,7 @@ public extension Defaults {
         }
     }
 
-    static func getMyStations<T: Codable>(for key: String) -> [T]? {
+    static func get<T: Codable>(for key: String) -> [T]? {
         guard let data = UserDefaults.standard.value(forKey: key) as? Data else { return nil }
         do {
             let object = try JSONDecoder().decode([T].self, from: data)

@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import DomainLayer
+import NetworkService
 
 public protocol ItunesSearchRepositoryProtocol {
     func search(title: String) -> AnyPublisher<URL?, Error>

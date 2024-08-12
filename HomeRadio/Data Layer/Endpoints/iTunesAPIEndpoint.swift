@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NetworkService
 
 private struct ItunesAPIConstants {
     static let scheme = "https"

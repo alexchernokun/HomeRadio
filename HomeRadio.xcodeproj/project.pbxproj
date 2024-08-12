@@ -20,6 +20,12 @@
 		6307E94F29DEE93700678D08 /* MyStationsPreviewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94E29DEE93700678D08 /* MyStationsPreviewMock.swift */; };
 		63146E682A55EBC80044BDCB /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63146E672A55EBC80044BDCB /* PlayerView.swift */; };
 		63146E6A2A5601F10044BDCB /* MiniPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63146E692A5601F10044BDCB /* MiniPlayerView.swift */; };
+		634040822A5771F500EC3630 /* iTunesAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040802A5771F500EC3630 /* iTunesAPIEndpoint.swift */; };
+		634040832A5771F500EC3630 /* TuneInAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040812A5771F500EC3630 /* TuneInAPIEndpoint.swift */; };
+		634040862A5771FE00EC3630 /* iTunesSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040842A5771FD00EC3630 /* iTunesSearchResponse.swift */; };
+		634040872A5771FE00EC3630 /* RadioItemResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040852A5771FE00EC3630 /* RadioItemResponse.swift */; };
+		6340408A2A57720300EC3630 /* iTunesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040882A57720300EC3630 /* iTunesRepository.swift */; };
+		6340408B2A57720300EC3630 /* TuneInRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040892A57720300EC3630 /* TuneInRepository.swift */; };
 		634E1B5329E1652C0012C9C5 /* SubCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5229E1652C0012C9C5 /* SubCategoryView.swift */; };
 		634E1B5529E1657E0012C9C5 /* SubCategoryModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5429E1657E0012C9C5 /* SubCategoryModuleBuilder.swift */; };
 		634E1B5729E165CD0012C9C5 /* SubCategoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5629E165CD0012C9C5 /* SubCategoryInteractor.swift */; };
@@ -53,6 +59,12 @@
 		6307E94E29DEE93700678D08 /* MyStationsPreviewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsPreviewMock.swift; sourceTree = "<group>"; };
 		63146E672A55EBC80044BDCB /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		63146E692A5601F10044BDCB /* MiniPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerView.swift; sourceTree = "<group>"; };
+		634040802A5771F500EC3630 /* iTunesAPIEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunesAPIEndpoint.swift; sourceTree = "<group>"; };
+		634040812A5771F500EC3630 /* TuneInAPIEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuneInAPIEndpoint.swift; sourceTree = "<group>"; };
+		634040842A5771FD00EC3630 /* iTunesSearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunesSearchResponse.swift; sourceTree = "<group>"; };
+		634040852A5771FE00EC3630 /* RadioItemResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioItemResponse.swift; sourceTree = "<group>"; };
+		634040882A57720300EC3630 /* iTunesRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunesRepository.swift; sourceTree = "<group>"; };
+		634040892A57720300EC3630 /* TuneInRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuneInRepository.swift; sourceTree = "<group>"; };
 		634E1B5229E1652C0012C9C5 /* SubCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryView.swift; sourceTree = "<group>"; };
 		634E1B5429E1657E0012C9C5 /* SubCategoryModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryModuleBuilder.swift; sourceTree = "<group>"; };
 		634E1B5629E165CD0012C9C5 /* SubCategoryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryInteractor.swift; sourceTree = "<group>"; };
@@ -145,6 +157,43 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		6340407F2A5771D500EC3630 /* Data Layer */ = {
+			isa = PBXGroup;
+			children = (
+				6340408C2A57725B00EC3630 /* Endpoints */,
+				6340408D2A57726300EC3630 /* Models */,
+				6340408E2A57726A00EC3630 /* Repositories */,
+			);
+			path = "Data Layer";
+			sourceTree = "<group>";
+		};
+		6340408C2A57725B00EC3630 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				634040802A5771F500EC3630 /* iTunesAPIEndpoint.swift */,
+				634040812A5771F500EC3630 /* TuneInAPIEndpoint.swift */,
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		6340408D2A57726300EC3630 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				634040842A5771FD00EC3630 /* iTunesSearchResponse.swift */,
+				634040852A5771FE00EC3630 /* RadioItemResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6340408E2A57726A00EC3630 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				634040882A57720300EC3630 /* iTunesRepository.swift */,
+				634040892A57720300EC3630 /* TuneInRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		634E1B5129E076780012C9C5 /* Sub Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +270,7 @@
 				637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */,
 				6307E94429DEE1A100678D08 /* DIContainerInitialization.swift */,
 				6340407B2A57657200EC3630 /* Screens */,
+				6340407F2A5771D500EC3630 /* Data Layer */,
 				6307E93D29DDA3EE00678D08 /* Info.plist */,
 				637411B129DD7AA700297AC7 /* Assets.xcassets */,
 				637411B329DD7AA700297AC7 /* Preview Content */,
@@ -324,13 +374,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				635FAB7A29E027F400EC02E5 /* SquircleShape.swift in Sources */,
+				634040862A5771FE00EC3630 /* iTunesSearchResponse.swift in Sources */,
+				6340408B2A57720300EC3630 /* TuneInRepository.swift in Sources */,
 				634E1B5329E1652C0012C9C5 /* SubCategoryView.swift in Sources */,
 				635FAB6729DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift in Sources */,
 				6307E94B29DEE4EF00678D08 /* MyStationsModuleBuilder.swift in Sources */,
 				6307E94729DEE2FE00678D08 /* MyStationsInteractor.swift in Sources */,
 				635FAB7829DF663600EC02E5 /* RadioStationTypeView.swift in Sources */,
+				634040872A5771FE00EC3630 /* RadioItemResponse.swift in Sources */,
 				635FAB7C29E04C3900EC02E5 /* MyStationsEmptyView.swift in Sources */,
 				634E1B5929E1664A0012C9C5 /* SubCategoryPresenter.swift in Sources */,
+				634040822A5771F500EC3630 /* iTunesAPIEndpoint.swift in Sources */,
+				6340408A2A57720300EC3630 /* iTunesRepository.swift in Sources */,
 				6307E94329DEE14F00678D08 /* BrowseMainCategoriesView.swift in Sources */,
 				635FAB6529DEEB3100EC02E5 /* BrowseMainCategoriesModuleBuilder.swift in Sources */,
 				6307E94929DEE30500678D08 /* MyStationsPresenter.swift in Sources */,
@@ -346,6 +401,7 @@
 				63146E682A55EBC80044BDCB /* PlayerView.swift in Sources */,
 				634E1B5E29E18F2C0012C9C5 /* LinkTypeView.swift in Sources */,
 				635FAB6329DEEB2800EC02E5 /* BrowseMainCategoriesPresenter.swift in Sources */,
+				634040832A5771F500EC3630 /* TuneInAPIEndpoint.swift in Sources */,
 				634E1B5B29E167250012C9C5 /* SubCategoryPreviewMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
