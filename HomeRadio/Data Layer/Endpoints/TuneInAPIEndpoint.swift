@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  TuneInAPIEndpoint.swift
 //  
 //
 //  Created by Oleksandr Chornokun on 05.04.2023.

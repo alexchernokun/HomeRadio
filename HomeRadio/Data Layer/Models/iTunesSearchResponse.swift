@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ItunesSearchResponse.swift
 //  
 //
 //  Created by Oleksandr Chornokun on 07.04.2023.

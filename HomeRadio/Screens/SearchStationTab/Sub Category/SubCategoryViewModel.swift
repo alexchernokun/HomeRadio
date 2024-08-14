@@ -1,5 +1,5 @@
 //
-//  SubCategoryInteractor.swift
+//  SubCategoryViewModel.swift
 //  HomeRadio
 //
 //  Created by Oleksandr Chornokun on 08.04.2023.
@@ -13,20 +13,45 @@ import NetworkService
 import DomainLayer
 import Utils
 
-final class SubCategoryInteractor {
+final class SubCategoryViewModel: ObservableObject {
     
+    // MARK: Properties
+    @Published var isLoading = true
+    @Published var shouldShowError = false
+    @Published var title: String = ""
+    @Published var radioItems: [RadioItem] = []
+    
+    // From interator:
     // MARK: Properties
     let query: [String: String?]
     let path: String
-    private let presenter: SubCategoryPresenter
     private let tuneInRepository: TuneInRepositoryProtocol
     private let radioPlayer: RadioPlayer
     private var subscriptions = Set<AnyCancellable>()
     private var container = DIContainer.shared
     
+    // From presenter:
+    // MARK: Methods
+    func showItems(_ title: String?, _ stations: [RadioItem]) {
+        isLoading = false
+        self.title = title ?? "Browse Station"
+        radioItems = stations
+    }
+    
+    func showErrorState() {
+        isLoading = false
+        shouldShowError = true
+    }
+    
+    func clearErrorState() {
+        isLoading = true
+        shouldShowError = false
+    }
+    
+    // From interactor:
     // MARK: Methods
     func fetchRadioStationItems() {
-        presenter.clearErrorState()
+        clearErrorState()
         getItems()
     }
     
@@ -50,22 +75,20 @@ final class SubCategoryInteractor {
     }
     
     // MARK: Initialization
-    init(presenter: SubCategoryPresenter,
-         tuneInRepository: TuneInRepositoryProtocol,
+    init(tuneInRepository: TuneInRepositoryProtocol,
          radioPlayer: RadioPlayer,
          path: String,
          query: [String: String?]) {
-        self.presenter = presenter
         self.tuneInRepository = tuneInRepository
         self.radioPlayer = radioPlayer
         self.path = path
         self.query = query
     }
-    
 }
 
 // MARK: - Private methods
-private extension SubCategoryInteractor {
+private extension SubCategoryViewModel {
+    
     func getItems() {
         tuneInRepository.getSubCategory(path: path, query: query)
             .receive(on: DispatchQueue.main)
@@ -74,14 +97,14 @@ private extension SubCategoryInteractor {
                 switch completion {
                 case .failure(let error):
                     Logger.logError(message: error)
-                    presenter.showErrorState()
+                    showErrorState()
                 case .finished:
                     break
                 }
             } receiveValue: { [weak self] response in
                 guard let self else { return }
                 let items = mapResponseType(from: response)
-                self.presenter.showItems(response.head?.title, items)
+                self.showItems(response.head?.title, items)
             }
             .store(in: &subscriptions)
     }
@@ -98,5 +121,4 @@ private extension SubCategoryInteractor {
     func mapResponseType(from response: GeneralTuneInResponse) -> [RadioItem] {
         return response.body.map { RadioItem($0) }
     }
-    
 }

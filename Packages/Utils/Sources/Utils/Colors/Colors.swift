@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Colors.swift
 //  
 //
 //  Created by Oleksandr Chornokun on 07.04.2023.

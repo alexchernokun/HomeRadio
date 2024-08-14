@@ -1,5 +1,5 @@
 //
-//  MyStationsInteractor.swift
+//  MyStationsViewModel.swift
 //  HomeRadio
 //
 //  Created by Oleksandr Chornokun on 06.04.2023.
@@ -12,15 +12,58 @@ import NetworkService
 import DomainLayer
 import Utils
 
-final class MyStationsInteractor {
+final class MyStationsViewModel: ObservableObject {
     
+    // From presenter:
     // MARK: Properties
-    private let presenter: MyStationsPresenter
+    @Published var myStations: [RadioItem] = []
+    @Published var shouldShowEmptyState = false
+    @Published var currentStation: RadioItem?
+    @Published var isRadioPlaying: Bool = false
+    
+    // From interactor:
     private let radioPlayer: RadioPlayer
     private let iTunesRepository: ItunesSearchRepositoryProtocol
     private var subscriptions = Set<AnyCancellable>()
     private var cancelableSubscriptions = Set<AnyCancellable>()
     
+    // From presenter:
+    // MARK: Methods
+    func showEmptyState() {
+        shouldShowEmptyState = true
+    }
+    
+    func showMyStations(_ stations: [RadioItem]) {
+        shouldShowEmptyState = false
+        myStations = stations
+    }
+    
+    func updateCurrentStation(_ station: RadioItem) {
+        currentStation = station
+    }
+    
+    func toggleIsRadioPlaying() {
+        isRadioPlaying.toggle()
+        isRadioPlaying ? makeStopButton() : makePlayButton()
+    }
+    
+    func makePlayButton() {
+        isRadioPlaying = false
+    }
+    
+    func makeStopButton() {
+        isRadioPlaying = true
+    }
+    
+    func updateMetadata(_ title: String) {
+        currentStation?.metadata = title
+    }
+    
+    func updateArtwork(_ url: URL?) {
+        currentStation?.artworkFromMetadata = url
+    }
+    
+    // From Interactor:
     // MARK: Methods
     func getMyStations() {
         getStationsFromUserDefaults()
@@ -28,15 +71,15 @@ final class MyStationsInteractor {
     
     func playRadio(_ station: RadioItem) {
         guard let url = station.url else { return }
-        presenter.updateCurrentStation(station)
-        presenter.makeStopButton()
+        updateCurrentStation(station)
+        makeStopButton()
         radioPlayer.playRadio(from: url)
     }
     
     func toggleRadioPlayback() {
-        guard let url = presenter.currentStation?.url else { return }
-        presenter.isRadioPlaying ? radioPlayer.pauseRadio() : radioPlayer.playRadio(from: url)
-        presenter.toggleIsRadioPlaying()
+        guard let url = currentStation?.url else { return }
+        isRadioPlaying ? radioPlayer.pauseRadio() : radioPlayer.playRadio(from: url)
+        toggleIsRadioPlaying()
     }
     
     func getMetadata() {
@@ -44,14 +87,12 @@ final class MyStationsInteractor {
     }
     
     func updateNowPlayingInfoCenter() {
-        NowPlayingService.addNowPlayingInfo(from: presenter.currentStation)
+        NowPlayingService.addNowPlayingInfo(from: currentStation)
     }
     
     // MARK: Initialization
-    init(presenter: MyStationsPresenter,
-         radioPlayer: RadioPlayer,
+    init(radioPlayer: RadioPlayer,
          iTunesRepository: ItunesSearchRepositoryProtocol) {
-        self.presenter = presenter
         self.radioPlayer = radioPlayer
         self.iTunesRepository = iTunesRepository
         getMetadata()
@@ -59,13 +100,13 @@ final class MyStationsInteractor {
 }
 
 // MARK: - Private Methods
-private extension MyStationsInteractor {
+private extension MyStationsViewModel {
     func getStationsFromUserDefaults() {
         guard let myStations: [RadioItem] = Defaults.get(for: Defaults.myStationsKey) else {
-            presenter.showEmptyState()
+            showEmptyState()
             return
         }
-        presenter.showMyStations(myStations)
+        showMyStations(myStations)
     }
     
     func subscribeToMetadataPublisher() {
@@ -73,7 +114,7 @@ private extension MyStationsInteractor {
             .sink { [weak self] title in
                 guard let self else { return }
                 self.updateNowPlayingInfoCenter()
-                self.presenter.updateMetadata(title)
+                self.updateMetadata(title)
                 self.fetchArtwork(for: title)
             }
             .store(in: &subscriptions)
@@ -94,7 +135,7 @@ private extension MyStationsInteractor {
                 }
             } receiveValue: { [weak self] artworkUrl in
                 guard let self else { return }
-                self.presenter.updateArtwork(artworkUrl)
+                self.updateArtwork(artworkUrl)
                 self.updateNowPlayingInfoCenter()
             }
             .store(in: &cancelableSubscriptions)

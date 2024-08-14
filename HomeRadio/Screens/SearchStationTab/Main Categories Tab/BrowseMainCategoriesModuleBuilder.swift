@@ -16,12 +16,9 @@ struct BrowseMainCategoriesModuleBuilder: ModuleBuilder {
     var container = DIContainer.shared
     
     func build() -> BrowseMainCategoriesView {
-        let presenter = BrowseMainCategoriesPresenter()
         let tuneInRepository = container.resolve(type: TuneInRepositoryProtocol.self)
-        let interactor = BrowseMainCategoriesInteractor(presenter: presenter,
-                                                        tuneInRepository: tuneInRepository)
-        let view = BrowseMainCategoriesView(interactor: interactor,
-                                            viewModel: presenter.viewModel)
+        let viewModel = BrowseMainCategoriesViewModel(tuneInRepository: tuneInRepository)
+        let view = BrowseMainCategoriesView(viewModel: viewModel)
         return view
     }
 }

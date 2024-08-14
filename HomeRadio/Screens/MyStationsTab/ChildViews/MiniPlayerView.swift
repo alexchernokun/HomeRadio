@@ -9,7 +9,7 @@ import SwiftUI
 import Utils
 
 struct MiniPlayerView: View {
-    let interactor: MyStationsInteractor
+    
     @ObservedObject var viewModel: MyStationsViewModel
     @Binding var showPopover: Bool
     
@@ -71,7 +71,7 @@ private extension MiniPlayerView {
     
     func playPauseButton() -> some View {
         Button {
-            interactor.toggleRadioPlayback()
+            viewModel.toggleRadioPlayback()
         } label: {
             Image(systemName: viewModel.isRadioPlaying ? "stop.fill" : "play.fill")
                 .resizable()

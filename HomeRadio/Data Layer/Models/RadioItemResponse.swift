@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  RadioItemResponse.swift
 //  
 //
 //  Created by Oleksandr Chornokun on 06.04.2023.

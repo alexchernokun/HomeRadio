@@ -14,30 +14,22 @@ struct MyStationsPreviewMock {
     private static let radioPlayer = RadioPlayer()
     private static let repository = ItunesSearchRepository()
     
-    private static var presenter: MyStationsPresenter {
-        return MyStationsPresenter()
-    }
-    
-    private static var interactor: MyStationsInteractor {
-        return MyStationsInteractor(presenter: presenter,
-                                    radioPlayer: radioPlayer,
-                                    iTunesRepository: repository)
+    private static var viewModel: MyStationsViewModel {
+        return MyStationsViewModel(radioPlayer: radioPlayer,
+                                   iTunesRepository: repository)
     }
     
     static func myStationsView() -> MyStationsView {
-        return MyStationsView(interactor: interactor,
-                              viewModel: presenter.viewModel)
+        return MyStationsView(viewModel: viewModel)
     }
     
     static func playerView() -> PlayerView {
-        return PlayerView(interactor: interactor,
-                          viewModel: presenter.viewModel,
+        return PlayerView(viewModel: viewModel,
                           showPopover: Binding<Bool>.constant(true))
     }
     
     static func miniPlayerView() -> MiniPlayerView {
-        return MiniPlayerView(interactor: interactor,
-                              viewModel: presenter.viewModel,
+        return MiniPlayerView(viewModel: viewModel,
                               showPopover: Binding<Bool>.constant(false))
     }
 }

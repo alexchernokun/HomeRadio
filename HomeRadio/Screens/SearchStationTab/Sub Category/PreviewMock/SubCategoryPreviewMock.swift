@@ -34,21 +34,14 @@ struct SubCategoryPreviewMock {
                 RadioItem(type: .link, text: "Christmas Oldies")]
     }
     
-    private static var presenter: SubCategoryPresenter {
-        let presenter = SubCategoryPresenter()
-        presenter.viewModel.isLoading = false
-        presenter.viewModel.radioItems = radioItems
-        return presenter
+    private static var viewModel: SubCategoryViewModel {
+        return SubCategoryViewModel(tuneInRepository: TuneInRepository(),
+                                    radioPlayer: RadioPlayer(),
+                                    path: "",
+                                    query: ["": ""])
     }
     
     static func view() -> SubCategoryView {
-        let interactor = SubCategoryInteractor(presenter: presenter,
-                                               tuneInRepository: TuneInRepository(),
-                                               radioPlayer: RadioPlayer(),
-                                               path: "",
-                                               query: ["": ""])
-        let view = SubCategoryView(interactor: interactor,
-                                  viewModel: presenter.viewModel)
-        return view
+        return SubCategoryView(viewModel: viewModel)
     }
 }

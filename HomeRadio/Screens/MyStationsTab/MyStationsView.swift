@@ -9,7 +9,7 @@ import SwiftUI
 import Utils
 
 struct MyStationsView: View {
-    let interactor: MyStationsInteractor
+    
     @ObservedObject var viewModel: MyStationsViewModel
     @State var showPopover = false
     
@@ -25,15 +25,14 @@ struct MyStationsView: View {
             }
         }
         .refreshable {
-            interactor.getMyStations()
+            viewModel.getMyStations()
         }
         .popover(isPresented: $showPopover, content: {
-            PlayerView(interactor: interactor,
-                       viewModel: viewModel,
+            PlayerView(viewModel: viewModel,
                        showPopover: $showPopover)
         })
         .onAppear {
-            interactor.getMyStations()
+            viewModel.getMyStations()
         }
     }
 }
@@ -55,7 +54,7 @@ private extension MyStationsView {
                     VStack(spacing: 10) {
                         ForEach(viewModel.myStations, id: \.self) { station in
                             Button {
-                                interactor.playRadio(station)
+                                viewModel.playRadio(station)
                             } label: {
                                 RadioStationTypeView(station: station, isAdded: true)
                                     .background(
@@ -71,8 +70,7 @@ private extension MyStationsView {
             }
             .padding(.bottom, 95)
             
-            MiniPlayerView(interactor: interactor,
-                           viewModel: viewModel,
+            MiniPlayerView(viewModel: viewModel,
                            showPopover: $showPopover)
                 .padding(.horizontal, 5)
                 .padding(.bottom, 5)

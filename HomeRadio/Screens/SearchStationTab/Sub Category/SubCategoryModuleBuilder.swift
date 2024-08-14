@@ -20,16 +20,13 @@ struct SubCategoryModuleBuilder: ModuleBuilder {
     var query: [String: String?]
     
     func build() -> SubCategoryView {
-        let presenter = SubCategoryPresenter()
         let radioPlayer = container.resolve(type: RadioPlayer.self)
         let tuneInRepository = container.resolve(type: TuneInRepositoryProtocol.self)
-        let interactor = SubCategoryInteractor(presenter: presenter,
-                                               tuneInRepository: tuneInRepository,
-                                               radioPlayer: radioPlayer,
-                                               path: path,
-                                               query: query)
-        let view = SubCategoryView(interactor: interactor,
-                                   viewModel: presenter.viewModel)
+        let viewModel = SubCategoryViewModel(tuneInRepository: tuneInRepository,
+                                             radioPlayer: radioPlayer,
+                                             path: path,
+                                             query: query)
+        let view = SubCategoryView(viewModel: viewModel)
         return view
     }
     

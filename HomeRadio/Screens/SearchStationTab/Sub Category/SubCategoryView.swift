@@ -10,13 +10,13 @@ import DomainLayer
 import Utils
 
 struct SubCategoryView:  View {
-    let interactor: SubCategoryInteractor
+    
     @ObservedObject var viewModel: SubCategoryViewModel
     
     var body: some View {
         if viewModel.shouldShowError {
             NetworkErrorView {
-                interactor.fetchRadioStationItems()
+                viewModel.fetchRadioStationItems()
             }
         } else {
             radioItemsList()
@@ -26,7 +26,7 @@ struct SubCategoryView:  View {
                 .navigationBarTitleDisplayMode(.inline)
                 .redacted(reason: viewModel.isLoading ? .placeholder : [])
                 .onAppear {
-                    interactor.fetchRadioStationItems()
+                    viewModel.fetchRadioStationItems()
                 }
         }
     }
@@ -63,10 +63,10 @@ private extension SubCategoryView {
     
     func radioItemView(_ item: RadioItem) -> some View {
         Button {
-            interactor.playRadio(item)
+            viewModel.playRadio(item)
         } label: {
             RadioStationTypeView(station: item) { station in
-                interactor.saveToMyStations(station)
+                viewModel.saveToMyStations(station)
             }
         }
         .buttonStyle(.plain)
@@ -74,7 +74,7 @@ private extension SubCategoryView {
     
     func navigationItemView(_ item: RadioItem) -> some View {
         NavigationLink {
-            interactor.navigateToLink(item)
+            viewModel.navigateToLink(item)
         } label: {
             LinkTypeView(stationItem: item)
         }

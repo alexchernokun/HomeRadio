@@ -17,14 +17,9 @@ struct MyStationsModuleBuilder: ModuleBuilder {
     var container = DIContainer.shared
     
     func build() -> MyStationsView {
-        let presenter = MyStationsPresenter()
-        let interactor = MyStationsInteractor(presenter: presenter,
-                                              radioPlayer: container.resolve(type: RadioPlayer.self),
-                                              iTunesRepository: container.resolve(type: ItunesSearchRepositoryProtocol.self))
-        
-        let view = MyStationsView(interactor: interactor,
-                                  viewModel: presenter.viewModel)
-        
+        let viewModel = MyStationsViewModel(radioPlayer: container.resolve(type: RadioPlayer.self),
+                                            iTunesRepository: container.resolve(type: ItunesSearchRepositoryProtocol.self))
+        let view = MyStationsView(viewModel: viewModel)
         return view
     }
 }

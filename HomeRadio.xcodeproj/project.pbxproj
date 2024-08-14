@@ -14,8 +14,7 @@
 		6307E94129DEE0CB00678D08 /* MyStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94029DEE0CB00678D08 /* MyStationsView.swift */; };
 		6307E94329DEE14F00678D08 /* BrowseMainCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94229DEE14F00678D08 /* BrowseMainCategoriesView.swift */; };
 		6307E94529DEE1A100678D08 /* DIContainerInitialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94429DEE1A100678D08 /* DIContainerInitialization.swift */; };
-		6307E94729DEE2FE00678D08 /* MyStationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94629DEE2FE00678D08 /* MyStationsInteractor.swift */; };
-		6307E94929DEE30500678D08 /* MyStationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94829DEE30500678D08 /* MyStationsPresenter.swift */; };
+		6307E94929DEE30500678D08 /* MyStationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94829DEE30500678D08 /* MyStationsViewModel.swift */; };
 		6307E94B29DEE4EF00678D08 /* MyStationsModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94A29DEE4EF00678D08 /* MyStationsModuleBuilder.swift */; };
 		6307E94F29DEE93700678D08 /* MyStationsPreviewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94E29DEE93700678D08 /* MyStationsPreviewMock.swift */; };
 		63146E682A55EBC80044BDCB /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63146E672A55EBC80044BDCB /* PlayerView.swift */; };
@@ -24,16 +23,14 @@
 		634040832A5771F500EC3630 /* TuneInAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040812A5771F500EC3630 /* TuneInAPIEndpoint.swift */; };
 		634040862A5771FE00EC3630 /* iTunesSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040842A5771FD00EC3630 /* iTunesSearchResponse.swift */; };
 		634040872A5771FE00EC3630 /* RadioItemResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040852A5771FE00EC3630 /* RadioItemResponse.swift */; };
-		6340408A2A57720300EC3630 /* iTunesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040882A57720300EC3630 /* iTunesRepository.swift */; };
+		6340408A2A57720300EC3630 /* ItunesSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040882A57720300EC3630 /* ItunesSearchRepository.swift */; };
 		6340408B2A57720300EC3630 /* TuneInRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040892A57720300EC3630 /* TuneInRepository.swift */; };
 		634E1B5329E1652C0012C9C5 /* SubCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5229E1652C0012C9C5 /* SubCategoryView.swift */; };
 		634E1B5529E1657E0012C9C5 /* SubCategoryModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5429E1657E0012C9C5 /* SubCategoryModuleBuilder.swift */; };
-		634E1B5729E165CD0012C9C5 /* SubCategoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5629E165CD0012C9C5 /* SubCategoryInteractor.swift */; };
-		634E1B5929E1664A0012C9C5 /* SubCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5829E1664A0012C9C5 /* SubCategoryPresenter.swift */; };
+		634E1B5929E1664A0012C9C5 /* SubCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5829E1664A0012C9C5 /* SubCategoryViewModel.swift */; };
 		634E1B5B29E167250012C9C5 /* SubCategoryPreviewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5A29E167250012C9C5 /* SubCategoryPreviewMock.swift */; };
 		634E1B5E29E18F2C0012C9C5 /* LinkTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5D29E18F2C0012C9C5 /* LinkTypeView.swift */; };
-		635FAB6129DEEB1E00EC02E5 /* BrowseMainCategoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6029DEEB1E00EC02E5 /* BrowseMainCategoriesInteractor.swift */; };
-		635FAB6329DEEB2800EC02E5 /* BrowseMainCategoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6229DEEB2800EC02E5 /* BrowseMainCategoriesPresenter.swift */; };
+		635FAB6329DEEB2800EC02E5 /* BrowseMainCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6229DEEB2800EC02E5 /* BrowseMainCategoriesViewModel.swift */; };
 		635FAB6529DEEB3100EC02E5 /* BrowseMainCategoriesModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6429DEEB3100EC02E5 /* BrowseMainCategoriesModuleBuilder.swift */; };
 		635FAB6729DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6629DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift */; };
 		635FAB7829DF663600EC02E5 /* RadioStationTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB7729DF663600EC02E5 /* RadioStationTypeView.swift */; };
@@ -53,8 +50,7 @@
 		6307E94029DEE0CB00678D08 /* MyStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsView.swift; sourceTree = "<group>"; };
 		6307E94229DEE14F00678D08 /* BrowseMainCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseMainCategoriesView.swift; sourceTree = "<group>"; };
 		6307E94429DEE1A100678D08 /* DIContainerInitialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainerInitialization.swift; sourceTree = "<group>"; };
-		6307E94629DEE2FE00678D08 /* MyStationsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsInteractor.swift; sourceTree = "<group>"; };
-		6307E94829DEE30500678D08 /* MyStationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsPresenter.swift; sourceTree = "<group>"; };
+		6307E94829DEE30500678D08 /* MyStationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsViewModel.swift; sourceTree = "<group>"; };
 		6307E94A29DEE4EF00678D08 /* MyStationsModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsModuleBuilder.swift; sourceTree = "<group>"; };
 		6307E94E29DEE93700678D08 /* MyStationsPreviewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsPreviewMock.swift; sourceTree = "<group>"; };
 		63146E672A55EBC80044BDCB /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
@@ -63,16 +59,14 @@
 		634040812A5771F500EC3630 /* TuneInAPIEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuneInAPIEndpoint.swift; sourceTree = "<group>"; };
 		634040842A5771FD00EC3630 /* iTunesSearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunesSearchResponse.swift; sourceTree = "<group>"; };
 		634040852A5771FE00EC3630 /* RadioItemResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioItemResponse.swift; sourceTree = "<group>"; };
-		634040882A57720300EC3630 /* iTunesRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iTunesRepository.swift; sourceTree = "<group>"; };
+		634040882A57720300EC3630 /* ItunesSearchRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesSearchRepository.swift; sourceTree = "<group>"; };
 		634040892A57720300EC3630 /* TuneInRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuneInRepository.swift; sourceTree = "<group>"; };
 		634E1B5229E1652C0012C9C5 /* SubCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryView.swift; sourceTree = "<group>"; };
 		634E1B5429E1657E0012C9C5 /* SubCategoryModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryModuleBuilder.swift; sourceTree = "<group>"; };
-		634E1B5629E165CD0012C9C5 /* SubCategoryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryInteractor.swift; sourceTree = "<group>"; };
-		634E1B5829E1664A0012C9C5 /* SubCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryPresenter.swift; sourceTree = "<group>"; };
+		634E1B5829E1664A0012C9C5 /* SubCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryViewModel.swift; sourceTree = "<group>"; };
 		634E1B5A29E167250012C9C5 /* SubCategoryPreviewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryPreviewMock.swift; sourceTree = "<group>"; };
 		634E1B5D29E18F2C0012C9C5 /* LinkTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTypeView.swift; sourceTree = "<group>"; };
-		635FAB6029DEEB1E00EC02E5 /* BrowseMainCategoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseMainCategoriesInteractor.swift; sourceTree = "<group>"; };
-		635FAB6229DEEB2800EC02E5 /* BrowseMainCategoriesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseMainCategoriesPresenter.swift; sourceTree = "<group>"; };
+		635FAB6229DEEB2800EC02E5 /* BrowseMainCategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseMainCategoriesViewModel.swift; sourceTree = "<group>"; };
 		635FAB6429DEEB3100EC02E5 /* BrowseMainCategoriesModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseMainCategoriesModuleBuilder.swift; sourceTree = "<group>"; };
 		635FAB6629DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseStationsPreviewMock.swift; sourceTree = "<group>"; };
 		635FAB7729DF663600EC02E5 /* RadioStationTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioStationTypeView.swift; sourceTree = "<group>"; };
@@ -121,8 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				6307E94A29DEE4EF00678D08 /* MyStationsModuleBuilder.swift */,
-				6307E94629DEE2FE00678D08 /* MyStationsInteractor.swift */,
-				6307E94829DEE30500678D08 /* MyStationsPresenter.swift */,
+				6307E94829DEE30500678D08 /* MyStationsViewModel.swift */,
 				6307E94029DEE0CB00678D08 /* MyStationsView.swift */,
 				63146E662A55EBB40044BDCB /* ChildViews */,
 				6307E94C29DEE91200678D08 /* PreviewMock */,
@@ -188,7 +181,7 @@
 		6340408E2A57726A00EC3630 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				634040882A57720300EC3630 /* iTunesRepository.swift */,
+				634040882A57720300EC3630 /* ItunesSearchRepository.swift */,
 				634040892A57720300EC3630 /* TuneInRepository.swift */,
 			);
 			path = Repositories;
@@ -198,8 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				634E1B5429E1657E0012C9C5 /* SubCategoryModuleBuilder.swift */,
-				634E1B5629E165CD0012C9C5 /* SubCategoryInteractor.swift */,
-				634E1B5829E1664A0012C9C5 /* SubCategoryPresenter.swift */,
+				634E1B5829E1664A0012C9C5 /* SubCategoryViewModel.swift */,
 				634E1B5229E1652C0012C9C5 /* SubCategoryView.swift */,
 				634E1B5C29E18E160012C9C5 /* PreviewMock */,
 			);
@@ -226,8 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				635FAB6429DEEB3100EC02E5 /* BrowseMainCategoriesModuleBuilder.swift */,
-				635FAB6029DEEB1E00EC02E5 /* BrowseMainCategoriesInteractor.swift */,
-				635FAB6229DEEB2800EC02E5 /* BrowseMainCategoriesPresenter.swift */,
+				635FAB6229DEEB2800EC02E5 /* BrowseMainCategoriesViewModel.swift */,
 				6307E94229DEE14F00678D08 /* BrowseMainCategoriesView.swift */,
 				635FAB6829DEEB3C00EC02E5 /* PreviewMock */,
 			);
@@ -289,8 +280,8 @@
 		637411C229DD8AA100297AC7 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				6307E93A29DD8F1D00678D08 /* NetworkService */,
 				6307E93629DD8E3D00678D08 /* DomainLayer */,
+				6307E93A29DD8F1D00678D08 /* NetworkService */,
 				6307E93329DD8D7C00678D08 /* Utils */,
 				637411C129DD86F000297AC7 /* RadioPlayer */,
 			);
@@ -379,28 +370,25 @@
 				634E1B5329E1652C0012C9C5 /* SubCategoryView.swift in Sources */,
 				635FAB6729DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift in Sources */,
 				6307E94B29DEE4EF00678D08 /* MyStationsModuleBuilder.swift in Sources */,
-				6307E94729DEE2FE00678D08 /* MyStationsInteractor.swift in Sources */,
 				635FAB7829DF663600EC02E5 /* RadioStationTypeView.swift in Sources */,
 				634040872A5771FE00EC3630 /* RadioItemResponse.swift in Sources */,
 				635FAB7C29E04C3900EC02E5 /* MyStationsEmptyView.swift in Sources */,
-				634E1B5929E1664A0012C9C5 /* SubCategoryPresenter.swift in Sources */,
+				634E1B5929E1664A0012C9C5 /* SubCategoryViewModel.swift in Sources */,
 				634040822A5771F500EC3630 /* iTunesAPIEndpoint.swift in Sources */,
-				6340408A2A57720300EC3630 /* iTunesRepository.swift in Sources */,
+				6340408A2A57720300EC3630 /* ItunesSearchRepository.swift in Sources */,
 				6307E94329DEE14F00678D08 /* BrowseMainCategoriesView.swift in Sources */,
 				635FAB6529DEEB3100EC02E5 /* BrowseMainCategoriesModuleBuilder.swift in Sources */,
-				6307E94929DEE30500678D08 /* MyStationsPresenter.swift in Sources */,
+				6307E94929DEE30500678D08 /* MyStationsViewModel.swift in Sources */,
 				6307E94F29DEE93700678D08 /* MyStationsPreviewMock.swift in Sources */,
 				63146E6A2A5601F10044BDCB /* MiniPlayerView.swift in Sources */,
 				635FAB7E29E050E000EC02E5 /* NetworkErrorView.swift in Sources */,
 				637411AE29DD7AA500297AC7 /* HomeRadioApp.swift in Sources */,
-				634E1B5729E165CD0012C9C5 /* SubCategoryInteractor.swift in Sources */,
 				634E1B5529E1657E0012C9C5 /* SubCategoryModuleBuilder.swift in Sources */,
-				635FAB6129DEEB1E00EC02E5 /* BrowseMainCategoriesInteractor.swift in Sources */,
 				6307E94129DEE0CB00678D08 /* MyStationsView.swift in Sources */,
 				6307E94529DEE1A100678D08 /* DIContainerInitialization.swift in Sources */,
 				63146E682A55EBC80044BDCB /* PlayerView.swift in Sources */,
 				634E1B5E29E18F2C0012C9C5 /* LinkTypeView.swift in Sources */,
-				635FAB6329DEEB2800EC02E5 /* BrowseMainCategoriesPresenter.swift in Sources */,
+				635FAB6329DEEB2800EC02E5 /* BrowseMainCategoriesViewModel.swift in Sources */,
 				634040832A5771F500EC3630 /* TuneInAPIEndpoint.swift in Sources */,
 				634E1B5B29E167250012C9C5 /* SubCategoryPreviewMock.swift in Sources */,
 			);

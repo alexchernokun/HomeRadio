@@ -10,7 +10,7 @@ import DomainLayer
 import Utils
 
 struct BrowseMainCategoriesView: View {
-    let interactor: BrowseMainCategoriesInteractor
+    
     @ObservedObject var viewModel: BrowseMainCategoriesViewModel
     
     var body: some View {
@@ -21,7 +21,7 @@ struct BrowseMainCategoriesView: View {
                 
                 if viewModel.shouldShowError {
                     NetworkErrorView {
-                        interactor.fetchCategories()
+                        viewModel.fetchCategories()
                     }
                 } else {
                     ScrollView(showsIndicators: false) {
@@ -29,7 +29,7 @@ struct BrowseMainCategoriesView: View {
                             .padding()
                             .redacted(reason: viewModel.isLoading ? .placeholder : [])
                             .onAppear {
-                                interactor.fetchCategories()
+                                viewModel.fetchCategories()
                             }
                     }
                 }
@@ -66,7 +66,7 @@ private extension BrowseMainCategoriesView {
     func navigationViewItem(for category: BrowseMainCategoriesViewModel.CategoryViewModel?) -> some View {
         if let category {
             NavigationLink {
-                interactor.navigateToLink(category.url)
+                viewModel.navigateToLink(category.url)
             } label: {
                 categoryView(category)
             }
