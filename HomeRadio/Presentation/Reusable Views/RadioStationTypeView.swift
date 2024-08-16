@@ -42,7 +42,8 @@ private extension RadioStationTypeView {
                     .resizable()
                     .frame(width: 75, height: 75)
                     .clipShape(SquircleShape(size: 75))
-                    .padding(5)
+                    .padding(.leading, 15)
+                    .padding(.trailing, 5)
             } else {
                 Color(Colors.bgSecondary)
                     .frame(width: 75, height: 75)

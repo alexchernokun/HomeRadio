@@ -67,7 +67,7 @@ private extension PlayerView {
     
     func playPauseButton() -> some View {
         Button {
-            viewModel.toggleRadioPlayback()
+            viewModel.onEvent(.onPlayButtonTap)
         } label: {
             Image(systemName: viewModel.isRadioPlaying ? "stop.fill" : "play.fill")
                 .resizable()

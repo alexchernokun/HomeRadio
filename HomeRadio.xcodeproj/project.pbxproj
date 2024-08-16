@@ -12,10 +12,8 @@
 		6307E93829DD8E8F00678D08 /* DomainLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 6307E93729DD8E8F00678D08 /* DomainLayer */; };
 		6307E93C29DD9A9D00678D08 /* NetworkService in Frameworks */ = {isa = PBXBuildFile; productRef = 6307E93B29DD9A9D00678D08 /* NetworkService */; };
 		6307E94129DEE0CB00678D08 /* MyStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94029DEE0CB00678D08 /* MyStationsView.swift */; };
-		6307E94329DEE14F00678D08 /* BrowseMainCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94229DEE14F00678D08 /* BrowseMainCategoriesView.swift */; };
-		6307E94529DEE1A100678D08 /* DIContainerInitialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94429DEE1A100678D08 /* DIContainerInitialization.swift */; };
+		6307E94329DEE14F00678D08 /* MainCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94229DEE14F00678D08 /* MainCategoriesView.swift */; };
 		6307E94929DEE30500678D08 /* MyStationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94829DEE30500678D08 /* MyStationsViewModel.swift */; };
-		6307E94B29DEE4EF00678D08 /* MyStationsModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94A29DEE4EF00678D08 /* MyStationsModuleBuilder.swift */; };
 		6307E94F29DEE93700678D08 /* MyStationsPreviewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6307E94E29DEE93700678D08 /* MyStationsPreviewMock.swift */; };
 		63146E682A55EBC80044BDCB /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63146E672A55EBC80044BDCB /* PlayerView.swift */; };
 		63146E6A2A5601F10044BDCB /* MiniPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63146E692A5601F10044BDCB /* MiniPlayerView.swift */; };
@@ -26,13 +24,11 @@
 		6340408A2A57720300EC3630 /* ItunesSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040882A57720300EC3630 /* ItunesSearchRepository.swift */; };
 		6340408B2A57720300EC3630 /* TuneInRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634040892A57720300EC3630 /* TuneInRepository.swift */; };
 		634E1B5329E1652C0012C9C5 /* SubCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5229E1652C0012C9C5 /* SubCategoryView.swift */; };
-		634E1B5529E1657E0012C9C5 /* SubCategoryModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5429E1657E0012C9C5 /* SubCategoryModuleBuilder.swift */; };
 		634E1B5929E1664A0012C9C5 /* SubCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5829E1664A0012C9C5 /* SubCategoryViewModel.swift */; };
 		634E1B5B29E167250012C9C5 /* SubCategoryPreviewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5A29E167250012C9C5 /* SubCategoryPreviewMock.swift */; };
 		634E1B5E29E18F2C0012C9C5 /* LinkTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E1B5D29E18F2C0012C9C5 /* LinkTypeView.swift */; };
-		635FAB6329DEEB2800EC02E5 /* BrowseMainCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6229DEEB2800EC02E5 /* BrowseMainCategoriesViewModel.swift */; };
-		635FAB6529DEEB3100EC02E5 /* BrowseMainCategoriesModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6429DEEB3100EC02E5 /* BrowseMainCategoriesModuleBuilder.swift */; };
-		635FAB6729DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6629DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift */; };
+		635FAB6329DEEB2800EC02E5 /* MainCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6229DEEB2800EC02E5 /* MainCategoriesViewModel.swift */; };
+		635FAB6729DEEB3800EC02E5 /* MainCategoriesPreviewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB6629DEEB3800EC02E5 /* MainCategoriesPreviewMock.swift */; };
 		635FAB7829DF663600EC02E5 /* RadioStationTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB7729DF663600EC02E5 /* RadioStationTypeView.swift */; };
 		635FAB7A29E027F400EC02E5 /* SquircleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB7929E027F400EC02E5 /* SquircleShape.swift */; };
 		635FAB7C29E04C3900EC02E5 /* MyStationsEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FAB7B29E04C3800EC02E5 /* MyStationsEmptyView.swift */; };
@@ -40,6 +36,9 @@
 		637411AE29DD7AA500297AC7 /* HomeRadioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */; };
 		637411B229DD7AA700297AC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 637411B129DD7AA700297AC7 /* Assets.xcassets */; };
 		637411B529DD7AA700297AC7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 637411B429DD7AA700297AC7 /* Preview Assets.xcassets */; };
+		638882842C6F9B0200C41232 /* MyStationsScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638882832C6F9B0200C41232 /* MyStationsScreenEvent.swift */; };
+		638882872C6FA3E600C41232 /* MainCategoriesScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638882862C6FA3E600C41232 /* MainCategoriesScreenEvent.swift */; };
+		6388828A2C6FA4C400C41232 /* SubCategoryScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638882892C6FA4C400C41232 /* SubCategoryScreenEvent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,10 +47,8 @@
 		6307E93A29DD8F1D00678D08 /* NetworkService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NetworkService; path = Packages/NetworkService; sourceTree = SOURCE_ROOT; };
 		6307E93D29DDA3EE00678D08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6307E94029DEE0CB00678D08 /* MyStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsView.swift; sourceTree = "<group>"; };
-		6307E94229DEE14F00678D08 /* BrowseMainCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseMainCategoriesView.swift; sourceTree = "<group>"; };
-		6307E94429DEE1A100678D08 /* DIContainerInitialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainerInitialization.swift; sourceTree = "<group>"; };
+		6307E94229DEE14F00678D08 /* MainCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoriesView.swift; sourceTree = "<group>"; };
 		6307E94829DEE30500678D08 /* MyStationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsViewModel.swift; sourceTree = "<group>"; };
-		6307E94A29DEE4EF00678D08 /* MyStationsModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsModuleBuilder.swift; sourceTree = "<group>"; };
 		6307E94E29DEE93700678D08 /* MyStationsPreviewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsPreviewMock.swift; sourceTree = "<group>"; };
 		63146E672A55EBC80044BDCB /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		63146E692A5601F10044BDCB /* MiniPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerView.swift; sourceTree = "<group>"; };
@@ -62,13 +59,11 @@
 		634040882A57720300EC3630 /* ItunesSearchRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesSearchRepository.swift; sourceTree = "<group>"; };
 		634040892A57720300EC3630 /* TuneInRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuneInRepository.swift; sourceTree = "<group>"; };
 		634E1B5229E1652C0012C9C5 /* SubCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryView.swift; sourceTree = "<group>"; };
-		634E1B5429E1657E0012C9C5 /* SubCategoryModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryModuleBuilder.swift; sourceTree = "<group>"; };
 		634E1B5829E1664A0012C9C5 /* SubCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryViewModel.swift; sourceTree = "<group>"; };
 		634E1B5A29E167250012C9C5 /* SubCategoryPreviewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryPreviewMock.swift; sourceTree = "<group>"; };
 		634E1B5D29E18F2C0012C9C5 /* LinkTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTypeView.swift; sourceTree = "<group>"; };
-		635FAB6229DEEB2800EC02E5 /* BrowseMainCategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseMainCategoriesViewModel.swift; sourceTree = "<group>"; };
-		635FAB6429DEEB3100EC02E5 /* BrowseMainCategoriesModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseMainCategoriesModuleBuilder.swift; sourceTree = "<group>"; };
-		635FAB6629DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseStationsPreviewMock.swift; sourceTree = "<group>"; };
+		635FAB6229DEEB2800EC02E5 /* MainCategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoriesViewModel.swift; sourceTree = "<group>"; };
+		635FAB6629DEEB3800EC02E5 /* MainCategoriesPreviewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoriesPreviewMock.swift; sourceTree = "<group>"; };
 		635FAB7729DF663600EC02E5 /* RadioStationTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioStationTypeView.swift; sourceTree = "<group>"; };
 		635FAB7929E027F400EC02E5 /* SquircleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquircleShape.swift; sourceTree = "<group>"; };
 		635FAB7B29E04C3800EC02E5 /* MyStationsEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsEmptyView.swift; sourceTree = "<group>"; };
@@ -78,6 +73,9 @@
 		637411B129DD7AA700297AC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		637411B429DD7AA700297AC7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		637411C129DD86F000297AC7 /* RadioPlayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RadioPlayer; sourceTree = "<group>"; };
+		638882832C6F9B0200C41232 /* MyStationsScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStationsScreenEvent.swift; sourceTree = "<group>"; };
+		638882862C6FA3E600C41232 /* MainCategoriesScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoriesScreenEvent.swift; sourceTree = "<group>"; };
+		638882892C6FA4C400C41232 /* SubCategoryScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryScreenEvent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +112,7 @@
 		6307E93F29DEE02200678D08 /* MyStationsTab */ = {
 			isa = PBXGroup;
 			children = (
-				6307E94A29DEE4EF00678D08 /* MyStationsModuleBuilder.swift */,
+				638882822C6F9AFD00C41232 /* Model */,
 				6307E94829DEE30500678D08 /* MyStationsViewModel.swift */,
 				6307E94029DEE0CB00678D08 /* MyStationsView.swift */,
 				63146E662A55EBB40044BDCB /* ChildViews */,
@@ -140,14 +138,14 @@
 			path = ChildViews;
 			sourceTree = "<group>";
 		};
-		6340407B2A57657200EC3630 /* Screens */ = {
+		6340407B2A57657200EC3630 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				6307E93F29DEE02200678D08 /* MyStationsTab */,
 				6307E93E29DEE00F00678D08 /* SearchStationTab */,
 				635FAB7629DF662600EC02E5 /* Reusable Views */,
 			);
-			path = Screens;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		6340407F2A5771D500EC3630 /* Data Layer */ = {
@@ -190,7 +188,7 @@
 		634E1B5129E076780012C9C5 /* Sub Category */ = {
 			isa = PBXGroup;
 			children = (
-				634E1B5429E1657E0012C9C5 /* SubCategoryModuleBuilder.swift */,
+				638882882C6FA4C000C41232 /* Model */,
 				634E1B5829E1664A0012C9C5 /* SubCategoryViewModel.swift */,
 				634E1B5229E1652C0012C9C5 /* SubCategoryView.swift */,
 				634E1B5C29E18E160012C9C5 /* PreviewMock */,
@@ -209,7 +207,7 @@
 		635FAB6829DEEB3C00EC02E5 /* PreviewMock */ = {
 			isa = PBXGroup;
 			children = (
-				635FAB6629DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift */,
+				635FAB6629DEEB3800EC02E5 /* MainCategoriesPreviewMock.swift */,
 			);
 			path = PreviewMock;
 			sourceTree = "<group>";
@@ -217,9 +215,9 @@
 		635FAB6929DEEE0F00EC02E5 /* Main Categories Tab */ = {
 			isa = PBXGroup;
 			children = (
-				635FAB6429DEEB3100EC02E5 /* BrowseMainCategoriesModuleBuilder.swift */,
-				635FAB6229DEEB2800EC02E5 /* BrowseMainCategoriesViewModel.swift */,
-				6307E94229DEE14F00678D08 /* BrowseMainCategoriesView.swift */,
+				638882852C6FA3D500C41232 /* Model */,
+				635FAB6229DEEB2800EC02E5 /* MainCategoriesViewModel.swift */,
+				6307E94229DEE14F00678D08 /* MainCategoriesView.swift */,
 				635FAB6829DEEB3C00EC02E5 /* PreviewMock */,
 			);
 			path = "Main Categories Tab";
@@ -259,8 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */,
-				6307E94429DEE1A100678D08 /* DIContainerInitialization.swift */,
-				6340407B2A57657200EC3630 /* Screens */,
+				6340407B2A57657200EC3630 /* Presentation */,
 				6340407F2A5771D500EC3630 /* Data Layer */,
 				6307E93D29DDA3EE00678D08 /* Info.plist */,
 				637411B129DD7AA700297AC7 /* Assets.xcassets */,
@@ -286,6 +283,30 @@
 				637411C129DD86F000297AC7 /* RadioPlayer */,
 			);
 			path = Packages;
+			sourceTree = "<group>";
+		};
+		638882822C6F9AFD00C41232 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				638882832C6F9B0200C41232 /* MyStationsScreenEvent.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		638882852C6FA3D500C41232 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				638882862C6FA3E600C41232 /* MainCategoriesScreenEvent.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		638882882C6FA4C000C41232 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				638882892C6FA4C400C41232 /* SubCategoryScreenEvent.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,27 +389,26 @@
 				634040862A5771FE00EC3630 /* iTunesSearchResponse.swift in Sources */,
 				6340408B2A57720300EC3630 /* TuneInRepository.swift in Sources */,
 				634E1B5329E1652C0012C9C5 /* SubCategoryView.swift in Sources */,
-				635FAB6729DEEB3800EC02E5 /* BrowseStationsPreviewMock.swift in Sources */,
-				6307E94B29DEE4EF00678D08 /* MyStationsModuleBuilder.swift in Sources */,
+				635FAB6729DEEB3800EC02E5 /* MainCategoriesPreviewMock.swift in Sources */,
 				635FAB7829DF663600EC02E5 /* RadioStationTypeView.swift in Sources */,
 				634040872A5771FE00EC3630 /* RadioItemResponse.swift in Sources */,
 				635FAB7C29E04C3900EC02E5 /* MyStationsEmptyView.swift in Sources */,
 				634E1B5929E1664A0012C9C5 /* SubCategoryViewModel.swift in Sources */,
 				634040822A5771F500EC3630 /* iTunesAPIEndpoint.swift in Sources */,
 				6340408A2A57720300EC3630 /* ItunesSearchRepository.swift in Sources */,
-				6307E94329DEE14F00678D08 /* BrowseMainCategoriesView.swift in Sources */,
-				635FAB6529DEEB3100EC02E5 /* BrowseMainCategoriesModuleBuilder.swift in Sources */,
+				638882872C6FA3E600C41232 /* MainCategoriesScreenEvent.swift in Sources */,
+				638882842C6F9B0200C41232 /* MyStationsScreenEvent.swift in Sources */,
+				6307E94329DEE14F00678D08 /* MainCategoriesView.swift in Sources */,
 				6307E94929DEE30500678D08 /* MyStationsViewModel.swift in Sources */,
 				6307E94F29DEE93700678D08 /* MyStationsPreviewMock.swift in Sources */,
 				63146E6A2A5601F10044BDCB /* MiniPlayerView.swift in Sources */,
 				635FAB7E29E050E000EC02E5 /* NetworkErrorView.swift in Sources */,
 				637411AE29DD7AA500297AC7 /* HomeRadioApp.swift in Sources */,
-				634E1B5529E1657E0012C9C5 /* SubCategoryModuleBuilder.swift in Sources */,
+				6388828A2C6FA4C400C41232 /* SubCategoryScreenEvent.swift in Sources */,
 				6307E94129DEE0CB00678D08 /* MyStationsView.swift in Sources */,
-				6307E94529DEE1A100678D08 /* DIContainerInitialization.swift in Sources */,
 				63146E682A55EBC80044BDCB /* PlayerView.swift in Sources */,
 				634E1B5E29E18F2C0012C9C5 /* LinkTypeView.swift in Sources */,
-				635FAB6329DEEB2800EC02E5 /* BrowseMainCategoriesViewModel.swift in Sources */,
+				635FAB6329DEEB2800EC02E5 /* MainCategoriesViewModel.swift in Sources */,
 				634040832A5771F500EC3630 /* TuneInAPIEndpoint.swift in Sources */,
 				634E1B5B29E167250012C9C5 /* SubCategoryPreviewMock.swift in Sources */,
 			);

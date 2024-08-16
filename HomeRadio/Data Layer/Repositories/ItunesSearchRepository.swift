@@ -14,7 +14,7 @@ public protocol ItunesSearchRepositoryProtocol {
     func search(title: String) -> AnyPublisher<URL?, Error>
 }
 
-public final class ItunesSearchRepository: ItunesSearchRepositoryProtocol {
+public final class ItunesSearchRepository: ItunesSearchRepositoryProtocol, ObservableObject {
     
     public let networkService = NetworkService()
     

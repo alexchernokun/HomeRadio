@@ -12,9 +12,11 @@ import Utils
 import SwiftUI
 import DomainLayer
 
-final class BrowseMainCategoriesViewModel: ObservableObject {
+final class MainCategoriesViewModel: ObservableObject {
     
     // MARK: Properties
+    private let tuneInRepository: TuneInRepositoryProtocol
+    private var subscriptions = Set<AnyCancellable>()
     @Published var isLoading = true
     @Published var shouldShowError = false
     @Published var localCategory: CategoryViewModel?
@@ -25,33 +27,21 @@ final class BrowseMainCategoriesViewModel: ObservableObject {
     @Published var languageCategory: CategoryViewModel?
     @Published var podcastsCategory: CategoryViewModel?
     
-    // From interactor:
-    // MARK: Properties
-    private let container = DIContainer.shared
-    private let tuneInRepository: TuneInRepositoryProtocol
-    private var subscriptions = Set<AnyCancellable>()
-    
-    // MARK: Methods
-    func fetchCategories() {
-        clearErrorState()
-        getMainCategories()
-    }
-    
-    func navigateToLink(_ url: URL?) -> some View {
-        guard let url else {
-            return SubCategoryModuleBuilder(path: "", query: [:]).build()
-        }
-        
-        let query = URLExtractHelper.extractQueryFrom(url)
-        let path = URLExtractHelper.extractPathFrom(url)
-        
-        return SubCategoryModuleBuilder(path: path, query: query).build()
-    }
-    
     // MARK: Initialization
     init(tuneInRepository: TuneInRepositoryProtocol) {
         self.tuneInRepository = tuneInRepository
     }
+    
+    // MARK: Methods
+    func onEvent(_ event: MainCategoriesScreenEvent) {
+        switch event {
+        case .fetchCategories:
+            fetchCategories()
+        }
+    }
+}
+
+extension MainCategoriesViewModel {
     
     struct CategoryViewModel {
         var type: RadioItemType
@@ -95,45 +85,17 @@ final class BrowseMainCategoriesViewModel: ObservableObject {
             }
         }
     }
-    
-    func showCategories(_ categories: [RadioItem]) {
-        
-        for category in categories {
-            switch category.key {
-            case "local":
-                localCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
-            case "music":
-                musicCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
-            case "talk":
-                talkCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
-            case "sports":
-                sportsCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
-            case "location":
-                locationCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
-            case "language":
-                languageCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
-            case "podcast":
-                podcastsCategory = BrowseMainCategoriesViewModel.CategoryViewModel(category)
-            default: break
-            }
-        }
-
-        isLoading = false
-    }
-    
-    func showErrorState() {
-        isLoading = false
-        shouldShowError = true
-    }
-    
-    func clearErrorState() {
-        isLoading = true
-        shouldShowError = false
-    }
 }
 
 // MARK: - Private methods
-private extension BrowseMainCategoriesViewModel {
+private extension MainCategoriesViewModel {
+    
+    func fetchCategories() {
+        isLoading = true
+        shouldShowError = false
+        getMainCategories()
+    }
+    
     func getMainCategories() {
         tuneInRepository.getGeneralTuneInCategories()
             .receive(on: DispatchQueue.main)
@@ -142,14 +104,39 @@ private extension BrowseMainCategoriesViewModel {
                 switch completion {
                 case .failure(let error):
                     Logger.logError(message: error)
-                    self.showErrorState()
+                    isLoading = false
+                    shouldShowError = true
                 case .finished:
                     break
                 }
             } receiveValue: { [weak self] categories in
                 guard let self else { return }
-                self.showCategories(categories)
+                showCategories(categories)
             }
             .store(in: &subscriptions)
+    }
+    
+    func showCategories(_ categories: [RadioItem]) {
+        for category in categories {
+            switch category.key {
+            case "local":
+                localCategory = MainCategoriesViewModel.CategoryViewModel(category)
+            case "music":
+                musicCategory = MainCategoriesViewModel.CategoryViewModel(category)
+            case "talk":
+                talkCategory = MainCategoriesViewModel.CategoryViewModel(category)
+            case "sports":
+                sportsCategory = MainCategoriesViewModel.CategoryViewModel(category)
+            case "location":
+                locationCategory = MainCategoriesViewModel.CategoryViewModel(category)
+            case "language":
+                languageCategory = MainCategoriesViewModel.CategoryViewModel(category)
+            case "podcast":
+                podcastsCategory = MainCategoriesViewModel.CategoryViewModel(category)
+            default: break
+            }
+        }
+
+        isLoading = false
     }
 }

@@ -6,17 +6,20 @@
 //
 
 import SwiftUI
+import RadioPlayer
 import DomainLayer
 import Utils
 
 struct SubCategoryView:  View {
     
-    @ObservedObject var viewModel: SubCategoryViewModel
+    @EnvironmentObject private var radioPlayer: RadioPlayer
+    @EnvironmentObject private var tuneInRepository: TuneInRepository
+    @StateObject private var viewModel: SubCategoryViewModel
     
     var body: some View {
         if viewModel.shouldShowError {
             NetworkErrorView {
-                viewModel.fetchRadioStationItems()
+                viewModel.onEvent(.fetchRadioStations)
             }
         } else {
             radioItemsList()
@@ -26,9 +29,34 @@ struct SubCategoryView:  View {
                 .navigationBarTitleDisplayMode(.inline)
                 .redacted(reason: viewModel.isLoading ? .placeholder : [])
                 .onAppear {
-                    viewModel.fetchRadioStationItems()
+                    viewModel.onEvent(.configure(radioPlayer: radioPlayer,
+                                                 tuneInRepository: tuneInRepository))
+                }
+                .task {
+                    viewModel.onEvent(.fetchRadioStations)
                 }
         }
+    }
+    
+    init(for url: URL?) {
+        if let url {
+            let query = URLExtractHelper.extractQueryFrom(url)
+            let path = URLExtractHelper.extractPathFrom(url)
+            let viewModel = SubCategoryViewModel(path: path,
+                                                 query: query)
+            _viewModel = StateObject(wrappedValue: viewModel)
+        } else {
+            let viewModel = SubCategoryViewModel(path: "",
+                                                 query: [:])
+            _viewModel = StateObject(wrappedValue: viewModel)
+        }
+    }
+    
+    init(path: String = "",
+         query: [String: String?] = [:]) {
+        let viewModel = SubCategoryViewModel(path: path,
+                                             query: query)
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 }
 
@@ -63,18 +91,19 @@ private extension SubCategoryView {
     
     func radioItemView(_ item: RadioItem) -> some View {
         Button {
-            viewModel.playRadio(item)
+            viewModel.onEvent(.playRadio(item))
         } label: {
             RadioStationTypeView(station: item) { station in
-                viewModel.saveToMyStations(station)
+                viewModel.onEvent(.save(item))
             }
         }
         .buttonStyle(.plain)
     }
     
+    @ViewBuilder
     func navigationItemView(_ item: RadioItem) -> some View {
         NavigationLink {
-            viewModel.navigateToLink(item)
+            SubCategoryView(for: item.url)
         } label: {
             LinkTypeView(stationItem: item)
         }

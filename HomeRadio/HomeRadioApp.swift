@@ -7,20 +7,25 @@
 
 import SwiftUI
 import Utils
+import RadioPlayer
 
 @main
 struct HomeRadioApp: App {
     
-    let container = DIContainer.shared
+    @StateObject private var radioPlayer = RadioPlayer()
+    private var tuneInRepository = TuneInRepository()
+    private var itunesRepository = ItunesSearchRepository()
     
     var body: some Scene {
         WindowGroup {
             TabView {
-                container.resolve(type: MyStationsModuleBuilder.self).build()
+                MyStationsView(viewModel: MyStationsViewModel(radioPlayer: radioPlayer,
+                                                              iTunesRepository: itunesRepository))
                     .tabItem {
                         Label("My Stations", systemImage: "music.note.list")
                     }
-                container.resolve(type: BrowseMainCategoriesModuleBuilder.self).build()
+
+                MainCategoriesView(viewModel: MainCategoriesViewModel(tuneInRepository: tuneInRepository))
                     .tabItem {
                         Label("Browse", systemImage: "antenna.radiowaves.left.and.right")
                     }
@@ -31,10 +36,9 @@ struct HomeRadioApp: App {
                 tabBarAppearance.configureWithOpaqueBackground()
                 UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
             }
+            .environmentObject(radioPlayer)
+            .environmentObject(tuneInRepository)
+            .environmentObject(itunesRepository)
         }
-    }
-    
-    init() {
-        DIContainerInitialization()
     }
 }

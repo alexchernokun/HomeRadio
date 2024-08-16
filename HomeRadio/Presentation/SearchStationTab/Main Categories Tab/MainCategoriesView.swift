@@ -8,10 +8,13 @@
 import SwiftUI
 import DomainLayer
 import Utils
+import RadioPlayer
 
-struct BrowseMainCategoriesView: View {
+struct MainCategoriesView: View {
     
-    @ObservedObject var viewModel: BrowseMainCategoriesViewModel
+    @EnvironmentObject private var radioPlayer: RadioPlayer
+    @EnvironmentObject private var tuneInRepository: TuneInRepository
+    @StateObject var viewModel: MainCategoriesViewModel
     
     var body: some View {
         NavigationStack {
@@ -21,7 +24,7 @@ struct BrowseMainCategoriesView: View {
                 
                 if viewModel.shouldShowError {
                     NetworkErrorView {
-                        viewModel.fetchCategories()
+                        viewModel.onEvent(.fetchCategories)
                     }
                 } else {
                     ScrollView(showsIndicators: false) {
@@ -29,7 +32,7 @@ struct BrowseMainCategoriesView: View {
                             .padding()
                             .redacted(reason: viewModel.isLoading ? .placeholder : [])
                             .onAppear {
-                                viewModel.fetchCategories()
+                                viewModel.onEvent(.fetchCategories)
                             }
                     }
                 }
@@ -39,7 +42,7 @@ struct BrowseMainCategoriesView: View {
     }
 }
 
-private extension BrowseMainCategoriesView {
+private extension MainCategoriesView {
     
     func menuContainerView() -> some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -63,17 +66,17 @@ private extension BrowseMainCategoriesView {
     }
     
     @ViewBuilder
-    func navigationViewItem(for category: BrowseMainCategoriesViewModel.CategoryViewModel?) -> some View {
+    func navigationViewItem(for category: MainCategoriesViewModel.CategoryViewModel?) -> some View {
         if let category {
             NavigationLink {
-                viewModel.navigateToLink(category.url)
+                SubCategoryView(for: category.url)
             } label: {
                 categoryView(category)
             }
         }
     }
     
-    func categoryView(_ category: BrowseMainCategoriesViewModel.CategoryViewModel) -> some View {
+    func categoryView(_ category: MainCategoriesViewModel.CategoryViewModel) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
                 Text(category.text)
@@ -107,6 +110,6 @@ private extension BrowseMainCategoriesView {
 
 struct SearchStationsView_Previews: PreviewProvider {
     static var previews: some View {
-        BrowseStationsPreviewMock.view()
+        MainCategoriesPreviewMock.view()
     }
 }

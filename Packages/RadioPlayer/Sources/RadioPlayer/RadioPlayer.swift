@@ -12,7 +12,7 @@ import Utils
 import MediaPlayer
 
 /// General purpose Radio Player module which plays stream from url and also can fetch station metadata
-public final class RadioPlayer: NSObject {
+public final class RadioPlayer: NSObject, ObservableObject {
     
     // MARK: Properties
     public var trackTitle = CurrentValueSubject<String, Never>("")

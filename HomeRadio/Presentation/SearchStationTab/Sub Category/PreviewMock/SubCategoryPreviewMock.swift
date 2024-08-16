@@ -35,13 +35,11 @@ struct SubCategoryPreviewMock {
     }
     
     private static var viewModel: SubCategoryViewModel {
-        return SubCategoryViewModel(tuneInRepository: TuneInRepository(),
-                                    radioPlayer: RadioPlayer(),
-                                    path: "",
+        return SubCategoryViewModel(path: "",
                                     query: ["": ""])
     }
     
     static func view() -> SubCategoryView {
-        return SubCategoryView(viewModel: viewModel)
+        return SubCategoryView()
     }
 }

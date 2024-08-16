@@ -14,7 +14,7 @@ public protocol TuneInRepositoryProtocol {
     func getSubCategory(path: String, query: [String: String?]) -> AnyPublisher<GeneralTuneInResponse, Error>
 }
 
-public final class TuneInRepository: TuneInRepositoryProtocol {
+public final class TuneInRepository: TuneInRepositoryProtocol, ObservableObject {
     
     private let networkService = NetworkService()
     
