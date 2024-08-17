@@ -15,11 +15,8 @@ struct MiniPlayerView: View {
     var body: some View {
         HStack(alignment: .center, spacing: 3) {
             artwork()
-            
             metadata()
-            
             Spacer()
-            
             playPauseButton()
         }
         .background(
@@ -63,6 +60,7 @@ private extension MiniPlayerView {
                 Text(viewModel.currentStation?.subtext ?? "")
                     .font(.system(size: 12, weight: .light))
                     .foregroundColor(Color(Colors.textSecondary))
+                    .lineLimit(1)
             }
         }
     }
@@ -104,7 +102,8 @@ private extension MiniPlayerView {
 }
 
 #Preview {
-    MiniPlayerView(viewModel: MyStationsViewModel(radioPlayer: DependencyContainer.shared.radioPlayer,
-                                                  getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase),
+    MiniPlayerView(viewModel: MyStationsViewModel(getMyStationsUseCase: DependencyContainer.shared.getMyStationsUseCase,
+                                                  getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase,
+                                                  radioPlayer: DependencyContainer.shared.radioPlayer),
                    showPopover: .constant(false))
 }

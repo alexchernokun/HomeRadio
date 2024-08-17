@@ -22,12 +22,14 @@ struct RadioItemMapper {
                          url: response.url,
                          bitrate: response.bitrate,
                          reliability: response.reliability,
+                         popularity: nil,
                          subtext: response.subtext,
                          formats: response.formats,
                          image: response.image,
                          currentTrack: response.currentTrack,
                          playing: response.playing,
                          playingImage: response.playingImage,
-                         children: radioStationChildren)
+                         children: radioStationChildren,
+                         tags: [])
     }
 }

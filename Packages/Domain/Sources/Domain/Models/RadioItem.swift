@@ -14,6 +14,7 @@ public struct RadioItem: Codable, Hashable {
     public var url: URL?
     public var bitrate: String?
     public var reliability: String?
+    public var popularity: String?
     public var subtext: String?
     public var formats: String?
     public var image: URL?
@@ -23,6 +24,7 @@ public struct RadioItem: Codable, Hashable {
     public var children: [RadioItem]?
     public var metadata: String?
     public var artworkFromMetadata: URL?
+    public var tags: [String]?
     
     public init(type: String?,
                 key: String?,
@@ -30,19 +32,22 @@ public struct RadioItem: Codable, Hashable {
                 url: String?,
                 bitrate: String?,
                 reliability: String?,
+                popularity: Double?,
                 subtext: String?,
                 formats: String?,
                 image: String?,
                 currentTrack: String?,
                 playing: String?,
                 playingImage: String?,
-                children: [RadioItem]?) {
+                children: [RadioItem]?,
+                tags: [String]?) {
         self.type = RadioItemType(rawValue: type ?? "") ?? .unknown
         self.key = key
         self.text = text
         self.url = URL(string: url ?? "") ?? nil
         self.bitrate = (bitrate ?? "n/a") + " Kbps"
         self.reliability = (reliability ?? "n/a") + "%"
+        self.popularity = String(describing: popularity)
         self.subtext = subtext
         self.formats = formats
         self.image = URL(string: image ?? "") ?? nil
@@ -52,5 +57,6 @@ public struct RadioItem: Codable, Hashable {
         self.children = children
         self.metadata = nil
         self.artworkFromMetadata = nil
+        self.tags = tags
     }
 }

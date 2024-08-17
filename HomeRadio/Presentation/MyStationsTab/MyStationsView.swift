@@ -24,7 +24,7 @@ struct MyStationsView: View {
             }
         }
         .refreshable {
-            viewModel.onEvent(.getRadioStations)
+            viewModel.onEvent(.getMyRadioStations)
         }
         .popover(isPresented: $showPopover, content: {
             PlayerView(viewModel: viewModel,
@@ -36,8 +36,9 @@ struct MyStationsView: View {
     }
     
     init() {
-        _viewModel = StateObject(wrappedValue: MyStationsViewModel(radioPlayer: DependencyContainer.shared.radioPlayer,
-                                                                   getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase))
+        _viewModel = StateObject(wrappedValue: MyStationsViewModel(getMyStationsUseCase: DependencyContainer.shared.getMyStationsUseCase,
+                                                                   getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase,
+                                                                   radioPlayer: DependencyContainer.shared.radioPlayer))
         self.showPopover = showPopover
     }
 }
@@ -47,36 +48,42 @@ private extension MyStationsView {
     
     @ViewBuilder
     var contentView: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("My Favourite Tunes")
-                .foregroundColor(Color(Colors.textPrimary))
-                .font(.system(size: 32, weight: .bold, design: .default))
-                .padding(.top, 40)
-                .padding(.leading, 16)
-            
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 10) {
-                    ForEach(viewModel.myStations, id: \.self) { station in
-                        Button {
-                            viewModel.onEvent(.playRadio(station))
-                        } label: {
-                            RadioStationTypeView(station: station)
-                                .background(
-                                    Rectangle()
-                                        .fill(Color(Colors.bgSecondary))
-                                        .cornerRadius(25)
-                                )
-                                .padding(.horizontal)
+        if viewModel.shouldShowError {
+            NetworkErrorView {
+                viewModel.onEvent(.getMyRadioStations)
+            }
+        } else {
+            VStack(alignment: .leading, spacing: 0) {
+                Text("My Favourite Tunes")
+                    .foregroundColor(Color(Colors.textPrimary))
+                    .font(.system(size: 32, weight: .bold, design: .default))
+                    .padding(.top, 40)
+                    .padding(.leading, 16)
+                
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 10) {
+                        ForEach(viewModel.myStations, id: \.self) { station in
+                            Button {
+                                viewModel.onEvent(.playRadio(station))
+                            } label: {
+                                RadioStationTypeView(station: station)
+                                    .background(
+                                        Rectangle()
+                                            .fill(Color(Colors.bgSecondary))
+                                            .cornerRadius(25)
+                                    )
+                                    .padding(.horizontal)
+                            }
                         }
                     }
                 }
+                .padding(.bottom, 10)
+                
+                MiniPlayerView(viewModel: viewModel,
+                               showPopover: $showPopover)
+                .padding(.horizontal, 5)
+                .padding(.bottom, 5)
             }
-            .padding(.bottom, 10)
-            
-            MiniPlayerView(viewModel: viewModel,
-                           showPopover: $showPopover)
-            .padding(.horizontal, 5)
-            .padding(.bottom, 5)
         }
     }
 }

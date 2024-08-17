@@ -14,18 +14,20 @@ import AppLogger
 final class MyStationsViewModel: ObservableObject {
     
     // MARK: Properties
-    private let radioPlayer: RadioPlayer
+    private let getMyStationsUseCase: GetMyStationsUseCase
     private let getTrackArtworkUseCase: GetTrackArtworkUseCase
+    private let radioPlayer: RadioPlayer
     private var subscriptions = Set<AnyCancellable>()
     private var cancelableSubscriptions = Set<AnyCancellable>()
     @Published var myStations: [RadioItem] = []
     @Published var currentStation: RadioItem?
     @Published var isRadioPlaying: Bool = false
+    @Published var shouldShowError = false
     
     // MARK: Methods
     func onEvent(_ event: MyStationsScreenEvent) {
         switch event {
-        case .onAppear, .getRadioStations:
+        case .onAppear, .getMyRadioStations:
             getMyStations()
         case let .playRadio(station):
             playRadio(station)
@@ -35,10 +37,12 @@ final class MyStationsViewModel: ObservableObject {
     }
     
     // MARK: Initialization
-    init(radioPlayer: RadioPlayer,
-         getTrackArtworkUseCase: GetTrackArtworkUseCase) {
-        self.radioPlayer = radioPlayer
+    init(getMyStationsUseCase: GetMyStationsUseCase,
+         getTrackArtworkUseCase: GetTrackArtworkUseCase,
+         radioPlayer: RadioPlayer) {
+        self.getMyStationsUseCase = getMyStationsUseCase
         self.getTrackArtworkUseCase = getTrackArtworkUseCase
+        self.radioPlayer = radioPlayer
         observeStreamingMetadata()
     }
 }
@@ -47,8 +51,24 @@ final class MyStationsViewModel: ObservableObject {
 private extension MyStationsViewModel {
     
     func getMyStations() {
-        // TODO: fetch new stations here
-        myStations = []
+        shouldShowError = false
+        getMyStationsUseCase
+            .execute()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    guard let self else { return }
+                    AppLogger.log(error, type: .error)
+                    shouldShowError = true
+                case .finished:
+                    break
+                }
+            } receiveValue: { [weak self] stations in
+                guard let self else { return }
+                myStations = stations
+            }
+            .store(in: &subscriptions)
     }
     
     func observeStreamingMetadata() {

@@ -19,6 +19,7 @@ struct PlayerView: View {
             metadata()
             playPauseButton()
         }
+        .padding(.horizontal)
         .frame(maxHeight: .infinity, alignment: .top)
     }
 }
@@ -97,7 +98,8 @@ private extension PlayerView {
 }
 
 #Preview {
-    PlayerView(viewModel: MyStationsViewModel(radioPlayer: DependencyContainer.shared.radioPlayer,
-                                              getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase),
+    PlayerView(viewModel: MyStationsViewModel(getMyStationsUseCase: DependencyContainer.shared.getMyStationsUseCase,
+                                              getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase,
+                                              radioPlayer: DependencyContainer.shared.radioPlayer),
                showPopover: .constant(true))
 }

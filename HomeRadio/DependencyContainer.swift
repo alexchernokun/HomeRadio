@@ -16,6 +16,7 @@ final class DependencyContainer {
     
     private(set) var tuneInRepository: TuneInRepositoryProtocol
     private(set) var itunesRepository: ItunesSearchRepositoryProtocol
+    private(set) var getMyStationsUseCase: GetMyStationsUseCase
     private(set) var getTrackArtworkUseCase: GetTrackArtworkUseCase
     private(set) var getCategoriesUseCase: GetCategoriesUseCase
     private(set) var getSubcategoriesUseCase: GetSubcategoriesUseCase
@@ -24,6 +25,7 @@ final class DependencyContainer {
     private init() {
         self.tuneInRepository = TuneInRepository()
         self.itunesRepository = ItunesSearchRepository()
+        self.getMyStationsUseCase = GetMyStationsUseCaseImpl(tuneInRepository: tuneInRepository)
         self.getTrackArtworkUseCase = GetTrackArtworkUseCaseImpl(itunesRepository: itunesRepository)
         self.getCategoriesUseCase = GetCategoriesUseCaseImpl(tuneInRepository: tuneInRepository)
         self.getSubcategoriesUseCase = GetSubcateriesUseCaseImpl(tuneInRepository: tuneInRepository)

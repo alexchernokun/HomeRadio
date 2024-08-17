@@ -10,7 +10,7 @@ import Domain
 
 enum MyStationsScreenEvent {
     case onAppear
-    case getRadioStations
+    case getMyRadioStations
     case playRadio(_ station: RadioItem)
     case onPlayButtonTap
 }
