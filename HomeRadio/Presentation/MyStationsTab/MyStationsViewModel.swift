@@ -8,15 +8,14 @@
 import Foundation
 import Combine
 import RadioPlayer
-import NetworkService
-import DomainLayer
-import Utils
+import Domain
+import AppLogger
 
 final class MyStationsViewModel: ObservableObject {
     
     // MARK: Properties
     private let radioPlayer: RadioPlayer
-    private let iTunesRepository: ItunesSearchRepositoryProtocol
+    private let getTrackArtworkUseCase: GetTrackArtworkUseCase
     private var subscriptions = Set<AnyCancellable>()
     private var cancelableSubscriptions = Set<AnyCancellable>()
     @Published var myStations: [RadioItem] = []
@@ -37,9 +36,9 @@ final class MyStationsViewModel: ObservableObject {
     
     // MARK: Initialization
     init(radioPlayer: RadioPlayer,
-         iTunesRepository: ItunesSearchRepositoryProtocol) {
+         getTrackArtworkUseCase: GetTrackArtworkUseCase) {
         self.radioPlayer = radioPlayer
-        self.iTunesRepository = iTunesRepository
+        self.getTrackArtworkUseCase = getTrackArtworkUseCase
         observeStreamingMetadata()
     }
 }
@@ -48,15 +47,19 @@ final class MyStationsViewModel: ObservableObject {
 private extension MyStationsViewModel {
     
     func getMyStations() {
-        guard let stations: [RadioItem] = Defaults.get(for: Defaults.myStationsKey) else { return }
-        myStations = stations
+        // TODO: fetch new stations here
+        myStations = []
     }
     
     func observeStreamingMetadata() {
-        radioPlayer.trackTitle
+        radioPlayer
+            .trackTitle
             .sink { [weak self] title in
                 guard let self else { return }
-                NowPlayingService.addNowPlayingInfo(from: currentStation)
+                NowPlayingService.addNowPlayingInfo(from: PlayingInfo(text: currentStation?.text,
+                                                                      metadata: currentStation?.metadata,
+                                                                      artworkFromMetadata: currentStation?.artworkFromMetadata,
+                                                                      image: currentStation?.image))
                 currentStation?.metadata = title
                 fetchArtwork(for: title)
             }
@@ -79,20 +82,24 @@ private extension MyStationsViewModel {
     func fetchArtwork(for title: String) {
         cancelableSubscriptions.removeAll()
         
-        iTunesRepository.search(title: title)
+        getTrackArtworkUseCase
+            .execute(title: title)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
                 case .failure(let error):
                     // No error handling, because we already have a subtext value on TuneIn API
-                    Logger.logError(message: error)
+                    AppLogger.log(error, type: .error)
                 case .finished:
                     break
                 }
             } receiveValue: { [weak self] artworkUrl in
                 guard let self else { return }
                 currentStation?.artworkFromMetadata = artworkUrl
-                NowPlayingService.addNowPlayingInfo(from: currentStation)
+                NowPlayingService.addNowPlayingInfo(from: PlayingInfo(text: currentStation?.text,
+                                                                      metadata: currentStation?.metadata,
+                                                                      artworkFromMetadata: currentStation?.artworkFromMetadata,
+                                                                      image: currentStation?.image))
             }
             .store(in: &cancelableSubscriptions)
     }

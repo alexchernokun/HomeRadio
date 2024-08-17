@@ -1,13 +1,12 @@
 //
 //  NowPlayingManager.swift
-//  Radio
+//  RadioPlayer
 //
 //  Created by Oleksandr Chornokun on 04.04.2023.
 //
 
 import Foundation
 import MediaPlayer
-import DomainLayer
 
 /// An object for setting the Now Playing info
 public struct NowPlayingService {
@@ -15,20 +14,20 @@ public struct NowPlayingService {
     public static let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
     
     /// The method for setting track properties into NowPlaingInfoCenter
-    /// - Parameter track: The track you want to show in NowPlayingInfoCenter
-    public static func addNowPlayingInfo(from track: RadioItem?) {
+    /// - Parameter info: The info you want to show in NowPlayingInfoCenter
+    public static func addNowPlayingInfo(from info: PlayingInfo) {
         var nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo ?? [String: Any]()
         nowPlayingInfo[MPNowPlayingInfoPropertyIsLiveStream] = true
         
-        if let metadata = track?.metadata {
+        if let metadata = info.metadata {
             nowPlayingInfo[MPMediaItemPropertyTitle] = metadata
         } else {
-            nowPlayingInfo[MPMediaItemPropertyTitle] = track?.text
+            nowPlayingInfo[MPMediaItemPropertyTitle] = info.text
         }
         
-        if let artworkUrl = track?.artworkFromMetadata {
+        if let artworkUrl = info.artworkFromMetadata {
             getImage(from: artworkUrl, nowPlayingInfo)
-        } else if let imageUrl = track?.image {
+        } else if let imageUrl = info.image {
             getImage(from: imageUrl, nowPlayingInfo)
         }
         

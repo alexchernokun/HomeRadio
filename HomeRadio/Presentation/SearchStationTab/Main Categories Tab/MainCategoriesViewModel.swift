@@ -6,16 +6,15 @@
 //
 
 import Foundation
-import NetworkService
 import Combine
-import Utils
 import SwiftUI
-import DomainLayer
+import Domain
+import AppLogger
 
 final class MainCategoriesViewModel: ObservableObject {
     
     // MARK: Properties
-    private let tuneInRepository: TuneInRepositoryProtocol
+    private let getCategoriesUseCase: GetCategoriesUseCase
     private var subscriptions = Set<AnyCancellable>()
     @Published var isLoading = true
     @Published var shouldShowError = false
@@ -28,8 +27,8 @@ final class MainCategoriesViewModel: ObservableObject {
     @Published var podcastsCategory: CategoryViewModel?
     
     // MARK: Initialization
-    init(tuneInRepository: TuneInRepositoryProtocol) {
-        self.tuneInRepository = tuneInRepository
+    init(getCategoriesUseCase: GetCategoriesUseCase) {
+        self.getCategoriesUseCase = getCategoriesUseCase
     }
     
     // MARK: Methods
@@ -97,13 +96,13 @@ private extension MainCategoriesViewModel {
     }
     
     func getMainCategories() {
-        tuneInRepository.getGeneralTuneInCategories()
+        getCategoriesUseCase.execute()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self else { return }
                 switch completion {
                 case .failure(let error):
-                    Logger.logError(message: error)
+                    AppLogger.log(error, type: .error)
                     isLoading = false
                     shouldShowError = true
                 case .finished:
@@ -116,6 +115,7 @@ private extension MainCategoriesViewModel {
             .store(in: &subscriptions)
     }
     
+    // Most likely move to domain
     func showCategories(_ categories: [RadioItem]) {
         for category in categories {
             switch category.key {

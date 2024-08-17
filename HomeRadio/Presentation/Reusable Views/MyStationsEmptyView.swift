@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Utils
 
 struct MyStationsEmptyView: View {
     
@@ -38,8 +37,6 @@ struct MyStationsEmptyView: View {
     }
 }
 
-struct MyStationsEmptyView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyStationsEmptyView()
-    }
+#Preview {
+    MyStationsEmptyView()
 }

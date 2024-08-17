@@ -1,6 +1,6 @@
 //
-//  RadioPlayerService.swift
-//  Radio
+//  RadioPlayer.swift
+//  RadioPlayer
 //
 //  Created by Oleksandr Chornokun on 04.04.2023.
 //
@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 import Combine
-import Utils
+import AppLogger
 import MediaPlayer
 
 /// General purpose Radio Player module which plays stream from url and also can fetch station metadata
@@ -55,13 +55,13 @@ public final class RadioPlayer: NSObject, ObservableObject {
             // Switch over status value
             switch status {
             case .readyToPlay:
-                Logger.logDebug(message: "ReadyToPlay")
+                AppLogger.log("ReadyToPlay", type: .debug)
             case .failed:
-                Logger.logDebug(message: "FaledToPlay")
+                AppLogger.log("FaledToPlay", type: .debug)
             case .unknown:
-                Logger.logDebug(message: "UnknownToPlay")
+                AppLogger.log("ReadyTUnknownToPlayoPlay", type: .debug)
             @unknown default:
-                Logger.logDebug(message: "NewUnknownToPlay")
+                AppLogger.log("NewUnknownToPlay", type: .debug)
             }
         }
     }
@@ -81,7 +81,7 @@ private extension RadioPlayer {
         do {
             try audioSession.setCategory(.playback)
         } catch {
-            Logger.logError(message: "Setting category to AVAudioSessionCategoryPlayback failed")
+            AppLogger.log("Setting category to AVAudioSessionCategoryPlayback failed", type: .error)
         }
         UIApplication.shared.beginReceivingRemoteControlEvents()
     }
@@ -136,9 +136,9 @@ extension RadioPlayer: AVPlayerItemMetadataOutputPushDelegate {
         
         trackTitle.value = MetadataParser.getTitle(from: groups)
 
-        Logger.logMetadata(groups: groups,
+        AppLogger.logMetadata(groups: groups,
                            title: trackTitle.value,
                            track: track,
-                           logLevel: .short)
+                           level: .short)
     }
 }

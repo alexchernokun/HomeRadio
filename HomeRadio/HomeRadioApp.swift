@@ -6,39 +6,30 @@
 //
 
 import SwiftUI
-import Utils
-import RadioPlayer
 
 @main
 struct HomeRadioApp: App {
     
-    @StateObject private var radioPlayer = RadioPlayer()
-    private var tuneInRepository = TuneInRepository()
-    private var itunesRepository = ItunesSearchRepository()
+    private var myStationsViewTitle = "My Stations"
+    private var myStationsViewLabel = "music.note.list"
+    private var categoriesViewTitle = "Browse"
+    private var categoriesViewLabel = "antenna.radiowaves.left.and.right"
     
     var body: some Scene {
         WindowGroup {
             TabView {
-                MyStationsView(viewModel: MyStationsViewModel(radioPlayer: radioPlayer,
-                                                              iTunesRepository: itunesRepository))
+                MyStationsView()
                     .tabItem {
-                        Label("My Stations", systemImage: "music.note.list")
+                        Label(myStationsViewTitle,
+                              systemImage: myStationsViewLabel)
                     }
 
-                MainCategoriesView(viewModel: MainCategoriesViewModel(tuneInRepository: tuneInRepository))
+                MainCategoriesView()
                     .tabItem {
-                        Label("Browse", systemImage: "antenna.radiowaves.left.and.right")
+                        Label(categoriesViewTitle,
+                              systemImage: categoriesViewLabel)
                     }
             }
-            .onAppear {
-                // fix for the transparency bug of Tab bars
-                let tabBarAppearance = UITabBarAppearance()
-                tabBarAppearance.configureWithOpaqueBackground()
-                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-            }
-            .environmentObject(radioPlayer)
-            .environmentObject(tuneInRepository)
-            .environmentObject(itunesRepository)
         }
     }
 }

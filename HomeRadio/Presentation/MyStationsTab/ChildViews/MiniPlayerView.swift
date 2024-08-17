@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Utils
 
 struct MiniPlayerView: View {
     
@@ -104,8 +103,8 @@ private extension MiniPlayerView {
     }
 }
 
-struct MiniPlayerView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyStationsPreviewMock.miniPlayerView()
-    }
+#Preview {
+    MiniPlayerView(viewModel: MyStationsViewModel(radioPlayer: DependencyContainer.shared.radioPlayer,
+                                                  getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase),
+                   showPopover: .constant(false))
 }

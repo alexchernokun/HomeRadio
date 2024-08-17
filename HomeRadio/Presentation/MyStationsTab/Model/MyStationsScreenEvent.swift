@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import DomainLayer
+import Domain
 
 enum MyStationsScreenEvent {
     case onAppear

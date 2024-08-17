@@ -6,13 +6,10 @@
 //
 
 import SwiftUI
-import Utils
-import RadioPlayer
 
 struct MyStationsView: View {
     
-    @EnvironmentObject private var radioPlayer: RadioPlayer
-    @StateObject var viewModel: MyStationsViewModel
+    @StateObject private var viewModel: MyStationsViewModel
     @State var showPopover = false
     
     var body: some View {
@@ -37,6 +34,12 @@ struct MyStationsView: View {
             viewModel.onEvent(.onAppear)
         }
     }
+    
+    init() {
+        _viewModel = StateObject(wrappedValue: MyStationsViewModel(radioPlayer: DependencyContainer.shared.radioPlayer,
+                                                                   getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase))
+        self.showPopover = showPopover
+    }
 }
 
 // MARK: Subviews
@@ -57,7 +60,7 @@ private extension MyStationsView {
                         Button {
                             viewModel.onEvent(.playRadio(station))
                         } label: {
-                            RadioStationTypeView(station: station, isAdded: true)
+                            RadioStationTypeView(station: station)
                                 .background(
                                     Rectangle()
                                         .fill(Color(Colors.bgSecondary))
@@ -78,8 +81,6 @@ private extension MyStationsView {
     }
 }
 
-struct MyStationsView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyStationsPreviewMock.myStationsView()
-    }
+#Preview {
+    MyStationsView()
 }

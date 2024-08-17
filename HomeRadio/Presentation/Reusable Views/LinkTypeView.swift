@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-import DomainLayer
-import Utils
+import Domain
 
 struct LinkTypeView: View {
     
@@ -21,11 +20,5 @@ struct LinkTypeView: View {
                 .foregroundColor(Color(Colors.textPrimary))
         }
         .lineLimit(0)
-    }
-}
-
-struct LinkTypeView_Previews: PreviewProvider {
-    static var previews: some View {
-        LinkTypeView(stationItem: RadioItem(type: .audio, text: "Classic Hits"), action: nil)
     }
 }

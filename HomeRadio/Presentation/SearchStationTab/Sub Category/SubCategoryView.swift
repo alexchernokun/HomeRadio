@@ -7,13 +7,10 @@
 
 import SwiftUI
 import RadioPlayer
-import DomainLayer
-import Utils
+import Domain
 
 struct SubCategoryView:  View {
     
-    @EnvironmentObject private var radioPlayer: RadioPlayer
-    @EnvironmentObject private var tuneInRepository: TuneInRepository
     @StateObject private var viewModel: SubCategoryViewModel
     
     var body: some View {
@@ -29,10 +26,6 @@ struct SubCategoryView:  View {
                 .navigationBarTitleDisplayMode(.inline)
                 .redacted(reason: viewModel.isLoading ? .placeholder : [])
                 .onAppear {
-                    viewModel.onEvent(.configure(radioPlayer: radioPlayer,
-                                                 tuneInRepository: tuneInRepository))
-                }
-                .task {
                     viewModel.onEvent(.fetchRadioStations)
                 }
         }
@@ -40,30 +33,23 @@ struct SubCategoryView:  View {
     
     init(for url: URL?) {
         if let url {
-            let query = URLExtractHelper.extractQueryFrom(url)
-            let path = URLExtractHelper.extractPathFrom(url)
-            let viewModel = SubCategoryViewModel(path: path,
-                                                 query: query)
+            let viewModel = SubCategoryViewModel(radioPlayer: DependencyContainer.shared.radioPlayer,
+                                                 getSubcategoriesUseCase: DependencyContainer.shared.getSubcategoriesUseCase,
+                                                 path: URLExtractHelper.extractPathFrom(url),
+                                                 query:  URLExtractHelper.extractQueryFrom(url))
             _viewModel = StateObject(wrappedValue: viewModel)
         } else {
-            let viewModel = SubCategoryViewModel(path: "",
-                                                 query: [:])
+            let viewModel = SubCategoryViewModel(radioPlayer: DependencyContainer.shared.radioPlayer,
+                                                 getSubcategoriesUseCase: DependencyContainer.shared.getSubcategoriesUseCase)
             _viewModel = StateObject(wrappedValue: viewModel)
         }
-    }
-    
-    init(path: String = "",
-         query: [String: String?] = [:]) {
-        let viewModel = SubCategoryViewModel(path: path,
-                                             query: query)
-        _viewModel = StateObject(wrappedValue: viewModel)
     }
 }
 
 private extension SubCategoryView {
     
     func radioItemsList() -> some View {
-        List(viewModel.radioItems, id: \.self) { radioItem in
+        List(viewModel.subcategoryItems, id: \.self) { radioItem in
             if let children = radioItem.children {
                 Section(header: Text(radioItem.text)) {
                     ForEach(children, id: \.self) { child in
@@ -93,9 +79,7 @@ private extension SubCategoryView {
         Button {
             viewModel.onEvent(.playRadio(item))
         } label: {
-            RadioStationTypeView(station: item) { station in
-                viewModel.onEvent(.save(item))
-            }
+            RadioStationTypeView(station: item)
         }
         .buttonStyle(.plain)
     }
@@ -117,11 +101,5 @@ private extension SubCategoryView {
                 .font(.system(size: 18, weight: .semibold))
             Spacer()
         }
-    }
-}
-
-struct SubCategoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        SubCategoryPreviewMock.view()
     }
 }

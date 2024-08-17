@@ -6,15 +6,11 @@
 //
 
 import SwiftUI
-import DomainLayer
-import Utils
-import RadioPlayer
+import Domain
 
 struct MainCategoriesView: View {
     
-    @EnvironmentObject private var radioPlayer: RadioPlayer
-    @EnvironmentObject private var tuneInRepository: TuneInRepository
-    @StateObject var viewModel: MainCategoriesViewModel
+    @StateObject private var viewModel: MainCategoriesViewModel
     
     var body: some View {
         NavigationStack {
@@ -39,6 +35,10 @@ struct MainCategoriesView: View {
             }
             .navigationTitle("Find Your Tune")
         }
+    }
+    
+    init() {
+        _viewModel = StateObject(wrappedValue: MainCategoriesViewModel(getCategoriesUseCase: DependencyContainer.shared.getCategoriesUseCase))
     }
 }
 
@@ -108,8 +108,6 @@ private extension MainCategoriesView {
     
 }
 
-struct SearchStationsView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainCategoriesPreviewMock.view()
-    }
+#Preview {
+    MainCategoriesView()
 }

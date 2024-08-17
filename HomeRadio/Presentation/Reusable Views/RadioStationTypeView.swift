@@ -6,28 +6,19 @@
 //
 
 import SwiftUI
-import DomainLayer
-import Utils
+import Domain
 
 struct RadioStationTypeView: View {
     
     var station: RadioItem
     var action: ((RadioItem) -> Void)?
     
-    @State var isAdded = false
-    
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
             artwork()
-            
             metadata()
-            
-            Spacer()
-            
-            if !isAdded {
-                addButton()
-            }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .contentShape(Rectangle())
     }
     
@@ -71,6 +62,7 @@ private extension RadioStationTypeView {
             }
         }
         .padding(.vertical)
+        .padding(.trailing, 10)
         .lineLimit(0)
     }
     
@@ -91,38 +83,20 @@ private extension RadioStationTypeView {
                 .cornerRadius(25)
         )
     }
-    
-    func addButton() -> some View {
-        Button {
-            isAdded = true
-            action?(station)
-        } label: {
-            Text("Add")
-                .foregroundColor(Color(Colors.textPrimary))
-                .font(.system(size: 13, weight: .medium))
-        }
-    }
 }
 
-struct RadioStation_Previews: PreviewProvider {
-    static var station: RadioItem {
-        return RadioItem(type: "audio",
-                         key: "",
-                         text: "Хіт FM 101.7 (Top 40 & Pop Music)",
-                         url: "http://opml.radiotime.com/Tune.ashx?id=s142760",
-                         bitrate: "128",
-                         reliability: "99",
-                         subtext: "Тільки хіти!",
-                         formats: "mp3",
-                         image: "http://cdn-profiles.tunein.com/s6122/images/logoq.png?t=1",
-                         currentTrack: "",
-                         playing: "",
-                         playingImage: "",
-                         children: [])
-    }
-    
-    static var previews: some View {
-        RadioStationTypeView(station: station)
-            .frame(width: 380, height: 100)
-    }
+#Preview {
+    RadioStationTypeView(station: RadioItem(type: "audio",
+                                            key: "",
+                                            text: "Хіт FM 101.7 (Top 40 & Pop Music)",
+                                            url: "http://opml.radiotime.com/Tune.ashx?id=s142760",
+                                            bitrate: "128",
+                                            reliability: "99",
+                                            subtext: "Тільки хіти!",
+                                            formats: "mp3",
+                                            image: "http://cdn-profiles.tunein.com/s6122/images/logoq.png?t=1",
+                                            currentTrack: "",
+                                            playing: "",
+                                            playingImage: "",
+                                            children: []))
 }

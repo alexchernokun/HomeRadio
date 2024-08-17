@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Utils
 
 struct PlayerView: View {
     
@@ -16,15 +15,11 @@ struct PlayerView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 30) {
             background()
-            
             artwork()
-                
             metadata()
-            
             playPauseButton()
-            
-            Spacer()
         }
+        .frame(maxHeight: .infinity, alignment: .top)
     }
 }
 
@@ -101,8 +96,8 @@ private extension PlayerView {
     }
 }
 
-struct PlayerView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyStationsPreviewMock.playerView()
-    }
+#Preview {
+    PlayerView(viewModel: MyStationsViewModel(radioPlayer: DependencyContainer.shared.radioPlayer,
+                                              getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase),
+               showPopover: .constant(true))
 }

@@ -1,4 +1,4 @@
 import XCTest
-@testable import Utils
+@testable import RadioPlayer
 
-final class RadioPlayerTests: XCTestCase { }
+final class RadioPlayerTests: XCTestCase {}

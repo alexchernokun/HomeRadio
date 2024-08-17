@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Utils
 
 struct NetworkErrorView: View {
     var action: (() -> Void)?
@@ -47,8 +46,6 @@ struct NetworkErrorView: View {
     }
 }
 
-struct NetworkErrorView_Previews: PreviewProvider {
-    static var previews: some View {
-        NetworkErrorView(action: nil)
-    }
+#Preview {
+    NetworkErrorView()
 }
