@@ -7,9 +7,9 @@
 
 import Foundation
 
-public struct RadioStationItem: Codable, Hashable {
+public struct RadioStationItem: Hashable {
     public var type: RadioItemType
-    public var key: String?
+    public var key: RadioStationItemKey
     public var text: String
     public var url: URL?
     public var bitrate: String?
@@ -42,7 +42,7 @@ public struct RadioStationItem: Codable, Hashable {
                 children: [RadioStationItem]?,
                 tags: [String]?) {
         self.type = RadioItemType(rawValue: type ?? "") ?? .unknown
-        self.key = key
+        self.key = RadioStationItemKey(rawValue: key ?? "") ?? .unknown
         self.text = text
         self.url = URL(string: url ?? "") ?? nil
         self.bitrate = (bitrate ?? "n/a") + " Kbps"

@@ -17,19 +17,19 @@ struct RadioItemMapper {
         }
         
         return RadioStationItem(type: response.type,
-                         key: response.key,
-                         text: response.text,
-                         url: response.url,
-                         bitrate: response.bitrate,
-                         reliability: response.reliability,
-                         popularity: nil,
-                         subtext: response.subtext,
-                         formats: response.formats,
-                         image: response.image,
-                         currentTrack: response.currentTrack,
-                         playing: response.playing,
-                         playingImage: response.playingImage,
-                         children: radioStationChildren,
-                         tags: [])
+                                key: response.key,
+                                text: response.text,
+                                url: response.url,
+                                bitrate: response.bitrate,
+                                reliability: response.reliability,
+                                popularity: nil,
+                                subtext: response.subtext,
+                                formats: response.formats,
+                                image: response.image,
+                                currentTrack: response.currentTrack,
+                                playing: response.playing,
+                                playingImage: response.playingImage,
+                                children: radioStationChildren,
+                                tags: [])
     }
 }

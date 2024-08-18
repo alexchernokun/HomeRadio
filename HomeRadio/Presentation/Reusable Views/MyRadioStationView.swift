@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Domain
-import Foundation
 
 struct MyRadioStationView: View {
     
@@ -22,7 +21,6 @@ struct MyRadioStationView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .contentShape(Rectangle())
     }
-    
 }
 
 // MARK: Subviews
@@ -68,7 +66,7 @@ private extension MyRadioStationView {
     
     @ViewBuilder
     func rating(_ popularity: Double?) -> some View {
-        RatingsView(value: popularity)
+        RatingView(value: popularity)
     }
 }
 

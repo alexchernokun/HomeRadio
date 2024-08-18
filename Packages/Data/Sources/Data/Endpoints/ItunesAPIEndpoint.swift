@@ -46,5 +46,4 @@ enum ItunesAPIEndpoint: APIEndpoint {
             return .get
         }
     }
-    
 }

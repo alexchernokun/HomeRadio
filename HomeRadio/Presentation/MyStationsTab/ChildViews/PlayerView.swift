@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Domain
 
 struct PlayerView: View {
     
@@ -26,6 +27,7 @@ struct PlayerView: View {
 
 // MARK: Subviews
 private extension PlayerView {
+    
     func background() -> some View {
         RoundedRectangle(cornerRadius: 4)
             .frame(width: 60, height: 8)

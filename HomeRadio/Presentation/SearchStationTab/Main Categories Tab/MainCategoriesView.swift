@@ -44,29 +44,39 @@ struct MainCategoriesView: View {
 
 private extension MainCategoriesView {
     
+    var firstRowRange: Range<Int> { 1..<3 }
+    var secondRowRange: Range<Int> { 3..<5 }
+    var thirdRowRange: Range<Int> { 5..<7 }
+    
+    @ViewBuilder
     func menuContainerView() -> some View {
-        VStack(alignment: .leading, spacing: 15) {
-            navigationViewItem(for: viewModel.localCategory)
-            
-            HStack(alignment: .center, spacing: 10) {
-                navigationViewItem(for: viewModel.musicCategory)
-                navigationViewItem(for: viewModel.talkCategory)
-            }
-            
-            HStack(alignment: .center, spacing: 10) {
-                navigationViewItem(for: viewModel.sportsCategory)
-                navigationViewItem(for: viewModel.locationCategory)
-            }
-            
-            HStack(alignment: .center, spacing: 10) {
-                navigationViewItem(for: viewModel.languageCategory)
-                navigationViewItem(for: viewModel.podcastsCategory)
+        if !viewModel.globalCategories.isEmpty {
+            Grid(alignment: .center,
+                 horizontalSpacing: 10,
+                 verticalSpacing: 12) {
+                navigationViewItem(for: viewModel.localCategory)
+                
+                GridRow {
+                    ForEach(1..<3) { index in
+                        navigationViewItem(for: viewModel.globalCategories[index])
+                    }
+                }
+                GridRow {
+                    ForEach(3..<5) { index in
+                        navigationViewItem(for: viewModel.globalCategories[index])
+                    }
+                }
+                GridRow {
+                    ForEach(5..<7) { index in
+                        navigationViewItem(for: viewModel.globalCategories[index])
+                    }
+                }
             }
         }
     }
     
     @ViewBuilder
-    func navigationViewItem(for category: MainCategoriesViewModel.CategoryViewModel?) -> some View {
+    func navigationViewItem(for category: CategoryModel?) -> some View {
         if let category {
             NavigationLink {
                 SubCategoryView(for: category.url)
@@ -76,27 +86,20 @@ private extension MainCategoriesView {
         }
     }
     
-    func categoryView(_ category: MainCategoriesViewModel.CategoryViewModel) -> some View {
+    func categoryView(_ category: CategoryModel) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack {
-                Text(category.text)
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(Color(Colors.textPrimary))
-                    .padding(.vertical, 20)
-                    .padding(.leading, 20)
-                Spacer()
-            }
+            Text(category.text)
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundColor(Color(Colors.textPrimary))
+                .padding(.vertical, 20)
+                .padding(.leading, 20)
+                .frame(maxWidth: .infinity, alignment: .leading)
             
-            Spacer()
-            
-            HStack {
-                Spacer()
-                
-                Image(systemName: category.imageName)
-                    .foregroundColor(Color(Colors.textPrimary))
-                    .padding(.vertical, 20)
-                    .padding(.trailing, 20)
-            }
+            Image(systemName: category.imageName)
+                .foregroundColor(Color(Colors.textPrimary))
+                .padding(.vertical, 20)
+                .padding(.trailing, 20)
+                .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .disabled(viewModel.isLoading)
         .background(
@@ -105,7 +108,6 @@ private extension MainCategoriesView {
                 .cornerRadius(25)
         )
     }
-    
 }
 
 #Preview {

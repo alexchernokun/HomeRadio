@@ -25,7 +25,6 @@
 		63685DAE2C70F88D003754C6 /* AppLogger in Resources */ = {isa = PBXBuildFile; fileRef = 63685DAD2C70F88D003754C6 /* AppLogger */; };
 		63685DB02C70F939003754C6 /* AppLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 63685DAF2C70F939003754C6 /* AppLogger */; };
 		63685DB22C70F948003754C6 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 63685DB12C70F948003754C6 /* Data */; };
-		63685DB52C70F9BA003754C6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63685DB42C70F9BA003754C6 /* Colors.swift */; };
 		63685DB72C70F9D1003754C6 /* URLExtractHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63685DB62C70F9D1003754C6 /* URLExtractHelper.swift */; };
 		63685DB92C7200A7003754C6 /* Persistence in Resources */ = {isa = PBXBuildFile; fileRef = 63685DB82C7200A7003754C6 /* Persistence */; };
 		63685DBB2C7203A1003754C6 /* Persistence in Frameworks */ = {isa = PBXBuildFile; productRef = 63685DBA2C7203A1003754C6 /* Persistence */; };
@@ -58,7 +57,6 @@
 		635FAB7D29E050E000EC02E5 /* NetworkErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorView.swift; sourceTree = "<group>"; };
 		63685DAB2C70D9E0003754C6 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		63685DAD2C70F88D003754C6 /* AppLogger */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AppLogger; sourceTree = "<group>"; };
-		63685DB42C70F9BA003754C6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		63685DB62C70F9D1003754C6 /* URLExtractHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtractHelper.swift; sourceTree = "<group>"; };
 		63685DB82C7200A7003754C6 /* Persistence */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Persistence; sourceTree = "<group>"; };
 		63685DBC2C7232FB003754C6 /* MyRadioStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRadioStationView.swift; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 		63685DB32C70F9A1003754C6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				63685DB42C70F9BA003754C6 /* Colors.swift */,
 				63685DB62C70F9D1003754C6 /* URLExtractHelper.swift */,
 				63685DC02C723890003754C6 /* PreviewMockDataProvider.swift */,
 			);
@@ -353,7 +350,6 @@
 				63685DBF2C723817003754C6 /* RatingView.swift in Sources */,
 				63146E6A2A5601F10044BDCB /* MiniPlayerView.swift in Sources */,
 				635FAB7E29E050E000EC02E5 /* NetworkErrorView.swift in Sources */,
-				63685DB52C70F9BA003754C6 /* Colors.swift in Sources */,
 				637411AE29DD7AA500297AC7 /* HomeRadioApp.swift in Sources */,
 				6388828A2C6FA4C400C41232 /* SubCategoryScreenEvent.swift in Sources */,
 				63685DC12C723890003754C6 /* PreviewMockDataProvider.swift in Sources */,

@@ -17,8 +17,8 @@ final class SubCategoryViewModel: ObservableObject {
     // MARK: Properties
     private let getSubcategoriesUseCase: GetSubcategoriesUseCase
     private let radioPlayer: RadioPlayer
-    let query: [String: String?]
-    let path: String
+    private let query: [String: String?]
+    private let path: String
     private var subscriptions = Set<AnyCancellable>()
     @Published var isLoading = true
     @Published var shouldShowError = false
@@ -47,7 +47,7 @@ final class SubCategoryViewModel: ObservableObject {
     }
 }
 
-// MARK: - Private methods
+// MARK: Private methods
 private extension SubCategoryViewModel {
 
     func fetchRadioStationItems() {

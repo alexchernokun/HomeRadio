@@ -21,7 +21,7 @@ public struct GeneralTuneInCategory: Hashable {
     }
 }
 
-public enum RadioItemType: String, Codable {
+public enum RadioItemType: String {
     case link
     case audio
     case unknown

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RadioPlayer
 import Domain
 
 struct SubCategoryView:  View {
@@ -48,6 +47,7 @@ struct SubCategoryView:  View {
 
 private extension SubCategoryView {
     
+    @ViewBuilder
     func radioItemsList() -> some View {
         List(viewModel.subcategoryItems, id: \.self) { radioItem in
             if let children = radioItem.children {
@@ -75,6 +75,7 @@ private extension SubCategoryView {
         }
     }
     
+    @ViewBuilder
     func radioItemView(_ item: RadioStationItem) -> some View {
         Button {
             viewModel.onEvent(.playRadio(item))
@@ -93,13 +94,11 @@ private extension SubCategoryView {
         }
     }
     
+    @ViewBuilder
     func emptyState() -> some View {
-        VStack(alignment: .center, spacing: 0) {
-            Spacer()
-            Text("No stations or shows available")
-                .foregroundColor(Color(Colors.textPrimary))
-                .font(.system(size: 18, weight: .semibold))
-            Spacer()
-        }
+        Text("No stations or shows available")
+            .foregroundColor(Color(Colors.textPrimary))
+            .font(.system(size: 18, weight: .semibold))
+            .frame(maxHeight: .infinity, alignment: .center)
     }
 }

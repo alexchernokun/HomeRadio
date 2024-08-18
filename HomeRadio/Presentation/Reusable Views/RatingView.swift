@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RatingsView: View {
+struct RatingView: View {
     let value: Double?
     
     var body: some View {
@@ -30,5 +30,5 @@ struct RatingsView: View {
 }
 
 #Preview {
-    RatingsView(value: 3.5)
+    RatingView(value: 3.5)
 }

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RadioPlayer
 import Domain
 
 enum SubCategoryScreenEvent {

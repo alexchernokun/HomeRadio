@@ -1,6 +1,6 @@
 //
-//  File.swift
-//
+//  MyStationsMapper.swift
+//  Domain
 //
 //  Created by Oleksandr Chornokun on 17.08.2024.
 //

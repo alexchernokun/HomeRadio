@@ -133,7 +133,6 @@ extension RadioPlayer: AVPlayerItemMetadataOutputPushDelegate {
     public func metadataOutput(_ output: AVPlayerItemMetadataOutput,
                                didOutputTimedMetadataGroups groups: [AVTimedMetadataGroup],
                                from track: AVPlayerItemTrack?) {
-        
         trackTitle.value = MetadataParser.getTitle(from: groups)
 
         AppLogger.logMetadata(groups: groups,

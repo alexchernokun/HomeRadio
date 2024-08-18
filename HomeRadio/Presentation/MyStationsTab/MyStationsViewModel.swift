@@ -7,8 +7,8 @@
 
 import Foundation
 import Combine
-import RadioPlayer
 import Domain
+import RadioPlayer
 import AppLogger
 
 final class MyStationsViewModel: ObservableObject {
@@ -61,7 +61,7 @@ final class MyStationsViewModel: ObservableObject {
     }
 }
 
-// MARK: - Private Methods
+// MARK: Private Methods
 private extension MyStationsViewModel {
     
     func getMyStations() {

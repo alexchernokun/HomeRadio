@@ -62,15 +62,7 @@ private extension MyStationsView {
         } else {
             VStack(alignment: .leading, spacing: 0) {
                 header()
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 10) {
-                        ForEach(viewModel.myStations, id: \.self) { station in
-                            radioStationRow(station)
-                        }
-                    }
-                }
-                .padding(.bottom, 10)
-                
+                myStations()
                 MiniPlayerView(viewModel: viewModel,
                                showPopover: $showPopover)
                 .padding(.horizontal, 5)
@@ -114,6 +106,18 @@ private extension MyStationsView {
                 .padding(.bottom, 20)
         }
         .padding(.horizontal, 20)
+    }
+    
+    @ViewBuilder
+    func myStations() -> some View {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 10) {
+                ForEach(viewModel.myStations, id: \.self) { station in
+                    radioStationRow(station)
+                }
+            }
+        }
+        .padding(.bottom, 10)
     }
     
     @ViewBuilder
