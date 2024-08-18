@@ -50,7 +50,7 @@ extension MainCategoriesViewModel {
         var imageName: String
         var color: String
 
-        init(_ category: RadioItem) {
+        init(_ category: RadioStationItem) {
             self.type = category.type
             self.text = category.text
             self.url = category.url
@@ -116,7 +116,7 @@ private extension MainCategoriesViewModel {
     }
     
     // Most likely move to domain
-    func showCategories(_ categories: [RadioItem]) {
+    func showCategories(_ categories: [RadioStationItem]) {
         for category in categories {
             switch category.key {
             case "local":

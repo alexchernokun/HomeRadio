@@ -10,23 +10,23 @@ import Combine
 import Data
 
 public protocol GetCategoriesUseCase {
-    func execute() -> AnyPublisher<[RadioItem], Error>
+    func execute() -> AnyPublisher<[RadioStationItem], Error>
 }
 
 public struct GetCategoriesUseCaseImpl: GetCategoriesUseCase {
     
-    private let tuneInRepository: TuneInRepositoryProtocol
+    private let tuneInRepository: TuneInRepository
     
-    public func execute() -> AnyPublisher<[RadioItem], Error> {
+    public func execute() -> AnyPublisher<[RadioStationItem], Error> {
         return tuneInRepository
             .getGeneralTuneInCategories()
-            .map { (response: GeneralTuneInResponse) -> [RadioItem] in
+            .map { (response: GeneralTuneInResponse) -> [RadioStationItem] in
                 return response.body.map { RadioItemMapper.map($0) }
             }
             .eraseToAnyPublisher()
     }
     
-    public init(tuneInRepository: TuneInRepositoryProtocol) {
+    public init(tuneInRepository: TuneInRepository) {
         self.tuneInRepository = tuneInRepository
     }
 }

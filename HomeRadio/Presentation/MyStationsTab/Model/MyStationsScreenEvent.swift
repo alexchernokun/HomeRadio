@@ -11,6 +11,7 @@ import Domain
 enum MyStationsScreenEvent {
     case onAppear
     case getMyRadioStations
-    case playRadio(_ station: RadioItem)
+    case playRadio(_ station: RadioStationItem)
     case onPlayButtonTap
+    case onTagToggle(_ tag: RadioStationTag)
 }

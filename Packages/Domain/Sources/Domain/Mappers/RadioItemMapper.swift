@@ -9,14 +9,14 @@ import Foundation
 import Data
 
 struct RadioItemMapper {
-    static func map(_ response: RadioItemResponse) -> RadioItem {
-        var radioStationChildren: [RadioItem]? = nil
+    static func map(_ response: RadioItemResponse) -> RadioStationItem {
+        var radioStationChildren: [RadioStationItem]? = nil
         
         if let children = response.children {
             radioStationChildren = children.map { map($0) }
         }
         
-        return RadioItem(type: response.type,
+        return RadioStationItem(type: response.type,
                          key: response.key,
                          text: response.text,
                          url: response.url,

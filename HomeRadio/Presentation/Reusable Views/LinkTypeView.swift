@@ -10,8 +10,8 @@ import Domain
 
 struct LinkTypeView: View {
     
-    var stationItem: RadioItem
-    var action: ((RadioItem) -> Void)?
+    var stationItem: RadioStationItem
+    var action: ((RadioStationItem) -> Void)?
     
     var body: some View {
         HStack(alignment: .center, spacing: 12) {

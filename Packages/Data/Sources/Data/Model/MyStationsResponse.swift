@@ -9,6 +9,10 @@ import Foundation
 
 public struct MyStationsResponse: Codable {
     public let data: [MyStationsResponseData]
+    
+    public init(data: [MyStationsResponseData]) {
+        self.data = data
+    }
 }
 
 public struct MyStationsResponseData: Codable {

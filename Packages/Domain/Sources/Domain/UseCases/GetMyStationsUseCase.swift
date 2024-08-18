@@ -10,21 +10,21 @@ import Combine
 import Data
 
 public protocol GetMyStationsUseCase {
-    func execute() -> AnyPublisher<[RadioItem], Error>
+    func execute() -> AnyPublisher<[RadioStationItem], Error>
 }
 
 public struct GetMyStationsUseCaseImpl: GetMyStationsUseCase {
     
-    private let tuneInRepository: TuneInRepositoryProtocol
+    private let tuneInRepository: TuneInRepository
     
-    public func execute() -> AnyPublisher<[RadioItem], Error> {
+    public func execute() -> AnyPublisher<[RadioStationItem], Error> {
         return tuneInRepository
-            .getMyStations()
+            .fetchMyStations()
             .map { MyStationsMapper.map($0) }
             .eraseToAnyPublisher()
     }
     
-    public init(tuneInRepository: TuneInRepositoryProtocol) {
+    public init(tuneInRepository: TuneInRepository) {
         self.tuneInRepository = tuneInRepository
     }
 }

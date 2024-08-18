@@ -15,12 +15,15 @@ final class MyStationsViewModel: ObservableObject {
     
     // MARK: Properties
     private let getMyStationsUseCase: GetMyStationsUseCase
+    private let getRadioStationTagsUseCase: GetRadioStationTagsUseCase
+    private let filterRadioStationByTagsUseCase: FilterStationsByTagsUseCase
     private let getTrackArtworkUseCase: GetTrackArtworkUseCase
     private let radioPlayer: RadioPlayer
     private var subscriptions = Set<AnyCancellable>()
     private var cancelableSubscriptions = Set<AnyCancellable>()
-    @Published var myStations: [RadioItem] = []
-    @Published var currentStation: RadioItem?
+    @Published var myStations: [RadioStationItem] = []
+    @Published var radioStationTags: [RadioStationTag] = []
+    @Published var currentStation: RadioStationItem?
     @Published var isRadioPlaying: Bool = false
     @Published var shouldShowError = false
     
@@ -33,14 +36,20 @@ final class MyStationsViewModel: ObservableObject {
             playRadio(station)
         case .onPlayButtonTap:
             toggleRadioPlayback()
+        case let .onTagToggle(tag):
+            onTagToggle(tag)
         }
     }
     
     // MARK: Initialization
     init(getMyStationsUseCase: GetMyStationsUseCase,
+         getRadioStationTagsUseCase: GetRadioStationTagsUseCase,
+         filterRadioStationByTagsUseCase: FilterStationsByTagsUseCase,
          getTrackArtworkUseCase: GetTrackArtworkUseCase,
          radioPlayer: RadioPlayer) {
         self.getMyStationsUseCase = getMyStationsUseCase
+        self.getRadioStationTagsUseCase = getRadioStationTagsUseCase
+        self.filterRadioStationByTagsUseCase = filterRadioStationByTagsUseCase
         self.getTrackArtworkUseCase = getTrackArtworkUseCase
         self.radioPlayer = radioPlayer
         observeStreamingMetadata()
@@ -67,8 +76,26 @@ private extension MyStationsViewModel {
             } receiveValue: { [weak self] stations in
                 guard let self else { return }
                 myStations = stations
+                getTags()
             }
             .store(in: &subscriptions)
+    }
+    
+    func getTags() {
+        radioStationTags = getRadioStationTagsUseCase.execute()
+    }
+    
+    func onTagToggle(_ tag: RadioStationTag) {
+        if let index = radioStationTags.firstIndex(where: { $0.name == tag.name }) {
+            radioStationTags[index].isToggled.toggle()
+        }
+        filterStationsByTags()
+    }
+    
+    func filterStationsByTags() {
+        let selectedTags = radioStationTags.filter { $0.isToggled }
+        guard let filteredStations = filterRadioStationByTagsUseCase.execute(selectedTags: selectedTags.map { $0.name } ) else { return }
+        myStations = filteredStations
     }
     
     func observeStreamingMetadata() {
@@ -86,7 +113,7 @@ private extension MyStationsViewModel {
             .store(in: &subscriptions)
     }
     
-    func playRadio(_ station: RadioItem) {
+    func playRadio(_ station: RadioStationItem) {
         guard let url = station.url else { return }
         currentStation = station
         isRadioPlaying = true

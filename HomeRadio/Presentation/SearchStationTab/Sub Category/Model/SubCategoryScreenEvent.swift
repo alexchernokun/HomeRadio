@@ -11,5 +11,5 @@ import Domain
 
 enum SubCategoryScreenEvent {
     case fetchRadioStations
-    case playRadio(_ station: RadioItem)
+    case playRadio(_ station: RadioStationItem)
 }

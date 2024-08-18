@@ -15,7 +15,7 @@ public protocol GetSubcategoriesUseCase {
 
 public struct GetSubcateriesUseCaseImpl: GetSubcategoriesUseCase {
     
-    private let tuneInRepository: TuneInRepositoryProtocol
+    private let tuneInRepository: TuneInRepository
     
     public func execute(path: String, query: [String: String?]) -> AnyPublisher<SubCategoriesModel, Error> {
         return tuneInRepository
@@ -26,12 +26,12 @@ public struct GetSubcateriesUseCaseImpl: GetSubcategoriesUseCase {
             .eraseToAnyPublisher()
     }
     
-    public init(tuneInRepository: TuneInRepositoryProtocol) {
+    public init(tuneInRepository: TuneInRepository) {
         self.tuneInRepository = tuneInRepository
     }
 }
 
 public struct SubCategoriesModel {
     public let title: String
-    public let subcategories: [RadioItem]
+    public let subcategories: [RadioStationItem]
 }

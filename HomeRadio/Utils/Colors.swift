@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Colors {
     static let bgPrimary = "bgPrimary"
@@ -20,4 +21,7 @@ struct Colors {
     static let categoryRed = "categoryRed"
     static let categoryYellow = "categoryYellow"
     static let categoryBrown = "categoryBrown"
+    
+    static let selectedTagColor = Color.blue
+    static let unselectedTagColor = Color.gray
 }

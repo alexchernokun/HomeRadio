@@ -12,12 +12,13 @@ let package = Package(
             targets: ["Data"]),
     ],
     dependencies: [
-        .package(path: "../Networking")
+        .package(path: "../Networking"),
+        .package(path: "../Persistence")
     ],
     targets: [
         .target(
             name: "Data",
-            dependencies: ["Networking"]),
+            dependencies: ["Networking", "Persistence"]),
         .testTarget(
             name: "DataTests",
             dependencies: ["Data"]),

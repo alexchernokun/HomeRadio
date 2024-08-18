@@ -15,7 +15,7 @@ public protocol GetTrackArtworkUseCase {
 
 public struct GetTrackArtworkUseCaseImpl: GetTrackArtworkUseCase {
     
-    private let itunesRepository: ItunesSearchRepositoryProtocol
+    private let itunesRepository: ItunesSearchRepository
     
     public func execute(title: String) -> AnyPublisher<URL?, Error> {
         return itunesRepository
@@ -24,7 +24,7 @@ public struct GetTrackArtworkUseCaseImpl: GetTrackArtworkUseCase {
             .eraseToAnyPublisher()
     }
     
-    public init(itunesRepository: ItunesSearchRepositoryProtocol) {
+    public init(itunesRepository: ItunesSearchRepository) {
         self.itunesRepository = itunesRepository
     }
 }

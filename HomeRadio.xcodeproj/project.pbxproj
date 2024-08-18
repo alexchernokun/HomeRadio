@@ -27,6 +27,8 @@
 		63685DB22C70F948003754C6 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 63685DB12C70F948003754C6 /* Data */; };
 		63685DB52C70F9BA003754C6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63685DB42C70F9BA003754C6 /* Colors.swift */; };
 		63685DB72C70F9D1003754C6 /* URLExtractHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63685DB62C70F9D1003754C6 /* URLExtractHelper.swift */; };
+		63685DB92C7200A7003754C6 /* Persistence in Resources */ = {isa = PBXBuildFile; fileRef = 63685DB82C7200A7003754C6 /* Persistence */; };
+		63685DBB2C7203A1003754C6 /* Persistence in Frameworks */ = {isa = PBXBuildFile; productRef = 63685DBA2C7203A1003754C6 /* Persistence */; };
 		637411AE29DD7AA500297AC7 /* HomeRadioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */; };
 		637411B229DD7AA700297AC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 637411B129DD7AA700297AC7 /* Assets.xcassets */; };
 		637411B529DD7AA700297AC7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 637411B429DD7AA700297AC7 /* Preview Assets.xcassets */; };
@@ -55,6 +57,7 @@
 		63685DAD2C70F88D003754C6 /* AppLogger */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AppLogger; sourceTree = "<group>"; };
 		63685DB42C70F9BA003754C6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		63685DB62C70F9D1003754C6 /* URLExtractHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtractHelper.swift; sourceTree = "<group>"; };
+		63685DB82C7200A7003754C6 /* Persistence */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Persistence; sourceTree = "<group>"; };
 		637411AA29DD7AA500297AC7 /* HomeRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		637411AD29DD7AA500297AC7 /* HomeRadioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRadioApp.swift; sourceTree = "<group>"; };
 		637411B129DD7AA700297AC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,6 +77,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63786B152C7096EA00A5B179 /* Domain in Frameworks */,
+				63685DBB2C7203A1003754C6 /* Persistence in Frameworks */,
 				63685DB22C70F948003754C6 /* Data in Frameworks */,
 				63685DB02C70F939003754C6 /* AppLogger in Frameworks */,
 				6307E93229DD8CCC00678D08 /* RadioPlayer in Frameworks */,
@@ -216,6 +220,7 @@
 				63786B132C7094BC00A5B179 /* Domain */,
 				63786B162C70983900A5B179 /* Data */,
 				63786B172C7099B100A5B179 /* Networking */,
+				63685DB82C7200A7003754C6 /* Persistence */,
 				63685DAD2C70F88D003754C6 /* AppLogger */,
 				637411C129DD86F000297AC7 /* RadioPlayer */,
 			);
@@ -267,6 +272,7 @@
 				63786B142C7096EA00A5B179 /* Domain */,
 				63685DAF2C70F939003754C6 /* AppLogger */,
 				63685DB12C70F948003754C6 /* Data */,
+				63685DBA2C7203A1003754C6 /* Persistence */,
 			);
 			productName = HomeRadio;
 			productReference = 637411AA29DD7AA500297AC7 /* HomeRadio.app */;
@@ -310,6 +316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63685DB92C7200A7003754C6 /* Persistence in Resources */,
 				63685DAE2C70F88D003754C6 /* AppLogger in Resources */,
 				637411B529DD7AA700297AC7 /* Preview Assets.xcassets in Resources */,
 				637411B229DD7AA700297AC7 /* Assets.xcassets in Resources */,
@@ -558,6 +565,10 @@
 		63685DB12C70F948003754C6 /* Data */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Data;
+		};
+		63685DBA2C7203A1003754C6 /* Persistence */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Persistence;
 		};
 		63786B142C7096EA00A5B179 /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;

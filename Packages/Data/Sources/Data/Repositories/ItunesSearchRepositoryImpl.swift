@@ -9,11 +9,11 @@ import Foundation
 import Combine
 import Networking
 
-public protocol ItunesSearchRepositoryProtocol {
+public protocol ItunesSearchRepository {
     func search(title: String) -> AnyPublisher<ItunesSearchResponse?, Error>
 }
 
-public final class ItunesSearchRepository: ItunesSearchRepositoryProtocol, ObservableObject {
+public final class ItunesSearchRepositoryImpl: ItunesSearchRepository, ObservableObject {
     
     public let networkService = NetworkService()
     

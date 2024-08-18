@@ -10,8 +10,8 @@ import Domain
 
 struct RadioStationTypeView: View {
     
-    var station: RadioItem
-    var action: ((RadioItem) -> Void)?
+    var station: RadioStationItem
+    var action: ((RadioStationItem) -> Void)?
     
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
@@ -86,7 +86,7 @@ private extension RadioStationTypeView {
 }
 
 #Preview {
-    RadioStationTypeView(station: RadioItem(type: "audio",
+    RadioStationTypeView(station: RadioStationItem(type: "audio",
                                             key: "",
                                             text: "Хіт FM 101.7 (Top 40 & Pop Music)",
                                             url: "http://opml.radiotime.com/Tune.ashx?id=s142760",

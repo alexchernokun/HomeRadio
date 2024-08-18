@@ -64,7 +64,7 @@ private extension SubCategoryView {
     }
     
     @ViewBuilder
-    func viewForItem(item: RadioItem) -> some View {
+    func viewForItem(item: RadioStationItem) -> some View {
         switch item.type {
         case .audio:
             radioItemView(item)
@@ -75,7 +75,7 @@ private extension SubCategoryView {
         }
     }
     
-    func radioItemView(_ item: RadioItem) -> some View {
+    func radioItemView(_ item: RadioStationItem) -> some View {
         Button {
             viewModel.onEvent(.playRadio(item))
         } label: {
@@ -85,7 +85,7 @@ private extension SubCategoryView {
     }
     
     @ViewBuilder
-    func navigationItemView(_ item: RadioItem) -> some View {
+    func navigationItemView(_ item: RadioStationItem) -> some View {
         NavigationLink {
             SubCategoryView(for: item.url)
         } label: {

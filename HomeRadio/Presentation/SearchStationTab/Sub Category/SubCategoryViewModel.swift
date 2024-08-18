@@ -23,7 +23,7 @@ final class SubCategoryViewModel: ObservableObject {
     @Published var isLoading = true
     @Published var shouldShowError = false
     @Published var title: String = ""
-    @Published var subcategoryItems: [RadioItem] = []
+    @Published var subcategoryItems: [RadioStationItem] = []
     
     // MARK: Initialization
     init(radioPlayer: RadioPlayer,
@@ -79,7 +79,7 @@ private extension SubCategoryViewModel {
             .store(in: &subscriptions)
     }
     
-    func playRadio(_ station: RadioItem) {
+    func playRadio(_ station: RadioStationItem) {
         guard let url = station.url else { return }
         radioPlayer.playRadio(from: url)
     }

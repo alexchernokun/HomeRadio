@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct RadioItem: Codable, Hashable {
+public struct RadioStationItem: Codable, Hashable {
     public var type: RadioItemType
     public var key: String?
     public var text: String
@@ -21,7 +21,7 @@ public struct RadioItem: Codable, Hashable {
     public var currentTrack: String?
     public var playing: String?
     public var playingImage: String?
-    public var children: [RadioItem]?
+    public var children: [RadioStationItem]?
     public var metadata: String?
     public var artworkFromMetadata: URL?
     public var tags: [String]?
@@ -39,7 +39,7 @@ public struct RadioItem: Codable, Hashable {
                 currentTrack: String?,
                 playing: String?,
                 playingImage: String?,
-                children: [RadioItem]?,
+                children: [RadioStationItem]?,
                 tags: [String]?) {
         self.type = RadioItemType(rawValue: type ?? "") ?? .unknown
         self.key = key
