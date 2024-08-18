@@ -1,14 +1,15 @@
 //
-//  RadioStationView.swift
+//  MyRadioStationView.swift
 //  HomeRadio
 //
-//  Created by Oleksandr Chornokun on 06.04.2023.
+//  Created by Oleksandr Chornokun on 18.08.2024.
 //
 
 import SwiftUI
 import Domain
+import Foundation
 
-struct RadioStationTypeView: View {
+struct MyRadioStationView: View {
     
     var station: RadioStationItem
     var action: ((RadioStationItem) -> Void)?
@@ -25,7 +26,9 @@ struct RadioStationTypeView: View {
 }
 
 // MARK: Subviews
-private extension RadioStationTypeView {
+private extension MyRadioStationView {
+    
+    @ViewBuilder
     func artwork() -> some View {
         AsyncImage(url: station.image) { phase in
             if let image = phase.image {
@@ -43,6 +46,7 @@ private extension RadioStationTypeView {
         }
     }
     
+    @ViewBuilder
     func metadata() -> some View {
         VStack(alignment: .leading, spacing: 5) {
             Text(station.text)
@@ -55,36 +59,19 @@ private extension RadioStationTypeView {
             Spacer()
                 .frame(height: 10)
             
-            HStack(alignment: .center, spacing: 3) {
-                labelInfo(text: station.reliability, imageName: "cellularbars")
-                labelInfo(text: station.bitrate, imageName: "arrow.up.arrow.down")
-                labelInfo(text: station.formats, imageName: "music.note")
-            }
+            rating(station.popularity)
         }
         .padding(.vertical)
         .padding(.trailing, 10)
         .lineLimit(0)
     }
     
-    func labelInfo(text: String?, imageName: String) -> some View {
-        HStack(alignment: .center, spacing: 2) {
-            Image(systemName: imageName)
-                .resizable()
-                .frame(width: 8, height: 8)
-            Text(text ?? "")
-                .font(.system(size: 7, weight: .medium))
-        }
-        .padding(.horizontal, 4)
-        .padding(.vertical, 2)
-        .foregroundColor(Color(Colors.textSecondary))
-        .background(
-            Rectangle()
-                .fill(Color(Colors.bgPrimary))
-                .cornerRadius(25)
-        )
+    @ViewBuilder
+    func rating(_ popularity: Double?) -> some View {
+        RatingsView(value: popularity)
     }
 }
 
 #Preview {
-    RadioStationTypeView(station: PreviewMockDataProvider.station)
+    MyRadioStationView(station: PreviewMockDataProvider.station)
 }

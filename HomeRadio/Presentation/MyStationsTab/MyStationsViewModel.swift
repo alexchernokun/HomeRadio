@@ -16,7 +16,8 @@ final class MyStationsViewModel: ObservableObject {
     // MARK: Properties
     private let getMyStationsUseCase: GetMyStationsUseCase
     private let getRadioStationTagsUseCase: GetRadioStationTagsUseCase
-    private let filterRadioStationByTagsUseCase: FilterStationsByTagsUseCase
+    private let filterRadioStationsByTagsUseCase: FilterStationsByTagsUseCase
+    private let sortRadioStationsByRatingUseCase: SortStationsByRatingUseCase
     private let getTrackArtworkUseCase: GetTrackArtworkUseCase
     private let radioPlayer: RadioPlayer
     private var subscriptions = Set<AnyCancellable>()
@@ -38,18 +39,22 @@ final class MyStationsViewModel: ObservableObject {
             toggleRadioPlayback()
         case let .onTagToggle(tag):
             onTagToggle(tag)
+        case let .sort(type):
+            sortStations(type)
         }
     }
     
     // MARK: Initialization
     init(getMyStationsUseCase: GetMyStationsUseCase,
          getRadioStationTagsUseCase: GetRadioStationTagsUseCase,
-         filterRadioStationByTagsUseCase: FilterStationsByTagsUseCase,
+         filterRadioStationsByTagsUseCase: FilterStationsByTagsUseCase,
+         sortRadioStationsByRatingUseCase: SortStationsByRatingUseCase,
          getTrackArtworkUseCase: GetTrackArtworkUseCase,
          radioPlayer: RadioPlayer) {
         self.getMyStationsUseCase = getMyStationsUseCase
         self.getRadioStationTagsUseCase = getRadioStationTagsUseCase
-        self.filterRadioStationByTagsUseCase = filterRadioStationByTagsUseCase
+        self.filterRadioStationsByTagsUseCase = filterRadioStationsByTagsUseCase
+        self.sortRadioStationsByRatingUseCase = sortRadioStationsByRatingUseCase
         self.getTrackArtworkUseCase = getTrackArtworkUseCase
         self.radioPlayer = radioPlayer
         observeStreamingMetadata()
@@ -94,8 +99,13 @@ private extension MyStationsViewModel {
     
     func filterStationsByTags() {
         let selectedTags = radioStationTags.filter { $0.isToggled }
-        guard let filteredStations = filterRadioStationByTagsUseCase.execute(selectedTags: selectedTags.map { $0.name } ) else { return }
+        guard let filteredStations = filterRadioStationsByTagsUseCase.execute(selectedTags: selectedTags.map { $0.name } ) else { return }
         myStations = filteredStations
+    }
+    
+    func sortStations(_ type: SortingType) {
+        guard let sortedStations = sortRadioStationsByRatingUseCase.execute(sortingType: type) else { return }
+        myStations = sortedStations
     }
     
     func observeStreamingMetadata() {

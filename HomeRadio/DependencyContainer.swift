@@ -21,6 +21,7 @@ final class DependencyContainer {
     private(set) var getMyStationsUseCase: GetMyStationsUseCase
     private(set) var getRadioStationTagsUseCase: GetRadioStationTagsUseCase
     private(set) var filterStationsByTagsUseCase: FilterStationsByTagsUseCase
+    private(set) var sortStationsByRatingUseCase: SortStationsByRatingUseCase
     private(set) var getTrackArtworkUseCase: GetTrackArtworkUseCase
     private(set) var getCategoriesUseCase: GetCategoriesUseCase
     private(set) var getSubcategoriesUseCase: GetSubcategoriesUseCase
@@ -32,6 +33,7 @@ final class DependencyContainer {
         self.getMyStationsUseCase = GetMyStationsUseCaseImpl(tuneInRepository: tuneInRepository)
         self.getRadioStationTagsUseCase = GetRadioStationTagsUseCaseImpl(tuneInRepository: tuneInRepository)
         self.filterStationsByTagsUseCase = FilterStationsByTagsUseCaseImpl(tuneInRepository: tuneInRepository)
+        self.sortStationsByRatingUseCase = SortStationsByRatingUseCaseImpl(tuneInRepository: tuneInRepository)
         self.getTrackArtworkUseCase = GetTrackArtworkUseCaseImpl(itunesRepository: itunesRepository)
         self.getCategoriesUseCase = GetCategoriesUseCaseImpl(tuneInRepository: tuneInRepository)
         self.getSubcategoriesUseCase = GetSubcateriesUseCaseImpl(tuneInRepository: tuneInRepository)

@@ -100,7 +100,8 @@ private extension PlayerView {
 #Preview {
     PlayerView(viewModel: MyStationsViewModel(getMyStationsUseCase: DependencyContainer.shared.getMyStationsUseCase,
                                               getRadioStationTagsUseCase: DependencyContainer.shared.getRadioStationTagsUseCase,
-                                              filterRadioStationByTagsUseCase: DependencyContainer.shared.filterStationsByTagsUseCase,
+                                              filterRadioStationsByTagsUseCase: DependencyContainer.shared.filterStationsByTagsUseCase,
+                                              sortRadioStationsByRatingUseCase: DependencyContainer.shared.sortStationsByRatingUseCase,
                                               getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase,
                                               radioPlayer: DependencyContainer.shared.radioPlayer),
                showPopover: .constant(true))

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Domain
 
 struct MyStationsView: View {
     
@@ -20,7 +21,7 @@ struct MyStationsView: View {
             if viewModel.myStations.isEmpty {
                 emptyView()
             } else {
-                contentView
+                contentView()
             }
         }
         .refreshable {
@@ -38,7 +39,8 @@ struct MyStationsView: View {
     init() {
         _viewModel = StateObject(wrappedValue: MyStationsViewModel(getMyStationsUseCase: DependencyContainer.shared.getMyStationsUseCase,
                                                                    getRadioStationTagsUseCase: DependencyContainer.shared.getRadioStationTagsUseCase,
-                                                                   filterRadioStationByTagsUseCase: DependencyContainer.shared.filterStationsByTagsUseCase,
+                                                                   filterRadioStationsByTagsUseCase: DependencyContainer.shared.filterStationsByTagsUseCase,
+                                                                   sortRadioStationsByRatingUseCase: DependencyContainer.shared.sortStationsByRatingUseCase,
                                                                    getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase,
                                                                    radioPlayer: DependencyContainer.shared.radioPlayer))
         self.showPopover = showPopover
@@ -49,7 +51,7 @@ struct MyStationsView: View {
 private extension MyStationsView {
     
     @ViewBuilder
-    var contentView: some View {
+    func contentView() -> some View {
         if viewModel.shouldShowError {
             VStack(alignment: .leading, spacing: 0) {
                 header()
@@ -63,17 +65,7 @@ private extension MyStationsView {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 10) {
                         ForEach(viewModel.myStations, id: \.self) { station in
-                            Button {
-                                viewModel.onEvent(.playRadio(station))
-                            } label: {
-                                RadioStationTypeView(station: station)
-                                    .background(
-                                        Rectangle()
-                                            .fill(Color(Colors.bgSecondary))
-                                            .cornerRadius(25)
-                                    )
-                                    .padding(.horizontal)
-                            }
+                            radioStationRow(station)
                         }
                     }
                 }
@@ -90,15 +82,38 @@ private extension MyStationsView {
     @ViewBuilder
     func header() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("My Favourite Tunes")
-                .foregroundColor(Color(Colors.textPrimary))
-                .font(.system(size: 32, weight: .bold, design: .default))
-                .padding(.top, 40)
-                .padding(.leading, 16)
+            HStack(alignment: .center) {
+                Text("My Favourite Tunes")
+                    .foregroundColor(Color(Colors.textPrimary))
+                    .font(.system(size: 32, weight: .bold, design: .default))
+                    .layoutPriority(1)
+                
+                if !viewModel.myStations.isEmpty {
+                    Menu {
+                        Button("Ascending") {
+                            withAnimation { viewModel.onEvent(.sort(.asc)) }
+                        }
+                        Button("Descending") {
+                            withAnimation { viewModel.onEvent(.sort(.desc)) }
+                        }
+                        Divider()
+                        Button("Reset") {
+                            withAnimation { viewModel.onEvent(.sort(.none)) }
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                            .font(.system(size: 16, weight: .bold))
+                            .tint(Color(Colors.textPrimary))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+            }
+            .padding(.top, 40)
+            
             tags()
                 .padding(.bottom, 20)
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, 20)
     }
     
     @ViewBuilder
@@ -118,6 +133,21 @@ private extension MyStationsView {
                     }
                 }
             }
+        }
+    }
+    
+    @ViewBuilder
+    func radioStationRow(_ station: RadioStationItem) -> some View {
+        Button {
+            viewModel.onEvent(.playRadio(station))
+        } label: {
+            MyRadioStationView(station: station)
+                .background(
+                    Rectangle()
+                        .fill(Color(Colors.bgSecondary))
+                        .cornerRadius(25)
+                )
+                .padding(.horizontal)
         }
     }
     

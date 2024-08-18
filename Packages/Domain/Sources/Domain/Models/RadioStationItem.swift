@@ -14,7 +14,7 @@ public struct RadioStationItem: Codable, Hashable {
     public var url: URL?
     public var bitrate: String?
     public var reliability: String?
-    public var popularity: String?
+    public var popularity: Double?
     public var subtext: String?
     public var formats: String?
     public var image: URL?
@@ -47,7 +47,7 @@ public struct RadioStationItem: Codable, Hashable {
         self.url = URL(string: url ?? "") ?? nil
         self.bitrate = (bitrate ?? "n/a") + " Kbps"
         self.reliability = (reliability ?? "n/a") + "%"
-        self.popularity = String(describing: popularity)
+        self.popularity = popularity
         self.subtext = subtext
         self.formats = formats
         self.image = URL(string: image ?? "") ?? nil

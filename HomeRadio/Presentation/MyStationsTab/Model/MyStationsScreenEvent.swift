@@ -14,4 +14,5 @@ enum MyStationsScreenEvent {
     case playRadio(_ station: RadioStationItem)
     case onPlayButtonTap
     case onTagToggle(_ tag: RadioStationTag)
+    case sort(_ type: SortingType)
 }
