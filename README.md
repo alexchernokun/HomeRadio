@@ -4,79 +4,93 @@
 - [App Overview](#app-overview)
 - [Architecture](#architecture)
 - [Screens Overview](#screens-overview)
+- [Things to Change and Known Bugs](#things-to-change-and-known-bugs)
 - [Best Practices](#best-practices)
 
 ## App Overview
-HomeView is a light-weight application, created using Swift and SwiftUI without any 3rd party dependency and serves as an application which can: 
-- browse and navigate TuneIn hierarchy;
-- save a station to your Favourites list;
-- play a station and check its metadata, artwork, title, etc.
+![](Resources/HomeScreen.jpeg)![](Resources/BrowseCategories.jpeg)
 
-## Architecture 
-I tried to stick to some simplified version of Clean Architecture by Uncle Bob - Clean Swift with VIP design pattern (View -> Interactor -> Presenter) as the architecture for this project. 
+HomeRadio is a light-weight streaming application, without any 3rd party dependencies, created using:
+- Clean Architecture + MVVM,
+- Modularization using SPM,
+- Swift,
+- SwiftUI,
+- Combine,
+- AVFoundation.
 
-I am not a fan of overengineering, that is why I borrowed only main concepts - separating domain and data layer and also VIP layer. Models in domain layer are our concrete bricks for UI, so we won't have any uncomfortable issues in future when some unapproved changes on back-end appear for example. 
+**Summary** of project features: 
+- shows radio stations fetched from mini TuneIn station API;
+- filtering by radio station tags and sorting by rating;
+- browse and navigate the TuneIn library hierarchy;
+- play a radio station stream and check its metadata, artwork, title, etc;
+- pass metadata info to the Lock screen (Now Playing info).
 
-I also really loved the idea of building scalable app using microapps architecture described [here](https://swiftwithmajid.com/2022/01/12/microapps-architecture-in-swift-spm-basics/). 
-It's not about main architectural approach of app, but about separating some core services into different modules. I used SPM (Swift Package Manager) for this matter and here is the list of packages:
-- RadioPlayer (a service to play a radio station)
-- NetworkManager (network layer + helpers + data response models)
-- DomainLayer (models for UI)
-- Utils (simple DI, Logger, and several Helpers)
-All of these modules were developed by myself, so no 3rd party code is used.
+## Architecture
+Working on this project, I thought of the following principles:
+- scalability;
+- clear separation of concerns;
+- maintainability
 
-The app consists of two tabs in TabView. 
-Every screen in the app is a module and we have 3 here:
-- MyStations View
-- Browse main categories View
-- SubCategory View
+The project follows **Clean Architecture** principles, ensuring a clear separation of concerns by organizing the codebase into three distinct layers:
 
-Each Module consists of 4 files:
-- ModuleBuilder - entry point where we can pass some data
-- Interactor - the class responsible of events like fetching, saving, downloading etc.
-- Presenter - the class responsible for UI updates
-- View - swiftUI view itself
+1. **Presentation Layer**: Responsible for the user interface and interaction, providing a seamless experience for end-users.
+2. **Domain Layer**: Contains the business logic, addressing the product owner’s needs by managing how screen data is built, modified, and processed.
+3. **Data Layer**: Handles data fetching and persistence, interacting with remote and local storage through Data Transfer Objects (DTOs).
+
+To further enhance modularity, Swift Package Manager (SPM) was used to implement vertical modularization. Each layer is encapsulated within its respective package:
+
+- **Domain Layer**: depends only on the Data layer, ensuring business logic remains decoupled from external dependencies.
+- **Data Layer**: depends solely on Networking and Persistence modules, keeping it focused on data management.
+
+![](Resources/Arch.png)
+
+In addition to these core layers, other SPM packages were created for Persistence, RadioPlayer, and Logger functionalities.
+This approach resulted in a scalable and maintainable project architecture, with a clear separation of concerns, making the codebase easier to navigate and extend.
+
+MVVM Implementation
+
+The project employs the Model-View-ViewModel (MVVM) architecture to structure the presentation layer. Here’s how it’s implemented:
+
+- **ViewModel as @StateObject**: Each screen’s ViewModel is instantiated as a @StateObject, ensuring that its lifecycle is managed by the View itself.
+  This guarantees that the ViewModel persists across view updates and is properly retained.
+- **@ObservedObject for Child Views**: When a ViewModel needs to be shared with child views, it is passed down as an @ObservedObject.
+  This allows the child views to observe and respond to changes in the ViewModel without affecting its lifecycle.
+- **UseCase Integration**: Each ViewModel interacts with UseCases from the Domain layer to retrieve and process data before presenting it
+  to the user interface. This ensures that the UI receives data in a format that’s ready for display, keeping the ViewModel focused on UI-related logic.
+
+![](Resources/MVVM.png)
 
 ## Screens Overview
-This app works both on iPhone and iPad, also supports light and dark themes: 
-![](Resources/MyStations.png)
+This app works both on iPhone and iPad and also supports light and dark themes.
+Minimum iOS version - 16.0.
+On the main screen you will find fetched stations from the new Home Task assignment.
+You are able to sort them by rating and filter by tags.
 
-![](Resources/MyStationsLight.png)
+![](Resources/Sorting.jpeg)![](Resources/HomeScreen.jpeg)
 
-When you first run the app you will see Empty state of the screens shown above:
+If you drag the "NowPlayingSmallView" up you will find the view with an artwork and track title. 
+Artwork is fetched using iTunes API.
 
-![](Resources/MyStationsEmpty.png)
+![](Resources/NowPlayingScreen.jpeg)
 
-If you drag the "NowPlayingSmallView" up you will find the view with an artwork and track title. Artwork is fetched using iTunes API.
+Since NavigationStack is in charge - it enables us a programmatic navigation, surfing through the huge TuneIn library 
+and popping a lot of screens in case of long tap on Back button.
 
-![](Resources/NowPlaying.png)
+![](Resources/BrowseCategories2.jpeg)
 
-Navigation is implemented using one SwiftUI view called SubCategoryView.
+The RadioPlayer service is also fully integrated with NowPlayingCenter:
 
-![](Resources/Categories.png)
+![](Resources/NowPlayingSystem.jpeg)
+![](Resources/NowPlayingSystem1.jpeg)
 
-![](Resources/Navigation3.png)
+Error handling and checking for empty stations is also backed by respective Views.
 
-Since it uses NavigationStack it enables us a programmatic navigation, popping a lot of screens in case of long tap on Back button, etc
-Also we my hide unneeded sections.
+## Things to Change and Known Bugs
 
-![](Resources/Navigation.png)
-
-![](Resources/Navigation2.png) 
-
-You can add a station to your Favourite station by tapping Add button. It saves into UserDefaults, just for simplicity means.
-And of course you may play a radio station from here by tapping on its cell.
-
-The RadioPlayer service also support NowPlayingCenter:
-
-![](Resources/NotificationCenter.jpg) 
-
-All error states are handled with NetworErrorView.
-
-## Best Practices
-I've thoroughly checked your TuneIn core values on [Github](https://github.com/tunein/engineering/blob/master/Principles.md) and would like to mention several of your principles I like:
-- We decide quickly; we believe perfect is enemy of good - that is why some of UI things are not perfect in this assignment app :)
-- We leave code better than when we found it - I refactored a lot while working on this project and also try to stick to this principle on a regular basis.
-- Remove things you don't use - I indeed removed a lot of code which appeared to be not useful at all. My only guilty pleasure is using pragma marks :)
-
-And last but not least, the assignment task tells to treat the app like the real one iOS application - that is why I took a little extra-mile adding that functionality for RadioPlayer (iTunes artwork search, saving to fav list, etc)
+- **Refreshing Main Screen**: If you refresh the main screen while stations are sorted or filtered, the list will reset to its initial state. Given more time, I would implement a solution to preserve the sort/filter state during refreshes.
+- **Sorting and Filtering Sync**: Currently, sorting and filtering actions are not synchronized, so each action resets the previous one. This needs to be addressed for better user experience.
+- **Now Playing Display**: While you can play a radio station from the TuneIn library in the second tab (Browse Categories), it doesn’t appear in the Now Playing section. This should definitely be implemented in a production app.
+- **Handling 404 Stations**: I considered handling 404 stations (unavailable stations) but opted not to use a NotificationCenter message for this test project. In a production app, I would ensure the RadioPlayer service passes relevant information on failed stations.
+- **Repository Structure**: The current repositories primarily access data from remote sources. In a real-world project, I would introduce separate RemoteDataSource and LocalDataSource classes. The repository would then sync data from both, enabling an offline-first approach where the initial data fetch is from local storage, followed by a remote request to update the local data upon network response.
+- **Dependency Injection**: The DI implementation in this test project is quite simple. In a larger project, I would consider using a more robust solution like Needle or Swinject.
+- **Testing and Linting**: Adding tests and incorporating a linter would improve the project’s reliability and code quality.
