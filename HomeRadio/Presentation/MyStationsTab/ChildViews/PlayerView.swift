@@ -10,8 +10,10 @@ import Domain
 
 struct PlayerView: View {
     
-    @ObservedObject var viewModel: MyStationsViewModel
+    @Binding var currentStation: RadioStationItem?
+    @Binding var isRadioPlaying: Bool
     @Binding var showPopover: Bool
+    var onPlayPauseButtonTap: (() -> Void)?
     
     var body: some View {
         VStack(alignment: .center, spacing: 30) {
@@ -37,25 +39,25 @@ private extension PlayerView {
     }
     
     func artwork() -> some View {
-        if let artwork = viewModel.currentStation?.artworkFromMetadata {
+        if let artwork = currentStation?.artworkFromMetadata {
             return asyncImage(artwork)
         } else {
-            return asyncImage(viewModel.currentStation?.image)
+            return asyncImage(currentStation?.image)
         }
     }
     
     func metadata() -> some View {
         VStack(alignment: .center, spacing: 6) {
-            if let metadata = viewModel.currentStation?.metadata {
+            if let metadata = currentStation?.metadata {
                 Text(metadata)
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(Color(Colors.textPrimary))
             } else {
-                Text(viewModel.currentStation?.subtext ?? "")
+                Text(currentStation?.subtext ?? "")
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(Color(Colors.textPrimary))
             }
-            Text(viewModel.currentStation?.text ?? "Choose the station to play")
+            Text(currentStation?.text ?? "Choose the station to play")
                 .font(.system(size: 15, weight: .light))
                 .foregroundColor(Color(Colors.textSecondary))
         }
@@ -65,9 +67,9 @@ private extension PlayerView {
     
     func playPauseButton() -> some View {
         Button {
-            viewModel.onEvent(.onPlayButtonTap)
+            onPlayPauseButtonTap?()
         } label: {
-            Image(systemName: viewModel.isRadioPlaying ? "stop.fill" : "play.fill")
+            Image(systemName: isRadioPlaying ? "stop.fill" : "play.fill")
                 .resizable()
                 .frame(width: 40, height: 40)
                 .foregroundColor(Color(Colors.bgSpecial))
@@ -100,11 +102,7 @@ private extension PlayerView {
 }
 
 #Preview {
-    PlayerView(viewModel: MyStationsViewModel(getMyStationsUseCase: DependencyContainer.shared.getMyStationsUseCase,
-                                              getRadioStationTagsUseCase: DependencyContainer.shared.getRadioStationTagsUseCase,
-                                              filterRadioStationsByTagsUseCase: DependencyContainer.shared.filterStationsByTagsUseCase,
-                                              sortRadioStationsByRatingUseCase: DependencyContainer.shared.sortStationsByRatingUseCase,
-                                              getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase,
-                                              radioPlayer: DependencyContainer.shared.radioPlayer),
-               showPopover: .constant(true))
+    PlayerView(currentStation: .constant(PreviewMockDataProvider.station),
+               isRadioPlaying: .constant(false),
+               showPopover: .constant(false))
 }

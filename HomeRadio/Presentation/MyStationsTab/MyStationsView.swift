@@ -28,7 +28,8 @@ struct MyStationsView: View {
             viewModel.onEvent(.getMyRadioStations)
         }
         .popover(isPresented: $showPopover, content: {
-            PlayerView(viewModel: viewModel,
+            PlayerView(currentStation: $viewModel.currentStation,
+                       isRadioPlaying: $viewModel.isRadioPlaying,
                        showPopover: $showPopover)
         })
         .onAppear {
@@ -63,7 +64,8 @@ private extension MyStationsView {
             VStack(alignment: .leading, spacing: 0) {
                 header()
                 myStations()
-                MiniPlayerView(viewModel: viewModel,
+                MiniPlayerView(currentStation: $viewModel.currentStation,
+                               isRadioPlaying: $viewModel.isRadioPlaying,
                                showPopover: $showPopover)
                 .padding(.horizontal, 5)
                 .padding(.bottom, 5)

@@ -11,6 +11,7 @@ import Domain
 struct SubCategoryView:  View {
     
     @StateObject private var viewModel: SubCategoryViewModel
+    @State var showPopover = false
     
     var body: some View {
         if viewModel.shouldShowError {
@@ -49,18 +50,27 @@ private extension SubCategoryView {
     
     @ViewBuilder
     func radioItemsList() -> some View {
-        List(viewModel.subcategoryItems, id: \.self) { radioItem in
-            if let children = radioItem.children {
-                Section(header: Text(radioItem.text)) {
-                    ForEach(children, id: \.self) { child in
-                        viewForItem(item: child)
+        VStack {
+            List(viewModel.subcategoryItems, id: \.self) { radioItem in
+                if let children = radioItem.children {
+                    Section(header: Text(radioItem.text)) {
+                        ForEach(children, id: \.self) { child in
+                            viewForItem(item: child)
+                        }
                     }
+                } else {
+                    viewForItem(item: radioItem)
                 }
-            } else {
-                viewForItem(item: radioItem)
             }
-            
+            MiniPlayerView(currentStation: $viewModel.currentStation,
+                           isRadioPlaying: $viewModel.isRadioPlaying,
+                           showPopover: $showPopover)
         }
+        .popover(isPresented: $showPopover, content: {
+            PlayerView(currentStation: $viewModel.currentStation,
+                       isRadioPlaying: $viewModel.isRadioPlaying,
+                       showPopover: $showPopover)
+        })
     }
     
     @ViewBuilder

@@ -11,7 +11,7 @@ import MediaPlayer
 /// An object for setting the Now Playing info
 public struct NowPlayingService {
     
-    public static let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
+    private static let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
     
     /// The method for setting track properties into NowPlaingInfoCenter
     /// - Parameter info: The info you want to show in NowPlayingInfoCenter
@@ -33,15 +33,6 @@ public struct NowPlayingService {
         
         nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
     }
-
-    static func addArtwork(from image: UIImage?) {
-        guard let image else { return }
-        var nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo ?? [String: Any]()
-        nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { (size) -> UIImage in
-            return image
-        }
-        nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
-    }
     
     private static func getImage(from url: URL, _ nowPlayingInfo: [String: Any]) {
         DispatchQueue.global(qos: .background).async {
@@ -55,4 +46,12 @@ public struct NowPlayingService {
         }
     }
     
+    private static func addArtwork(from image: UIImage?) {
+        guard let image else { return }
+        var nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo ?? [String: Any]()
+        nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { _ -> UIImage in
+            return image
+        }
+        nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
+    }
 }

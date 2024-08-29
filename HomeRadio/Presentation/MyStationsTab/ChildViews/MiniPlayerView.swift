@@ -10,8 +10,10 @@ import Domain
 
 struct MiniPlayerView: View {
     
-    @ObservedObject var viewModel: MyStationsViewModel
+    @Binding var currentStation: RadioStationItem?
+    @Binding var isRadioPlaying: Bool
     @Binding var showPopover: Bool
+    var onPlayPauseButtonTap: (() -> Void)?
     
     var body: some View {
         HStack(alignment: .center, spacing: 3) {
@@ -40,25 +42,25 @@ struct MiniPlayerView: View {
 // MARK: Subviews
 private extension MiniPlayerView {
     func artwork() -> some View {
-        if let artwork = viewModel.currentStation?.artworkFromMetadata {
+        if let artwork = currentStation?.artworkFromMetadata {
             return asyncImage(artwork)
         } else {
-            return asyncImage(viewModel.currentStation?.image)
+            return asyncImage(currentStation?.image)
         }
     }
     
     func metadata() -> some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text(viewModel.currentStation?.text ?? "Choose the station to play")
+            Text(currentStation?.text ?? "Choose the station to play")
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundColor(Color(Colors.textPrimary))
-            if let metadata = viewModel.currentStation?.metadata {
+            if let metadata = currentStation?.metadata {
                 Text(metadata)
                     .font(.system(size: 12, weight: .light))
                     .foregroundColor(Color(Colors.textSecondary))
                     .lineLimit(0)
             } else {
-                Text(viewModel.currentStation?.subtext ?? "")
+                Text(currentStation?.subtext ?? "")
                     .font(.system(size: 12, weight: .light))
                     .foregroundColor(Color(Colors.textSecondary))
                     .lineLimit(1)
@@ -68,9 +70,9 @@ private extension MiniPlayerView {
     
     func playPauseButton() -> some View {
         Button {
-            viewModel.onEvent(.onPlayButtonTap)
+            onPlayPauseButtonTap?()
         } label: {
-            Image(systemName: viewModel.isRadioPlaying ? "stop.fill" : "play.fill")
+            Image(systemName: isRadioPlaying ? "stop.fill" : "play.fill")
                 .resizable()
                 .frame(width: 25, height: 25)
                 .foregroundColor(Color(Colors.textSecondary))
@@ -103,11 +105,7 @@ private extension MiniPlayerView {
 }
 
 #Preview {
-    MiniPlayerView(viewModel: MyStationsViewModel(getMyStationsUseCase: DependencyContainer.shared.getMyStationsUseCase,
-                                                  getRadioStationTagsUseCase: DependencyContainer.shared.getRadioStationTagsUseCase,
-                                                  filterRadioStationsByTagsUseCase: DependencyContainer.shared.filterStationsByTagsUseCase,
-                                                  sortRadioStationsByRatingUseCase: DependencyContainer.shared.sortStationsByRatingUseCase,
-                                                  getTrackArtworkUseCase: DependencyContainer.shared.getTrackArtworkUseCase,
-                                                  radioPlayer: DependencyContainer.shared.radioPlayer),
+    MiniPlayerView(currentStation: .constant(PreviewMockDataProvider.station),
+                   isRadioPlaying: .constant(false),
                    showPopover: .constant(false))
 }

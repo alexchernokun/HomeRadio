@@ -20,6 +20,8 @@ final class SubCategoryViewModel: ObservableObject {
     private let query: [String: String?]
     private let path: String
     private var subscriptions = Set<AnyCancellable>()
+    @Published var currentStation: RadioStationItem?
+    @Published var isRadioPlaying: Bool = false
     @Published var isLoading = true
     @Published var shouldShowError = false
     @Published var title: String = ""
@@ -34,6 +36,7 @@ final class SubCategoryViewModel: ObservableObject {
         self.getSubcategoriesUseCase = getSubcategoriesUseCase
         self.path = path
         self.query = query
+        observeStreamingMetadata()
     }
     
     // MARK: Methods
@@ -49,6 +52,33 @@ final class SubCategoryViewModel: ObservableObject {
 
 // MARK: Private methods
 private extension SubCategoryViewModel {
+    
+    func observeStreamingMetadata() {
+        radioPlayer
+            .trackTitle
+            .sink { [weak self] title in
+                guard let self else { return }
+                NowPlayingService.addNowPlayingInfo(from: PlayingInfo(text: currentStation?.text,
+                                                                      metadata: currentStation?.metadata,
+                                                                      artworkFromMetadata: currentStation?.artworkFromMetadata,
+                                                                      image: currentStation?.image))
+                currentStation?.metadata = title
+            }
+            .store(in: &subscriptions)
+    }
+    
+    func playRadio(_ station: RadioStationItem) {
+        guard let url = station.url else { return }
+        currentStation = station
+        isRadioPlaying = true
+        radioPlayer.playRadio(from: url)
+    }
+    
+    func toggleRadioPlayback() {
+        guard let url = currentStation?.url else { return }
+        isRadioPlaying ? radioPlayer.pauseRadio() : radioPlayer.playRadio(from: url)
+        isRadioPlaying.toggle()
+    }
 
     func fetchRadioStationItems() {
         isLoading = true
@@ -77,10 +107,5 @@ private extension SubCategoryViewModel {
                 subcategoryItems = subcategoriesResponse.subcategories
             }
             .store(in: &subscriptions)
-    }
-    
-    func playRadio(_ station: RadioStationItem) {
-        guard let url = station.url else { return }
-        radioPlayer.playRadio(from: url)
     }
 }
